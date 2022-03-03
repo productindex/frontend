@@ -3,40 +3,46 @@ import Link from 'next/link';
 import { TextField } from '../textfield';
 // import axios from 'axios'
 import * as Joi from 'joi';
+import { Dropdown } from '../dropdown';
+import { Datepicker } from '../datepicker';
 const { joiPassword } = require("joi-password");
 
-const SignupForm: React.FC = () => {
+const Onboarding: React.FC = () => {
 
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
+  const [gender, setGender] = useState('');
   const [error, setError] = useState<ErrObj>({});
+  const [telephone, setTelephone] = useState('');
   
 
   interface ErrObj {
       email?: string;
-      password?: string;
-      firstname?: string;
-      lastname?: string;
+      telephone?: string;
+      birthday?: string;
+      gender?: string;
+      country?: string;
+      state?: string;
   }
   const schema = Joi.object({
-      firstname: Joi.string().min(2).required().label('First name').messages({'string.empty': 'First name is required'}),
-      lastname: Joi.string().min(2).required().label('Last name').messages({'string.empty': 'Last name is required'}),
-      email: Joi.string().required().label('Email address').messages({'string.empty': 'Email address is required'}),
-      password: joiPassword.string().min(8).minOfSpecialCharacters(1).minOfLowercase(0).minOfUppercase(0).minOfNumeric(1).noWhiteSpaces().required().messages({'string.min': 'Password must be at least 8 characters long', 'string.empty': 'Password is required'}),
+      birthday: Joi.string().required().messages({'string.empty': 'Birthday is required'}),
+      country: Joi.string().required().messages({'string.empty': 'Country is required'}),
+      state: Joi.string().required().messages({'string.empty': 'State is required'}),
+      gender: Joi.string().required().messages({'string.empty': 'Gender is required'})
   });
 
   const user = {
-    firstname,
-    lastname,
-    email,
-    password
+    birthday,
+    gender,
+    country,
+    state,
+    telephone
 }
   const validateForm = () => {
-    const errors: ErrObj = {email: '', password: '', firstname: '', lastname: ''};
+    const errors: any = {};
     const options = {abortEarly: false}
-    const { error } = schema.validate({email: email, password: password, firstname: firstname, lastname: lastname}, options );
+    const { error } = schema.validate({birthday: birthday, gender: gender, country: country, state: state}, options );
     if (error) {
       for (let e of error.details) {
           let message = e.message.replaceAll("\"", "")
@@ -54,62 +60,66 @@ const SignupForm: React.FC = () => {
         console.log(user)
       }
   };
+  const genderList = [
+    {
+      name: "Male",
+      value: "MALE"
+    },
+    {
+      name: "Female",
+      value: "FEMALE"
+    },
+    {
+      name: "Prefer not to say",
+      value: "UNIDENTIFIED"
+    }
+  ]
   
       return (
           <div className='form pane-form'>
   
               <form onSubmit={handleSubmit}>
                 <div className="double-textbox">
-                <TextField 
-                      name='firstname'
-                      valueType='text'
-                      valuePlaceholder='John'
-                      valueLabel='First name'
-                      onChange={(e: any)=> setFirstName(e.target.value)}
-                      value={firstname}
-                      className='med-textbox'
-                      error={error.firstname}
+
+                  <Dropdown 
+                    valueLabel='Gender'
+                    optionList={genderList}
+                    onChange={(e: any)=> setGender(e.target.value)}
+                    error={error.gender}
                   />
-                  <TextField 
-                      name='firstname'
-                      valueType='text'
-                      valuePlaceholder='Doe'
-                      valueLabel='Last name'
-                      onChange={(e: any)=> setLastName(e.target.value)}
-                      value={lastname}
-                      className='med-textbox'
-                      error={error.lastname}
+                  <Datepicker 
+                  valueLabel='Birthday'
+                  onChange={(e: any)=> setBirthday(e.target.value)}
+                  error={error.birthday}
                   />
                 </div>
+                <Dropdown 
+                    valueLabel='Country'
+                    optionList={[{name: "The Bahamas", value: "BAH"}]}
+                    onChange={(e: any)=> setCountry(e.target.value)}
+                    error={error.country}
+                  />
+                <Dropdown 
+                    valueLabel='State/Island'
+                    optionList={[{name: "New Providence", value: "NEW PROVIDENCE"}]}
+                    onChange={(e: any)=> setState(e.target.value)}
+                    error={error.state}
+                  />
 
                   <TextField 
-                      name='email'
-                      valueType='email'
-                      valuePlaceholder='me@example.com'
-                      valueLabel='Email address'
-                      onChange={(e: any)=> setEmail(e.target.value)}
-                      value={email}
+                      name='telephone'
+                      valueType='telephone'
+                      valuePlaceholder='242 123 4567'
+                      valueLabel='Phone contact'
+                      optional={true}
+                      onChange={(e: any)=> setTelephone(e.target.value)}
+                      value={telephone}
                       className='med-textbox'
-                      error={error.email}
+                      error={error.telephone}
                   />
-                  <TextField 
-                      name='password'
-                      valueType='password'
-                      valueLabel='Password'
-                      onChange={(e: any)=> setPassword(e.target.value)}
-                      value={password}
-                      className='med-textbox'
-                      error={error.password}
-                  />
-                <div className="legal-box">
-                  <p className='body body-small'>Creating an account means that you’ve read and agreed to our <span className="link-text"><Link href='terms-of-service'><p className='link'>Terms of Service</p></Link> </span> and <span className="link-text"><Link href='/privacy'><p className='link'> Privacy policy </p></Link></span></p> 
-                </div>
                  
-                 <input type="submit" value="Sign up" className='btn btn-primary btn-form' />
+                 <input type="submit" value="Complete sign up" className='btn btn-primary btn-form' />
               </form>
-              <div className="linkbox">
-                <p className='body'> Already a member? <span className='link-text'><Link href='/signin'><p className='link'>Sign In</p></Link></span></p>
-              </div>
 
             <style jsx>{`
         .auth-screens {
@@ -224,4 +234,4 @@ const SignupForm: React.FC = () => {
 
     )
 };
-export { SignupForm};
+export { Onboarding};

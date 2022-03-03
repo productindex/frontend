@@ -28,7 +28,7 @@ const user = {
 
 // Validates form properties and sets the Error state
 const validateForm = () => {
-    const errors: any = {email: '', password: ''};
+    const errors: ErrObj = {email: '', password: ''};
     const options = {abortEarly: false}
     const { error } = schema.validate({email: email, password: password}, options );
     if (error) {
@@ -43,8 +43,12 @@ const validateForm = () => {
 }
 const handleSubmit = (e: any) => {
     e.preventDefault();
-    setError(validateForm());
-    console.log(user);
+
+    const errors = validateForm()
+    setError(errors)
+    if (Object.values(errors).every(x => x === null || x === '')) {
+      console.log(user)
+    }
 
 };
 

@@ -1,3 +1,4 @@
+import { options } from 'joi';
 import React, {useState} from 'react';
 interface TextFieldProps  {
     name?: string;
@@ -8,11 +9,10 @@ interface TextFieldProps  {
     value?: string;
     className?: string;
     error?: string;
-    show?: boolean;
-    optional?: boolean;
+    optionList?: {value?: string, name?: string, default?: Boolean}[];
 }
 
-const TextField: React.FC<TextFieldProps>  = ({ 
+const Datepicker: React.FC<TextFieldProps>  = ({ 
 
     name,
     valueType,
@@ -22,64 +22,28 @@ const TextField: React.FC<TextFieldProps>  = ({
     className,
     onChange,
     error,
-    show,
-    optional,
+    optionList,
     ...props
     
 
 }) => {
-    const [showPassword, setShowPassword] = useState(false)
-    const toggleType = () => {
-      if (valueType == 'password' && showPassword == true) {
-        return 'text'
-      }
-      if (valueType == 'telephone') return 'tel'
-      return valueType
-    }
-    const showHide = () => {
-      setShowPassword(!showPassword)
-    }
-    const formatTelephone = () => {
-
-      return value
-    }
     return (
         <div>
-            <label className={`label label-regular`} htmlFor={name}>{valueLabel} {optional && <span className='label-optional'>(Optional)</span>}</label><br />
-            <input 
-                type={toggleType()} 
-                className={error ? `textbox-error textbox ${className}` : `${className} textbox`} 
-                name={name} 
-                placeholder={valuePlaceholder }
-                id={name}
-                onChange={onChange}
-                value={valueType == 'telephone'? formatTelephone() : value}
-                
-            />
-            {valueType=='password' && <button type='button' className='show-hide' onClick={showHide}>{showPassword? 'hide' : 'show'}</button>}
+            <label className="label label-regular" htmlFor={name}>{valueLabel}</label><br />
+            <input type="date" id="start" name="trip-start"
+              value = {value}
+              onChange={onChange}
+              className='textbox'/>
+
             {error && <div className="error-alert">{error}</div>}
             <style jsx>{`
-                .label {
+                  .label {
                     color: #1c1c1c;
                     font-weight: 700;
-                  }
-                  .show-hide {
-                      postion: absolute;
-                      transform: translateY(-3.3rem);
-                      float: right;
-                      margin-right: 2rem;
-                      padding: 6px;
-                      cursor: pointer;
-                      border: 1px solid #E5E9E8;
-                      text-transform: uppercase;
-                      display: inline-block;
                   }
                   
                   .label-regular {
                     font-size: 1.125em;
-                  }
-                  .label-optional {
-                    font-weight: 400;
                   }
 
                   .textbox {
@@ -99,6 +63,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                     letter-spacing: 0.05rem;
                     font-size: 1.125rem;
                     width: 100%;
+                    font-family: "Inter'
                   }
                   .textbox:focus {
                     box-shadow: 0px 0px 2px 2px #B8EEED;
@@ -120,4 +85,4 @@ const TextField: React.FC<TextFieldProps>  = ({
         </div>
     )
 };
-export { TextField };
+export { Datepicker };

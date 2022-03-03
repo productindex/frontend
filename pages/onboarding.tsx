@@ -1,8 +1,5 @@
 import Head from 'next/head'
-import NavBar from '../components/navbar'
-import Image from 'next/image'
-import { TextField } from '../components/textfield'
-import { SignupForm } from '../components/forms/signupForm'
+import { Onboarding } from '../components/forms/onboardingForm'
 
 export default function Home() {
   return (
@@ -26,8 +23,8 @@ export default function Home() {
               <div className="logo-box">
                 <img src="/images/logo.png" alt="Product Index Logo" />
               </div>
-              <h3 className='form-title'>Sign up</h3>
-              <SignupForm />
+              <h3 className='form-title'>A bit about yourself</h3>
+              <Onboarding />
             </div>
           </div>
 
