@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function NavBar(){
     return (
@@ -10,7 +9,7 @@ export default function NavBar(){
             </Link>
             <style jsx>{`
                 .logo-box {
-                    float: left;
+                    margin-right: auto;
                 }
                 .logo-box img {
                     width: 200px;

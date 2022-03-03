@@ -125,6 +125,7 @@ export default function Home() {
           text-decoration: none;
           transition: all 0.4s;
           border-radius: 2px;
+          cursor: pointer;
         }
         .btn:hover {
           transform: translateY(-2px);
@@ -236,6 +237,7 @@ export default function Home() {
         }
         p {
           color: #5C5C5C;
+          font-size: 1.125rem;
         }
         footer {
           background-color: #FAFAFA;
