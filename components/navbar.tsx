@@ -12,7 +12,7 @@ export default function NavBar(){
                     margin-right: auto;
                 }
                 .logo-box img {
-                    width: 200px;
+                    width: 162px;
                     cursor: pointer;
                 }
         `}</style>

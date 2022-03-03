@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TextField } from '../textfield';
 // import axios from 'axios'
 import * as Joi from 'joi';
+const { joiPassword } = require("joi-password");
 
 const LoginForm: React.FC = () => {
 
@@ -16,23 +17,24 @@ interface ErrObj {
 }
 
 const schema = Joi.object({
-    email: Joi.string().required().label('Email address'),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).label('Password').min(8),
+    email: Joi.string().required().label('Email address').messages({'string.empty': 'Email address is required'}),
+    password: Joi.string().required().messages({'string.empty': 'Password is required'}),
 });
-// const user = {
-//     email,
-//     password
-// }
+const user = {
+    email,
+    password
+}
 
 
 // Validates form properties and sets the Error state
 const validateForm = () => {
-    const errors: any= {email: '', password: ''};
+    const errors: any = {email: '', password: ''};
     const options = {abortEarly: false}
     const { error } = schema.validate({email: email, password: password}, options );
     if (error) {
         for (let e of error.details) {
-            errors[e.path[0]] = e.message;
+            let message = e.message.replaceAll("\"", "")
+            errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
         } 
         return errors;
     }
@@ -42,7 +44,7 @@ const validateForm = () => {
 const handleSubmit = (e: any) => {
     e.preventDefault();
     setError(validateForm());
-    // console.log(user);
+    console.log(user);
 
 };
 
@@ -69,8 +71,12 @@ const handleSubmit = (e: any) => {
                     className='med-textbox'
                     error={error.password}
                 />
+                  <div className="forgot">
+                    <Link href='/forgot-password'><p className='link'>Forgot password?</p></Link>
+                  </div>
+                  
+                  <input type="submit" value="Sign in" className='btn btn-primary btn-form' />
                 
-               <input type="submit" value="Sign in" className='btn btn-primary btn-form' />
                
             </form>    
             <div className="linkbox">
@@ -92,11 +98,21 @@ const handleSubmit = (e: any) => {
           display: flex;
           
         }
+        .right {
+          text-align: right;
+        }
         .link {
           color: #13C8C4;
           cursor: pointer;
           display: inline-block;
-          font-weight: 700;
+          font-weight: 500;
+          transition: all .4s;
+        }
+        .link:hover {
+          color: #4BE0DD;
+        }
+        .link:active {
+          color: #2EB7BE;
         }
         .logo-box img{
           width: 200px;
@@ -106,8 +122,10 @@ const handleSubmit = (e: any) => {
           width: 55%;
           padding: 10rem 0 5% 5%;
           background-color: #13C8C4;
-
           
+        }
+        .forgot {
+          padding: .5rem 0 1rem 0;
         }
         .leftpane .content {
             max-width: 450px;

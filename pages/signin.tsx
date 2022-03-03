@@ -28,7 +28,7 @@ export default function Home() {
               </div>
               <h3 className='form-title'>Sign in</h3>
               <LoginForm />
-            </div>`
+            </div>
           </div>
 
         </div>
@@ -62,7 +62,7 @@ export default function Home() {
 
         .leftpane {
           width: 55%;
-          padding: 10rem 0 5% 5%;
+          padding: 8rem 0 5% 5%;
           background-color: #13C8C4;
         }
 
@@ -73,13 +73,13 @@ export default function Home() {
             max-width: 450px;
         }
         .rightpane .content {
-          min-width: 450px;
+          max-width: 450px;
         }
 
         .rightpane {
           width: 45%;
           padding-right: 5%;
-          padding: 6rem 5% 5% 1.5rem;
+          padding: 4rem 5% 5% 1.5rem;
         }
         .leftpane h2 {
           color: white;
@@ -93,7 +93,7 @@ export default function Home() {
           background-color: #4BE0DD;
         }
         .primary-btn:active {
-          background-color: #2EB7BE;;
+          background-color: #2EB7BE;
         }
         .btn {
           display: inline-block;
@@ -114,6 +114,9 @@ export default function Home() {
             display: none;
   
             
+          }
+          .rightpane {
+            width: 100%;
           }
         }
   

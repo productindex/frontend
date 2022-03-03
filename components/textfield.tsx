@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 interface TextFieldProps  {
     name?: string;
     valueType?: string;
@@ -7,6 +8,7 @@ interface TextFieldProps  {
     value?: string;
     className?: string;
     error?: string;
+    show?: boolean;
 }
 
 const TextField: React.FC<TextFieldProps>  = ({ 
@@ -19,16 +21,26 @@ const TextField: React.FC<TextFieldProps>  = ({
     className,
     onChange,
     error,
+    show,
     ...props
     
 
 }) => {
-
+    const [showPassword, setShowPassword] = useState(false)
+    const toggleType = () => {
+      if (valueType == 'password' && showPassword == true) {
+        return 'text'
+      }
+      return valueType
+    }
+    const showHide = () => {
+      setShowPassword(!showPassword)
+    }
     return (
         <div>
             <label className="label label-regular" htmlFor={name}>{valueLabel}</label><br />
             <input 
-                type={valueType} 
+                type={toggleType()} 
                 className={error ? `textbox-error textbox ${className}` : `${className} textbox`} 
                 name={name} 
                 placeholder={valuePlaceholder }
@@ -37,11 +49,23 @@ const TextField: React.FC<TextFieldProps>  = ({
                 value={value}
                 
             />
+            {valueType=='password' && <button type='button' className='show-hide' onClick={showHide}>{showPassword? 'hide' : 'show'}</button>}
             {error && <div className="error-alert">{error}</div>}
             <style jsx>{`
                 .label {
                     color: #1c1c1c;
                     font-weight: 700;
+                  }
+                  .show-hide {
+                      postion: absolute;
+                      transform: translateY(-3.3rem);
+                      float: right;
+                      margin-right: 2rem;
+                      padding: 6px;
+                      cursor: pointer;
+                      border: 1px solid #E5E9E8;
+                      text-transform: uppercase;
+                      display: inline-block;
                   }
                   
                   .label-regular {
@@ -71,7 +95,16 @@ const TextField: React.FC<TextFieldProps>  = ({
                   }
                   .textbox::placeholder {
                     color: #CACACA;
-                    // font-weight: 200;
+                  }
+                  .error-alert {
+                      color: #C60000;
+                      padding: 4px 8px;
+                      border-radius: 2px;
+                      background-color: #FFDADA;
+                      display: inline-block;
+                      font-weight: 500;
+                      position: relative;
+                      top: -0.5rem;
                   }
         `}</style>
         </div>
