@@ -7,7 +7,7 @@ import { Dropdown } from '../dropdown';
 import { Datepicker } from '../datepicker';
 const { joiPassword } = require("joi-password");
 
-const Onboarding: React.FC = () => {
+const OnboardingForm: React.FC = () => {
 
   const [birthday, setBirthday] = useState('');
   const [country, setCountry] = useState('');
@@ -247,4 +247,4 @@ const Onboarding: React.FC = () => {
 
     )
 };
-export { Onboarding};
+export { OnboardingForm};

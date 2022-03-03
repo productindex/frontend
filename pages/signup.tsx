@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { TextField } from '../components/textfield'
 import { SignupForm } from '../components/forms/signupForm'
 
-export default function Home() {
+export default function SignUp() {
   return (
     <>
       <Head>

@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { Onboarding } from '../components/forms/onboardingForm'
+import { OnboardingForm } from '../components/forms/onboardingForm'
 
-export default function Home() {
+export default function Onboarding() {
   return (
     <>
       <Head>
@@ -24,7 +24,7 @@ export default function Home() {
                 <img src="/images/logo.png" alt="Product Index Logo" />
               </div>
               <h3 className='form-title'>A bit about yourself</h3>
-              <Onboarding />
+              <OnboardingForm />
             </div>
           </div>
 
