@@ -33,7 +33,7 @@ const TextField: React.FC<TextFieldProps>  = ({
       if (valueType == 'password' && showPassword == true) {
         return 'text'
       }
-      if (valueType == 'telephone') return 'tel'
+      if (valueType == 'telephone' || valueType == 'tel') return 'tel'
       return valueType
     }
     const showHide = () => {
@@ -65,7 +65,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                   }
                   .show-hide {
                       postion: absolute;
-                      transform: translateY(-3.3rem);
+                      transform: translateY(-3.4rem);
                       float: right;
                       margin-right: 2rem;
                       padding: 6px;

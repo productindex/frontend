@@ -46,13 +46,6 @@ export default function Home() {
           color: white;
           font-size: 1.2rem;
         }
-        .side-by-side {
-          display: flex;
-          
-        }
-        .logo-box img{
-          width: 162px;
-        }
         .logo-box {
           margin-bottom: 1.5rem;
         }
@@ -82,29 +75,6 @@ export default function Home() {
           color: white;
           text-transform: uppercase;
         }
-        .primary-btn {
-          background-color: #13C8C4;
-          color: white;
-        }
-        .primary-btn:hover {
-          background-color: #4BE0DD;
-        }
-        .primary-btn:active {
-          background-color: #2EB7BE;
-        }
-        .btn {
-          display: inline-block;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.4s;
-          border-radius: 2px;
-        }
-        .btn:hover {
-          transform: translateY(-2px);
-        }
-        .btn:active {
-          transform: scale(.99);
-        }
 
         @media (max-width: 850px) {
           .leftpane {
@@ -114,6 +84,10 @@ export default function Home() {
           }
           .rightpane {
             width: 100%;
+          }
+          .rightpane .content {
+            margin: 0 auto;
+            max-width: 600px;
           }
         }
   

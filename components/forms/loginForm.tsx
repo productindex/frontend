@@ -84,7 +84,7 @@ const handleSubmit = (e: any) => {
                
             </form>    
             <div className="linkbox">
-                <p className='body'> Not a member? <span className='link-text'><Link href='/signup'><p className='link'>Sign Up</p></Link></span></p>
+                <p className='body'> Not a member? <span className='link-text'><Link href='/signup' as='/signup'><p className='link'>Sign Up</p></Link></span></p>
             </div>
 
             <style jsx>{`
@@ -98,10 +98,7 @@ const handleSubmit = (e: any) => {
           color: white;
           font-size: 1.2rem;
         }
-        .side-by-side {
-          display: flex;
-          
-        }
+        
         .right {
           text-align: right;
         }

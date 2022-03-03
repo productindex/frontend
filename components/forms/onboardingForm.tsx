@@ -139,12 +139,9 @@ const Onboarding: React.FC = () => {
           color: white;
           font-size: 1.2rem;
         }
-        .side-by-side {
-          display: flex;
-          
-        }
         .double-textbox {
           display: flex;
+          width: 100%;
           column-gap: 1rem;
         }
         .right {
@@ -227,7 +224,23 @@ const Onboarding: React.FC = () => {
         .linkbox {
           margin: 2rem 0 1rem 0;
         }
-  
+        @media (max-width: 850px) {
+          .rightpane {
+            width: 100%;
+
+          }
+          .double-textbox {
+            flex-direction: column;
+          }
+        }
+        @media (max-width: 450px) {
+          .double-textbox {
+            flex-direction: column;
+          }
+
+          }
+        }
+
       `}</style>
         </div>
 

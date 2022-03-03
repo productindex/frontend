@@ -129,10 +129,6 @@ const SignupForm: React.FC = () => {
           color: white;
           font-size: 1.2rem;
         }
-        .side-by-side {
-          display: flex;
-          
-        }
         .double-textbox {
           display: flex;
           column-gap: 1rem;

@@ -86,6 +86,7 @@ export default function Home() {
           background-color: #1c1c1c;
           padding: 1.5rem 0;
         }
+        
         .header-title {
           color: #FAFCFC;
           text-align: center;
@@ -103,36 +104,7 @@ export default function Home() {
           margin: 3rem auto;
           text-align: center;
         }
-        .cta-btn {
-          padding: 0.75rem 3.5rem;
-          font-size: 1.5rem;
-          margin-top: 1rem;
-          
-        }
-        .primary-btn {
-          background-color: #13C8C4;
-          color: white;
-        }
-        .primary-btn:hover {
-          background-color: #4BE0DD;
-        }
-        .primary-btn:active {
-          background-color: #2EB7BE;;
-        }
-        .btn {
-          display: inline-block;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.4s;
-          border-radius: 2px;
-          cursor: pointer;
-        }
-        .btn:hover {
-          transform: translateY(-2px);
-        }
-        .btn:active {
-          transform: scale(.99);
-        }
+
         .cta-subtitle {
           color: white;
           margin-top: .5rem;
@@ -177,78 +149,6 @@ export default function Home() {
           .grid {
             width: 100%;
             flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: 'Inter', sans-serif;
-        }
-        
-        * {
-          box-sizing: border-box;
-          margin: 0;
-        }
-        .container {
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          max-width: 1440px;
-          padding: 0 5%;
-          margin: 0 auto;
-        }
-        h1 {
-          font-size: 4.375rem;
-          font-weight: 900;
-          color: #1c1c1c;
-          
-        }
-        h2 {
-          font-size: 3.4375rem;
-          font-weight: 700;
-          color: #1c1c1c;
-          
-        }
-        h3 {
-          font-size: 1.875rem;
-          font-weight: 700;
-          color: #1c1c1c;
-        }
-        h4 {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #1c1c1c;
-        }
-        h5 {
-          font-size: 1.125rem;
-          font-weight: 700;
-          color: #1c1c1c;
-        }
-        h6 {
-          font-size: 0.75rem;
-          font-weight: 700;
-          color: #1c1c1c;
-        }
-        p {
-          color: #5C5C5C;
-          font-size: 1.125rem;
-        }
-        footer {
-          background-color: #FAFAFA;
-          padding: 1rem 5%; 
-        }
-        @media (max-width: 450px) {
-          h1 {
-            font-size: 3rem;
-          }
-          h2 {
-            font-size: 2rem;
           }
         }
       `}</style>
