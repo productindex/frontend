@@ -83,26 +83,26 @@ footer {
     text-decoration: none;
     transition: all 0.4s;
     border-radius: 2px;
-  }
-  .btn:hover {
-    transform: translateY(-2px);
-  }
-  .btn:active {
-    transform: scale(.99);
-  }
-  .primary-btn {
-    background-color: #13C8C4;
-    color: white;
-  }
-  .primary-btn:hover {
-    background-color: #4BE0DD;
-  }
-  .primary-btn:active {
-    background-color: #2EB7BE;
-  }
-  .cta-btn {
-    padding: 0.75rem 3.5rem;
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    
-  }
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: scale(.99);
+}
+.primary-btn {
+  background-color: #13C8C4;
+  color: white;
+}
+.primary-btn:hover {
+  background-color: #4BE0DD;
+}
+.primary-btn:active {
+  background-color: #2EB7BE;
+}
+.cta-btn {
+  padding: 0.75rem 3.5rem;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  
+}
