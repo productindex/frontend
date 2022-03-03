@@ -13,7 +13,7 @@ export default function NavBar(){
                     float: left;
                 }
                 .logo-box img {
-                    width: 200px;
+                    width: 162px;
                     cursor: pointer;
                 }
         `}</style>

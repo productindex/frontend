@@ -125,6 +125,7 @@ export default function Home() {
           text-decoration: none;
           transition: all 0.4s;
           border-radius: 2px;
+          cursor: pointer;
         }
         .btn:hover {
           transform: translateY(-2px);
