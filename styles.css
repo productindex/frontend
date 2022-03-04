@@ -83,6 +83,7 @@ footer {
     text-decoration: none;
     transition: all 0.4s;
     border-radius: 2px;
+    cursor: pointer;
 }
 .btn:hover {
   transform: translateY(-2px);
@@ -90,19 +91,72 @@ footer {
 .btn:active {
   transform: scale(.99);
 }
-.primary-btn {
-  background-color: #13C8C4;
-  color: white;
-}
-.primary-btn:hover {
-  background-color: #4BE0DD;
-}
-.primary-btn:active {
-  background-color: #2EB7BE;
-}
 .cta-btn {
   padding: 0.75rem 3.5rem;
   font-size: 1.5rem;
   margin-top: 1rem;
   
 }
+.btn:disabled {
+  transform: translateY(0);
+}
+.btn-primary {
+  background-color: #13C8C4;
+  color: white;
+}
+.btn-primary:hover {
+  background-color: #4BE0DD;
+}
+.btn-primary:active {
+  background-color: #2EB7BE;;
+}
+.btn-primary:disabled {
+  background-color: #C9F1E9;
+}
+.btn-primary:focus {
+  outline: none;  
+  box-shadow: 0px 0px 0px 4px #89E3E1;
+}
+
+.rightpane {
+  width: 45%;
+  padding-right: 5%;
+  padding: 6rem 5% 5% 1.5rem;
+}
+.leftpane h2 {
+  color: white;
+  text-transform: uppercase;
+}
+.leftpane {
+  width: 55%;
+  padding: 10rem 0 5% 5%;
+  background-color: #13C8C4;
+  
+}
+.leftpane .content {
+  max-width: 450px;
+}
+.link {
+  color: #13C8C4;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  transition: all .4s;
+}
+.link:hover {
+  color: #4BE0DD;
+}
+.link:active {
+  color: #2EB7BE;
+}
+.btn-form {
+  padding: 12px 24px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  width: 100%;
+  border: 0;
+}
+.linkbox {
+margin: 2rem 0 1rem 0;
+}
+

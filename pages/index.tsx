@@ -15,7 +15,7 @@ export default function Home() {
           <div className="cta-box">
             <h1 className='header-title'>Discovery starts with all</h1>
             <h4 className='header-subtitle'>We are here to fostor community built relationships between clients and businesses.</h4>
-            <a href="#" className='btn cta-btn primary-btn'>Join waiting list</a>
+            <a href="#" className='btn cta-btn btn-primary'>Join waiting list</a>
             <h5 className='cta-subtitle'> We’ll contact you when we’re launching</h5>
           </div>
         </div>
@@ -61,7 +61,7 @@ export default function Home() {
             <h4 className='section-title'>A digital place for your products and services to live</h4>
             <p>Add and manage your inventory with us. Increase your public visibility by doing the things you normally do and nothing more.</p>
             <div className="btn-box">
-              <a href="#" className='btn cta-btn primary-btn'>Join waiting list</a>
+              <a href="#" className='btn cta-btn btn-primary'>Join waiting list</a>
             </div>
 
 
