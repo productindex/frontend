@@ -56,7 +56,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                 value={valueType == 'telephone'? formatTelephone() : value}
                 
             />
-            {valueType=='password' && <button type='button' className='show-hide' onClick={showHide}>{showPassword? 'hide' : 'show'}</button>}
+            {valueType=='password' && <button type='button' className='show-hide' onMouseDown={showHide} onMouseUp={showHide}>{showPassword? 'hide' : 'show'}</button>}
             {error && <div className="error-alert">{error}</div>}
             <style jsx>{`
                 .label {
