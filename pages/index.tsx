@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
+        <p>Copyright © 2022 Product Index. All rights reserved.</p>
       </footer>
 
       <style jsx>{`
