@@ -74,7 +74,7 @@ const SignupForm: React.FC = () => {
                       error={error.firstname}
                   />
                   <TextField 
-                      name='firstname'
+                      name='lastname'
                       valueType='text'
                       valuePlaceholder='Doe'
                       valueLabel='Last name'
@@ -105,7 +105,7 @@ const SignupForm: React.FC = () => {
                       error={error.password}
                   />
                 <div className="legal-box">
-                  <small>Creating an account means that you’ve read and agreed to our <span className="link-text link"><Link href='terms-of-service'><a className='link'>Terms of Service</a></Link> </span> and <span className="link-text"><Link href='/privacy'><a className='link'> Privacy policy </a></Link></span></small> 
+                  <small>Creating an account means that you’ve read and agreed to our <span className="link-text link"><Link href='/help/terms-of-service'><a className='link'>Terms of Service</a></Link> </span> and <span className="link-text"><Link href='/help/privacy'><a className='link'> Privacy policy </a></Link></span></small> 
                 </div>
                  
                  <input type="submit" value="Sign up" className='btn btn-primary btn-form' />

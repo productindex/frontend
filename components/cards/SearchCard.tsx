@@ -64,7 +64,6 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
                 cursor: pointer;
                 transition: all .5s;
                 margin-bottom: 0.5rem;
-                // box-sizing: border-box;
             }
             .card-search:hover {
                 background-color: #FBFBFB;

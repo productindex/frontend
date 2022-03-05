@@ -18,7 +18,7 @@ export default function Search() {
             <h5>Search results: <span className='results'>100</span></h5>
         </div>
 
-        <SearchCard businessName={`Solomon's Flavor`} slug='#' imageSrc={'/'} locationState='Nassau' locationCountry={'The Bahamas'} openStatus='Open' address={'Johnson road'} tags={['Soul food', 'Sandwiches', 'Pizza']} reviewAvg={4.5} reviewCount={100}  />
+        <SearchCard businessName={`Solomon's Flavor`} slug='/store/1' imageSrc={'/'} locationState='Nassau' locationCountry={'The Bahamas'} openStatus='Open' address={'Johnson road'} tags={['Soul food', 'Sandwiches', 'Pizza']} reviewAvg={4.5} reviewCount={100}  />
         <SearchCard businessName={`Solomon's Flavor`} slug='#' imageSrc={'/'} locationState='Nassau' locationCountry={'The Bahamas'} openStatus='Open' address={'Johnson road'} tags={['Soul food', 'Sandwiches', 'Pizza']} reviewAvg={4.5} reviewCount={100}  />
         <SearchCard businessName={`Solomon's Flavor`} slug='#' imageSrc={'/'} locationState='Nassau' locationCountry={'The Bahamas'} openStatus='Open' address={'Johnson road'} tags={['Soul food', 'Sandwiches', 'Pizza']} reviewAvg={4.5} reviewCount={100}  />
         <SearchCard businessName={`Solomon's Flavor`} slug='#' imageSrc={'/'} locationState='Nassau' locationCountry={'The Bahamas'} openStatus='Open' address={'Johnson road'} tags={['Soul food', 'Sandwiches', 'Pizza']} reviewAvg={4.5} reviewCount={100}  />
