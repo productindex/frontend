@@ -16,7 +16,7 @@ export default function Home() {
             <h1 className='header-title'>Discovery starts with all</h1>
             <h4 className='header-subtitle'>We are here to foster community-built relationships between clients and businesses.</h4>
             <a href="#" className='btn cta-btn primary-btn'>Join waiting list</a>
-            <h5 className='cta-subtitle'> We’ll contact you when we’re launching</h5>
+            <h5 className='cta-subtitle'> We’ll contact you when we’re launching.</h5>
           </div>
         </div>
         
@@ -43,7 +43,7 @@ export default function Home() {
                 <Image src='/images/Search-queries.png' width={600} height={156}></Image>
               </div>
               <h4 className='section-title'>Your voice matters to everyone</h4>
-              <p>Let everyone know about your last experience or find out how other feels. Our review section gives everyone an insight about the business you found.</p>
+              <p>Let everyone know about your previous experience or find out how others feel. Our review section gives everyone an insight into the business you found.</p>
             </div>
           </div>
       </section>
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="section-box">
             <h5 className='section-subtitle'>Built for you - too</h5>
             <h3 className='section-title'>Your business deserves to seen</h3>
-            <p>Being listed on Product Index, your business will be found if anyone searches for it’s name, category, product or service provided.</p>
+            <p>Being listed on Product Index, your business will be found if anyone searches for its name, category, product, or service provided.</p>
             <div className="img-box">
               <Image src='/images/highlighted-business.png' width={650} height={505} ></Image>
             </div>
