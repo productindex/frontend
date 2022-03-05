@@ -14,7 +14,7 @@ export default function Home() {
           <NavBar />
           <div className="cta-box">
             <h1 className='header-title'>Discovery starts with all</h1>
-            <h4 className='header-subtitle'>We are here to fostor community built relationships between clients and businesses.</h4>
+            <h4 className='header-subtitle'>We are here to foster community-built relationships between clients and businesses.</h4>
             <a href="#" className='btn cta-btn primary-btn'>Join waiting list</a>
             <h5 className='cta-subtitle'> We’ll contact you when we’re launching</h5>
           </div>
@@ -27,8 +27,7 @@ export default function Home() {
             <h5 className='section-subtitle'>Product Index</h5>
             <h3 className='section-title'>What is this about?</h3>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem explicabo temporibus provident. Voluptates atque quo facere molestiae odio, quisquam quaerat culpa, perspiciatis tempora velit obcaecati delectus laboriosam aspernatur aliquid. Maiores cum exercitationem magni, tenetur reiciendis alias delectus, soluta eaque, ut quidem enim? Hic fuga totam laborum harum sint nam excepturi minus molestiae, quibusdam ratione labore enim nisi et commodi voluptas veniam repellat nesciunt ad? Illo modi cupiditate nam eveniet aliquam, perspiciatis assumenda repellendus possimus mollitia error esse, temporibus nostrum eius numquam dicta debitis et quae. Impedit ipsa sapiente repellat. Dolorum minima voluptatum sed officia, officiis esse blanditiis quos. Ut, repudiandae.
-            </p>
+            Before Product Index, finding goods and services locally was an adventure. Relying on friends and family to point you in the right direction is limited by their personal experience. Product Index allows customers to find businesses that are right for them while driving more traffic to businesses that cater to their needs.             </p>
           </div>
         </div>
 
