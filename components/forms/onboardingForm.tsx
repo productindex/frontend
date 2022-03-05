@@ -15,6 +15,7 @@ const OnboardingForm: React.FC = () => {
   const [gender, setGender] = useState('');
   const [error, setError] = useState<ErrObj>({});
   const [telephone, setTelephone] = useState('');
+  const [city, setCity] = useState('');
   
 
   interface ErrObj {
@@ -24,12 +25,14 @@ const OnboardingForm: React.FC = () => {
       gender?: string;
       country?: string;
       state?: string;
+      city?: string;
   }
   const schema = Joi.object({
       birthday: Joi.string().required().messages({'string.empty': 'Birthday is required'}),
       country: Joi.string().required().messages({'string.empty': 'Country is required'}),
       state: Joi.string().required().messages({'string.empty': 'State is required'}),
-      gender: Joi.string().required().messages({'string.empty': 'Gender is required'})
+      gender: Joi.string().required().messages({'string.empty': 'Gender is required'}),
+      city: Joi.string().required().messages({'string.empty': 'Gender is required'})
   });
 
   const user = {
@@ -37,7 +40,8 @@ const OnboardingForm: React.FC = () => {
     gender,
     country,
     state,
-    telephone
+    telephone,
+    city
 }
   const validateForm = () => {
     const errors: any = {};
@@ -93,18 +97,30 @@ const OnboardingForm: React.FC = () => {
                   error={error.birthday}
                   />
                 </div>
-                <Dropdown 
-                    valueLabel='Country'
-                    optionList={[{name: "The Bahamas", value: "BAH"}]}
-                    onChange={(e: any)=> setCountry(e.target.value)}
-                    error={error.country}
+                <div className="double-textbox">
+                  <Dropdown 
+                      valueLabel='Country'
+                      optionList={[{name: "The Bahamas", value: "BAH"}]}
+                      onChange={(e: any)=> setCountry(e.target.value)}
+                      error={error.country}
+                    />
+                  <Dropdown 
+                      valueLabel='State/Island'
+                      optionList={[{name: "New Providence", value: "NEW PROVIDENCE"}]}
+                      onChange={(e: any)=> setState(e.target.value)}
+                      error={error.state}
                   />
-                <Dropdown 
-                    valueLabel='State/Island'
-                    optionList={[{name: "New Providence", value: "NEW PROVIDENCE"}]}
-                    onChange={(e: any)=> setState(e.target.value)}
-                    error={error.state}
-                  />
+                </div>
+
+                <TextField 
+                      name='city'
+                      valueType='text'
+                      valueLabel='City'
+                      onChange={(e: any)=> setCity(e.target.value)}
+                      value={city}
+                      className='med-textbox'
+                      error={error.city}
+                />
 
                   <TextField 
                       name='telephone'
@@ -121,25 +137,6 @@ const OnboardingForm: React.FC = () => {
                  <input type="submit" value="Complete sign up" className='btn btn-primary btn-form' />
               </form>
 
-            <style jsx>{`
-
-
-              .double-textbox {
-                display: flex;
-                width: 100%;
-                column-gap: 1rem;
-              }
-
-              @media (max-width: 850px) {
-                .rightpane {
-                  width: 100%;
-
-                }
-                .double-textbox {
-                  flex-direction: column;
-                }
-              }
-        `}</style>
         </div>
 
 

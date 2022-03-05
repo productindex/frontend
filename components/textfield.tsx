@@ -94,7 +94,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                     box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     -webkit-box-sizing: border-box;
-                    min-width: 12.5rem;
+                    // min-width: 12.5rem;
                     letter-spacing: 0.05rem;
                     font-size: 1.125rem;
                     width: 100%;

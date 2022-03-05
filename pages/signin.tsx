@@ -36,16 +36,6 @@ export default function Signin() {
       </footer>
 
       <style jsx>{`
-        .auth-screens {
-          height: 97vh;
-        }
-        .auth-screens .side-by-side {
-          height: 100%;
-        }
-        .auth-screens .leftpane  p{
-          color: white;
-          font-size: 1.2rem;
-        }
 
         .logo-box {
           margin-bottom: 1.5rem;
@@ -54,6 +44,7 @@ export default function Signin() {
           width: 55%;
           padding: 8rem 0 5% 5%;
           background-color: #13C8C4;
+          // height: 100%;
         }
 
         .form-title {
@@ -76,7 +67,7 @@ export default function Signin() {
           text-transform: uppercase;
         }
 
-        @media (max-width: 850px) {
+        @media (max-width: 900px) {
           .leftpane {
             display: none;
   

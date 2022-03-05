@@ -28,8 +28,8 @@ const Dropdown: React.FC<TextFieldProps>  = ({
 
 }) => {
     return (
-        <div>
-            <label className="label label-regular" htmlFor={name}>{valueLabel}</label><br />
+        <div className='dropdown'>
+              <label className="label label-regular" htmlFor={name}>{valueLabel}</label><br />
               <select name={name} id={name} className='textbox' onChange={onChange}>
                 {optionList && <> <option disabled hidden selected> -</option> {optionList.map((item) => <option value={item.value}>{item.name}</option> )}</>}
               </select>
@@ -39,7 +39,6 @@ const Dropdown: React.FC<TextFieldProps>  = ({
                     color: #1c1c1c;
                     font-weight: 700;
                   }
-                  
                   .label-regular {
                     font-size: 1.125em;
                   }
@@ -57,10 +56,11 @@ const Dropdown: React.FC<TextFieldProps>  = ({
                     -moz-box-sizing: border-box;
                     -webkit-box-sizing: border-box;
                     font-size: 1rem;
-                    min-width: 12.5rem;
+                    // min-width: 10.5rem;
                     letter-spacing: 0.05rem;
                     font-size: 1.125rem;
                     width: 100%;
+
                   }
                   .textbox:focus {
                     box-shadow: 0px 0px 2px 2px #B8EEED;
@@ -77,6 +77,9 @@ const Dropdown: React.FC<TextFieldProps>  = ({
                       font-weight: 500;
                       position: relative;
                       top: -0.5rem;
+                  }
+                  .dropdown {
+                    width: 100%;
                   }
         `}</style>
         </div>

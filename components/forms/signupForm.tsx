@@ -102,7 +102,8 @@ const SignupForm: React.FC = () => {
                       error={error.password}
                   />
                 <div className="legal-box">
-                  <p>Creating an account means that you’ve read and agreed to our <span className="link-text"><Link href='terms-of-service'><p className='link'>Terms of Service</p></Link> </span> and <span className="link-text"><Link href='/privacy'><p className='link'> Privacy policy </p></Link></span></p> 
+                  <small>Creating an account means that you’ve read and agreed to our <span className="link-text link"><Link href='terms-of-service'><a className='link'>Terms of Service</a></Link> </span> and <span className="link-text"><Link href='/privacy'><a className='link'> Privacy policy </a></Link></span></small> 
+                  {/* <small>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam nobis a eveniet quasi officia enim. Dignissimos ipsam vero aliquid, cupiditate ad modi voluptatum quisquam facere similique fugit velit sapiente. Dolor.</small> */}
                 </div>
                  
                  <input type="submit" value="Sign up" className='btn btn-primary btn-form' />
@@ -112,17 +113,11 @@ const SignupForm: React.FC = () => {
               </div>
 
             <style jsx>{`
-
-        .legal-box p{
-          display: inline-block;
-
-        }
         .legal-box {
-          margin-bottom: 1rem;
-        }
-        .double-textbox {
-          display: flex;
-          column-gap: 1rem;
+          width: 100%;
+          display: inline-block;
+          position: relative;
+          transform: translateY(-1rem);
         }
   
       `}</style>

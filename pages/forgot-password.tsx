@@ -40,7 +40,7 @@ export default function ForgotPassword() {
 
       <style jsx>{`
         .auth-screens {
-          height: 97vh;
+          min-height: 97vh;
         }
         .auth-screens .side-by-side {
           height: 100%;
@@ -79,7 +79,7 @@ export default function ForgotPassword() {
           text-transform: uppercase;
         }
 
-        @media (max-width: 850px) {
+        @media (max-width: 950px) {
           .leftpane {
             display: none;
   

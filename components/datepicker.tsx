@@ -28,7 +28,7 @@ const Datepicker: React.FC<TextFieldProps>  = ({
 
 }) => {
     return (
-        <div>
+        <div className='form-element'>
             <label className="label label-regular" htmlFor={name}>{valueLabel}</label><br />
             <input type="date" id="start" name="trip-start"
               value = {value}
@@ -58,12 +58,11 @@ const Datepicker: React.FC<TextFieldProps>  = ({
                     box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     -webkit-box-sizing: border-box;
-                    font-size: 1rem;
-                    min-width: 12.5rem;
-                    letter-spacing: 0.05rem;
-                    font-size: 1.125rem;
+                    // font-size: 1.125rem;
+                    min-width: 10.5rem;
+                    // letter-spacing: 0.05rem;
                     width: 100%;
-                    font-family: "Inter'
+                    font-family: "Inter';
                   }
                   .textbox:focus {
                     box-shadow: 0px 0px 2px 2px #B8EEED;
@@ -80,6 +79,9 @@ const Datepicker: React.FC<TextFieldProps>  = ({
                       font-weight: 500;
                       position: relative;
                       top: -0.5rem;
+                  }
+                  .form-element {
+                    width: 100%;
                   }
         `}</style>
         </div>
