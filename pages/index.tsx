@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Product Index: Discovery starts with all </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className='header'>
