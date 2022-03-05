@@ -6,6 +6,7 @@ import * as Joi from 'joi';
 import { Dropdown } from '../dropdown';
 import { Datepicker } from '../datepicker';
 const { joiPassword } = require("joi-password");
+import { useRouter } from 'next/router'
 
 const OnboardingForm: React.FC = () => {
 
@@ -16,8 +17,9 @@ const OnboardingForm: React.FC = () => {
   const [error, setError] = useState<ErrObj>({});
   const [telephone, setTelephone] = useState('');
   const [city, setCity] = useState('');
+  const router = useRouter()
+  const { firstname, lastname, password, email_address } = router.query // To verify password change
   
-
   interface ErrObj {
       email?: string;
       telephone?: string;
@@ -36,6 +38,10 @@ const OnboardingForm: React.FC = () => {
   });
 
   const user = {
+    firstname,
+    lastname,
+    email_address,
+    password,
     birthday,
     gender,
     country,

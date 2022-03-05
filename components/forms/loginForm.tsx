@@ -76,7 +76,7 @@ const handleSubmit = (e: any) => {
                     error={error.password}
                 />
                   <div className="forgot">
-                    <Link href='/forgot-password'><p className='link'>Forgot password?</p></Link>
+                    <Link href='/forgot-password'><a className='link'>Forgot password?</a></Link>
                   </div>
                   
                   <input type="submit" value="Sign in" disabled={false} className='btn btn-primary btn-form' />
@@ -84,7 +84,7 @@ const handleSubmit = (e: any) => {
                
             </form>    
             <div className="linkbox">
-                <p className='body'> Not a member? <span className='link-text'><Link href='/signup' as='/signup'><p className='link'>Sign Up</p></Link></span></p>
+                <p className='body'> Not a member? <span className='link-text'><Link href='/signup'><a className='link'>Sign Up</a></Link></span></p>
             </div>
 
             <style jsx>{`
