@@ -70,7 +70,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                       margin-right: 2rem;
                       padding: 6px;
                       cursor: pointer;
-                      border: 1px solid #E5E9E8;
+                      border: 1.5px solid #E5E9E8;
                       text-transform: uppercase;
                       display: inline-block;
                   }
@@ -85,7 +85,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                   .textbox {
                     padding: 0.75rem 1rem;
                     margin: 0.5rem 0 1rem 0;
-                    border: 1px solid #E5E9E8;
+                    border: 1.5px solid #E5E9E8;
                     -webkit-box-shadow: inset 0px 4px 6px rgba(58, 58, 58, 0.05);
                     box-shadow: inset 0px 4px 6px rgba(58, 58, 58, 0.05);
                     border-radius: 2px;
@@ -94,7 +94,6 @@ const TextField: React.FC<TextFieldProps>  = ({
                     box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     -webkit-box-sizing: border-box;
-                    font-size: 1rem;
                     min-width: 12.5rem;
                     letter-spacing: 0.05rem;
                     font-size: 1.125rem;

@@ -55,6 +55,10 @@ p {
   color: #5C5C5C;
   font-size: 1.125rem;
 }
+small {
+  color: #5C5C5C;
+  font-size: 0.8.75rem;
+}
 footer {
   background-color: #FAFAFA;
   padding: 1rem 5%; 

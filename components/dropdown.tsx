@@ -47,7 +47,7 @@ const Dropdown: React.FC<TextFieldProps>  = ({
                   .textbox {
                     padding: 0.75rem 1rem;
                     margin: 0.5rem 0 1rem 0;
-                    border: 1px solid #E5E9E8;
+                    border: 1.5px solid #E5E9E8;
                     -webkit-box-shadow: inset 0px 4px 6px rgba(58, 58, 58, 0.05);
                     box-shadow: inset 0px 4px 6px rgba(58, 58, 58, 0.05);
                     border-radius: 2px;
