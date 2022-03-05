@@ -47,6 +47,7 @@ const Datepicker: React.FC<TextFieldProps>  = ({
                   }
 
                   .textbox {
+                    background-color: #fff;
                     padding: 0.75rem 1rem;
                     margin: 0.5rem 0 1rem 0;
                     border: 1px solid #E5E9E8;
@@ -63,7 +64,8 @@ const Datepicker: React.FC<TextFieldProps>  = ({
                     letter-spacing: 0.05rem;
                     font-size: 1.125rem;
                     width: 100%;
-                    font-family: "Inter'
+                    font-family: "Inter';
+                    
                   }
                   .textbox:focus {
                     box-shadow: 0px 0px 2px 2px #B8EEED;

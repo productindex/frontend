@@ -1,7 +1,4 @@
 import Head from 'next/head'
-import NavBar from '../components/navbar'
-import Image from 'next/image'
-import { TextField } from '../components/textfield'
 import { SignupForm } from '../components/forms/signupForm'
 
 export default function SignUp() {

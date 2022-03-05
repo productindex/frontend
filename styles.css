@@ -142,6 +142,7 @@ footer {
   display: inline-block;
   font-weight: 500;
   transition: all .4s;
+  text-decoration: none;
 }
 .link:hover {
   color: #4BE0DD;

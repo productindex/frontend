@@ -3,7 +3,10 @@ import Link from 'next/link';
 import { TextField } from '../textfield';
 // import axios from 'axios'
 import * as Joi from 'joi';
+import Router from 'next/router';
 const { joiPassword } = require("joi-password");
+import { useRouter } from 'next/router'
+
 
 const SignupForm: React.FC = () => {
 
@@ -12,7 +15,7 @@ const SignupForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<ErrObj>({});
-  
+  const router = useRouter()
 
   interface ErrObj {
       email?: string;
@@ -51,7 +54,7 @@ const SignupForm: React.FC = () => {
       const errors = validateForm()
       setError(errors)
       if (Object.values(errors).every(x => x === null || x === '')) {
-        console.log(user)
+        router.replace({pathname: '/onboarding', query: {firstname: user.firstname, lastname: user.lastname ,email_address: user.email, password: user.password}}, '/signup')
       }
   };
   
@@ -102,13 +105,13 @@ const SignupForm: React.FC = () => {
                       error={error.password}
                   />
                 <div className="legal-box">
-                  <p>Creating an account means that you’ve read and agreed to our <span className="link-text"><Link href='terms-of-service'><p className='link'>Terms of Service</p></Link> </span> and <span className="link-text"><Link href='/privacy'><p className='link'> Privacy policy </p></Link></span></p> 
+                  <p>Creating an account means that you’ve read and agreed to our <span className="link-text"><Link href='terms-of-service'><a className='link'>Terms of Service</a></Link> </span> and <span className="link-text"><Link href='/privacy'><a className='link'> Privacy policy </a></Link></span></p> 
                 </div>
                  
                  <input type="submit" value="Sign up" className='btn btn-primary btn-form' />
               </form>
               <div className='linkbox'>
-                <p> Already a member? <span className='link-text'><Link href='/signin'><p className='link'>Sign In</p></Link></span></p>
+                <p> Already a member? <span className='link-text'><Link href='/signin'><a className='link'>Sign In</a></Link></span></p>
               </div>
 
             <style jsx>{`

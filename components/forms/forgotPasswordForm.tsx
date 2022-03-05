@@ -67,7 +67,7 @@ const handleSubmit = (e: any) => {
                 
             </form>    
             <div className="linkbox">
-                <p className='body'> Remembered? <span className='link-text'><Link href='/signin' as='/signin'><p className='link'>Sign In</p></Link></span></p>
+                <p className='body'> Remembered? <span className='link-text'><Link href='/signin'><a className='link'>Sign In</a></Link></span></p>
             </div>
         </div>
 
