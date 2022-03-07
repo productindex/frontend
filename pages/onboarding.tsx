@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { OnboardingForm } from '../components/forms/onboardingForm'
 
 export default function Onboarding() {

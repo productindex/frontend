@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
 // import axios from 'axios'
@@ -7,6 +7,7 @@ import { Dropdown } from '../dropdown';
 import { Datepicker } from '../datepicker';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
+
 
 const OnboardingForm: React.FC = () => {
 
@@ -20,6 +21,17 @@ const OnboardingForm: React.FC = () => {
   const router = useRouter()
   const { firstname, lastname, password, email_address } = router.query // To verify password change
   
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', alertUser)
+    return () => {
+      window.removeEventListener('beforeunload', alertUser)
+    }
+  }, [])
+  const alertUser = e => {
+    e.preventDefault()
+    e.returnValue = ''
+  }
   interface ErrObj {
       email?: string;
       telephone?: string;
@@ -52,7 +64,7 @@ const OnboardingForm: React.FC = () => {
   const validateForm = () => {
     const errors: any = {};
     const options = {abortEarly: false}
-    const { error } = schema.validate({birthday: birthday, gender: gender, country: country, state: state}, options );
+    const { error } = schema.validate({birthday: birthday, gender: gender, country: country, state: state, city: city}, options );
     if (error) {
       for (let e of error.details) {
           let message = e.message.replaceAll("\"", "")
@@ -68,6 +80,7 @@ const OnboardingForm: React.FC = () => {
       setError(errors)
       if (Object.values(errors).every(x => x === null || x === '')) {
         console.log(user)
+        // router.push('/')
       }
   };
   const genderList = [
