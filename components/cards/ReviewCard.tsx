@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import React from 'react'
+import { Ratings } from "../../components/puzzlePiece/starRatings"
 
 interface ReviewCardProps  {
     personName: string;
@@ -27,7 +28,7 @@ const ReviewCard:  React.FC<ReviewCardProps>  = ({
                 
             </div>
               
-              <div className="review-stars">{starRatings}</div>
+              <div className="review-stars"><Ratings rating={starRatings}/></div>
               <small>{reviewDate}</small>
               <p className="description">
                 {comments}

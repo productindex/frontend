@@ -4,6 +4,7 @@ import { Tag } from "../../components/tag";
 import SearchBar from "../../components/searchBar";
 import { useState } from 'react';
 
+
 export default function BusinessStore() {
   const [businessName, setBusinessName] = useState(`No Business Name`)
   const [tags, setTags] = useState(['Soul Food', 'Chicken', 'Pizza']);
@@ -12,7 +13,7 @@ export default function BusinessStore() {
   const [businessContact, setBusinessContact] = useState( {phoneOne: '(242) 123 - 4567', phoneTwo: '(242) 123 - 4567', email_address: 'me@example.com'})
   const [businessDirections, setBusinessDirections] = useState('')
   const [products, setProducts] = useState([{name: "Product name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse cum unde beatae blanditiis alias officia ullam praesentium eius, explicabo corrupti.", price: '17.00'}])
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState([{}])
 
   return (
     <>
@@ -46,7 +47,7 @@ export default function BusinessStore() {
                 <h4>What people are saying</h4>
           <div className="review-section-box">
             {   reviews.length > 0 ?
-              <ReviewCard personName='Tammy Taylor' starRatings={44444} reviewDate='Yesterday at 8pm' comments='Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore inventore nulla laudantium nisi consequuntur odit doloribus iste, repudiandae obcaecati! Nam voluptate voluptates tenetur quidem quas magnam tempora pariatur incidunt dignissimos quo in sunt itaque modi obcaecati animi labore hic necessitatibus iure consequuntur placeat esse, rem eum ipsum? Voluptate, excepturi fugiat?'/>
+              <ReviewCard personName='Tammy Taylor' starRatings={1} reviewDate='Yesterday at 8pm' comments='Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore inventore nulla laudantium nisi consequuntur odit doloribus iste, repudiandae obcaecati! Nam voluptate voluptates tenetur quidem quas magnam tempora pariatur incidunt dignissimos quo in sunt itaque modi obcaecati animi labore hic necessitatibus iure consequuntur placeat esse, rem eum ipsum? Voluptate, excepturi fugiat?'/>
             : <div className='empty-box'> No Reviews left as yet. Be the first one!</div>
             }            
           </div>
@@ -57,13 +58,13 @@ export default function BusinessStore() {
               <div className="card">
                 <h5>Business Hours</h5>
                 <ul>
-                  <li><span className='item-title'>Mon:</span> {businessHours.Monday ? businessHours.Monday: <span className='red'>Closed</span>}</li>
-                  <li><span className='item-title'>Tues:</span> {businessHours.Tuesday ? businessHours.Tuesday : <span className='red'>Closed</span>}</li>
-                  <li><span className='item-title'>Wed:</span> {businessHours.Wednesday ? businessHours.Wednesday : <span className='red'>Closed</span>}</li>
-                  <li><span className='item-title'>Thurs:</span> {businessHours.Thursday ? businessHours.Thursday : <span className='red'>Closed</span>}</li>
-                  <li><span className='item-title'>Fri:</span> {businessHours.Friday ? businessHours.Friday : <span className='red'>Closed</span>}</li>
-                  <li><span className='item-title'>Sat:</span> {businessHours.Saturday ? businessHours.Saturday : <span className='red'>Closed</span>}</li>
-                  <li><span className='item-title'>Sun:</span> {businessHours.Sunday ? businessHours.Sunday : <span className='red'>Closed</span>}</li>
+                  <li><span className='item-title'>Mon:</span> {businessHours.Monday ? businessHours.Monday: <span className='error'>Closed</span>}</li>
+                  <li><span className='item-title'>Tues:</span> {businessHours.Tuesday ? businessHours.Tuesday : <span className='error'>Closed</span>}</li>
+                  <li><span className='item-title'>Wed:</span> {businessHours.Wednesday ? businessHours.Wednesday : <span className='error'>Closed</span>}</li>
+                  <li><span className='item-title'>Thurs:</span> {businessHours.Thursday ? businessHours.Thursday : <span className='error'>Closed</span>}</li>
+                  <li><span className='item-title'>Fri:</span> {businessHours.Friday ? businessHours.Friday : <span className='error'>Closed</span>}</li>
+                  <li><span className='item-title'>Sat:</span> {businessHours.Saturday ? businessHours.Saturday : <span className='error'>Closed</span>}</li>
+                  <li><span className='item-title'>Sun:</span> {businessHours.Sunday ? businessHours.Sunday : <span className='error'>Closed</span>}</li>
                 </ul>
               </div>
               <div className="card">
@@ -120,7 +121,7 @@ export default function BusinessStore() {
         }
         .store-content {
           display: flex;
-          margin-top: 1rem;
+          margin-top: 2rem;
           column-gap: 2rem;
         }
         ul {
@@ -168,7 +169,7 @@ export default function BusinessStore() {
         .card h5 {
           margin-bottom: .5rem;
         }
-        .red {
+        .error {
           color: #C60000;
           font-weight: 700;
         }

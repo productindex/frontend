@@ -18,7 +18,7 @@ const ProductCard:  React.FC<ProductCardProps>  = ({
     return (
         <div className="product-card">
             <div className="product-photo">
-                <img src={photoSrc} />
+                <img src={!photoSrc? '/images/Default-photo-item.png' : photoSrc} />
             </div>
             <div className="product-meta">
                 <h5>{productName}</h5>
@@ -41,10 +41,17 @@ const ProductCard:  React.FC<ProductCardProps>  = ({
                 min-height: 100px;
             }
             .product-photo {
-                min-width: 100px;
-                min-height: 100px;
-                background-color: red;
+                min-width: 80px;
+                height: 80px;
+                background-color: #E5E9E8;
                 border-radius: 2px;
+                margin: .5rem;
+                
+            }
+            .product-photo img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
             }
             .product-meta {
                 padding: .5rem 0;

@@ -1,13 +1,16 @@
 import Link from "next/link"
 import Image from "next/image"
 import React from 'react'
+import { StoreAvailability } from '../../components/puzzlePiece/storeAvailability'
+import { Tag } from '../../components/tag'
 
 interface SearchCardProps  {
     businessName?: string;
     slug?: string;
     locationState?: string;
     locationCountry?: string;
-    openStatus?: string;
+    openingTime?: string;
+    closingTime?: string
     address?: string;
     tags?: string[];
     reviewAvg?: number;
@@ -25,29 +28,33 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
     reviewAvg,
     reviewCount,
     imageSrc,
+    openingTime,
+    closingTime,
 ...props
 }) => {
+
     return (
         <div>
         <Link href={slug}>
+            
             <div className='card-search'>
                     <div className="search-photo">
-                        <Image quality='60' width={150} height={150} src={!imageSrc? '/../images/Search-queries.png' : imageSrc}/>
+                        <img src={!imageSrc? '/images/Default-photo-store.png' : imageSrc} />
                     </div>
                     <div className="card-search-content">
                         <small>Business in {`${locationState}, ${locationCountry}`}</small> 
                         <h4>{businessName}</h4>
                         <div className="meta-details">
-                            <div className="availability">{`${openStatus}`}</div>
-                            <div className="location-box"> <span className='address'>{`${address}`}</span> </div>
+                            <div className="availability"><StoreAvailability openingTime={openingTime} closingTime={closingTime} /></div>
+                            <div className="location-box"><div> <Image src='/images/Pin.svg' width={24} height={24}/></div><span className='address'>{`${address}`}</span> </div>
 
                         </div>
                         <div className="tag-box">
-                            {tags.map(tag => <div className='tag'>{tag}</div>)}
+                            { tags && tags.length > 0 && tags.map(tag => <Tag description={tag} />)}
                         </div>
                     </div>
                     <div className="card-search-options">
-                        <div className="search-star-reviews">{`${reviewAvg} (${reviewCount})`}</div>
+                        <div className="search-star-reviews"><div><Image src='/images/Star.svg' width={24} height={24}/></div><div>{`${reviewAvg} (${reviewCount})`}</div></div>
                     </div>
 
             </div>
@@ -59,7 +66,7 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
                 height: 10.5rem;
                 display: flex;
                 border: 1.5px solid #E5E9E8;
-                width: 60%;
+                width: 70%;
                 border-radius: 2px;
                 cursor: pointer;
                 transition: all .5s;
@@ -76,8 +83,10 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
                 border-radius: 2px;
                 text-align: center;
             }
-            .search-photo p{
-                margin: auto;
+            .search-photo img{
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
             }
             .card-search-content {
                 padding: 1rem 1.25rem;
@@ -87,9 +96,6 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
                 display: flex;
                 column-gap: 1rem;
                 margin-top: 0.5rem;
-            }
-            .tag-box {
-                margin-top: 1rem;
             }
             .tag {
                 background-color: #E5E9E8;
@@ -105,10 +111,24 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
                 margin-left: .5rem;
             }
             .search-star-reviews {
-                padding: 1rem 1rem
+                padding: 1rem 1rem;
+                align-item: center;
+                font-weight: 500;
+                color: #5C5C5C;
+            }
+            .search-star-reviews,
+            .availability,
+            .location-box {
+                line-height: 1.5rem;
+                column-gap: 2px;
+                display: flex;
             }
             .card-search-options {
                 margin-left: auto;
+                
+            }
+            .address {
+                color: #5C5C5C;
             }
             `
         }
