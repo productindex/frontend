@@ -22,7 +22,6 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
     slug,
     locationState,
     locationCountry,
-    openStatus,
     address,
     tags,
     reviewAvg,
