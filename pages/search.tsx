@@ -3,13 +3,12 @@ import SearchBar from '../components/searchBar'
 import Link from 'next/link'
 import { SearchCard } from '../components/cards/SearchCard'
 import NavBar from '../components/navbar';
-import { useState } from 'react';
-import { Ratings } from '../components/puzzlePiece/starRatings'
-
+import { useState, useContext } from 'react';
+import FullNavBar from "../components/FullNavBar";
 
 export default function Search() {
     const router = useRouter()
-    const { find, near } = router.query // To verify password change
+    const { find, near, type } = router.query // To verify password change
 
     const testStore = { name: 'Solomon\'s Flavor', handle: 'sol-flavor', imgSrc:'/', city: 'Nassau', country: 'The Bahamas', openingTime:'09:05:00', closingTime:'19:05:00', address:'21 Johnson Road, Fox Hill', avgRatings: 4.8, reviewCount: 100, tags: ['Pizza', 'Chicken', 'Waffles'], displayImg: ''}
 
@@ -18,11 +17,10 @@ export default function Search() {
     return (
         
       <>
+      
       <div className="product-container">
-      <NavBar />
-      <div className="search-container">
-      <SearchBar />
-      </div>
+      <FullNavBar />
+      
       
         <div className="results-block">
             { stores.length > 0 ? <h5>Search results: <span className='results'>{stores.length}</span></h5> :  <h5>No results found for: <span className='results'>{find} in {near}</span></h5>}
@@ -50,9 +48,6 @@ export default function Search() {
                 padding: 0 5%;
                 margin: 0 auto;
                 }
-            .search-container {
-                display: inline-block;
-            }
         `}</style>
       </div>
 

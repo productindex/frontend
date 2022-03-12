@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import NavBar from '../components/navbar'
 import Image from 'next/image'
+import SearchBar from '../components/searchBar'
 
 export default function Home() {
   return (
@@ -14,10 +15,13 @@ export default function Home() {
           <NavBar />
           <div className="cta-box">
             <h1 className='header-title'>Discovery starts with all</h1>
-            <h4 className='header-subtitle'>We are here to fostor community built relationships between clients and businesses.</h4>
-            <a href="#" className='btn cta-btn btn-primary'>Join waiting list</a>
-            <h5 className='cta-subtitle'> We’ll contact you when we’re launching</h5>
+            <div className="searchbox">
+              <SearchBar dark/>
+            </div>
+            {/* <h4 className='header-subtitle'>We are here to fostor community built relationships between clients and businesses.</h4> */}
+           
           </div>
+          
         </div>
         
       </header>
@@ -84,7 +88,6 @@ export default function Home() {
       <style jsx>{`
         .header {
           background-color: #1c1c1c;
-          padding: 1.5rem 0;
         }
         
         .header-title {
@@ -101,7 +104,7 @@ export default function Home() {
           font-weight: 500;
         }
         .cta-box {
-          margin: 3rem auto;
+          margin: 0 auto 6rem auto;
           text-align: center;
         }
 
@@ -143,6 +146,9 @@ export default function Home() {
         }
         .img-box {
           margin-top: 1rem;
+        }
+        .searchbox {
+          margin: 2rem 0;
         }
 
         @media (max-width: 600px) {

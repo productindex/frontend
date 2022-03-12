@@ -1,7 +1,8 @@
 import { ProductCard } from "../../components/cards/ProductCard";
 import { ReviewCard } from "../../components/cards/ReviewCard";
 import { Tag } from "../../components/tag";
-import SearchBar from "../../components/searchBar";
+// import SearchBar from "../../components/searchBar";
+import FullNavBar from "../../components/FullNavBar";
 import { useState } from 'react';
 
 
@@ -12,14 +13,14 @@ export default function BusinessStore() {
   const [businessHours, setBusinessHours] = useState({Monday: '09:00AM - 05:00PM', Tuesday: '09:00AM - 05:00PM', Wednesday: '09:00AM - 05:00PM', Thursday: '09:00AM - 05:00PM', Friday: '09:00AM - 05:00PM', Saturday: '09:00AM - 05:00PM', Sunday: '09:00AM - 05:00PM'})
   const [businessContact, setBusinessContact] = useState( {phoneOne: '(242) 123 - 4567', phoneTwo: '(242) 123 - 4567', email_address: 'me@example.com'})
   const [businessDirections, setBusinessDirections] = useState('')
-  const [products, setProducts] = useState([{name: "Product name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse cum unde beatae blanditiis alias officia ullam praesentium eius, explicabo corrupti.", price: '17.00'}])
+  const [products, setProducts] = useState([{name: "Product name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse cum unde beatae blanditiis alias officia ullam praesentium eius, explicabo corrupti.", price: '17.00', img: ''}])
   const [reviews, setReviews] = useState([{}])
 
   return (
     <>
       <main>
         <div className="product-container">
-          <SearchBar />
+          <FullNavBar/>
           <div className="photogrid">
             <div className="store-photo">1</div>
             <div className="store-photo">2</div>

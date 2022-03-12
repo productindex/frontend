@@ -1,18 +1,29 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { useState } from 'react';
+import { useRouter } from 'next/router'
 
-export default function SearchBar(){
+
+export default function SearchBar(props){
     const [findQuery, setFind] = useState('')
     const [locationQuery, setLocation] = useState('')
+    const [searchType, setSearchType] = useState('BUSINESS')
+    const router = useRouter()
+
+    const handleSubmit = (e : any) => {
+        e.preventDefault()
+        router.push({pathname: '/search', query: {find: findQuery, near: locationQuery, type: searchType}})
+    }
     return (
         <div className='search'>
+            
             <div className="search-filter">
-                <div className="search-filter-title">Looking for:</div>
-                <div className="option">Item</div>
-                <div className="option">Service</div>
-                <div className="option">Business</div>
+                <div className={`search-filter-title ${props.dark && 'dark'}`}> Looking for:</div>
+                <button className={`option`} id={`${searchType == 'BUSINESS' && 'active-selection'}`} onClick={()=> {setSearchType('BUSINESS')}}>Business</button>
+                <button className={`option `} id={`${searchType == 'ITEM' && 'active-selection'}`} onClick={()=> {setSearchType('ITEM')}}>Item</button>
+                <button className={`option`} id={`${searchType == 'SERVICE' && 'active-selection'}`} onClick={()=> {setSearchType('SERVICE')}}>Service</button>
             </div>
+            <form onSubmit={handleSubmit}>
             <div className="searchbox">
 
                 <div className="search-field">
@@ -25,18 +36,18 @@ export default function SearchBar(){
                     <input type="text" name="Search" id="Search" className='searchbar' placeholder={`Try searching for 'Food'`} onChange={(e: any)=> setLocation(e.target.value)}/>
 
                 </div>
-            <Link href={{
-                pathname: '/search', 
-                query: {find: findQuery, near: locationQuery}
-                }}>
-            <button className="btn-primary btn btn-search" onClick={()=>{console.log('Clicked!')}}><Image src='/images/Search.svg' width={24} height={24}/></button>
-                
-            </Link>
+                <button type='submit' className="btn-primary btn btn-search"><Image src='/images/Search.svg' width={24} height={24}/></button>
+
+ 
             </div>
 
-            
+            </form>
             
             <style jsx>{`
+            #active-selection {
+                background-color: #E7E7E7;
+                color: inherit;
+            }
             .searchbar {
                 padding: 1.75rem 1rem 0.5rem 1rem;
                 border: 1.5px solid #E5E9E8;
@@ -55,12 +66,12 @@ export default function SearchBar(){
             }
             .searchbar {
                 transition: .8s;
-                width: 200px;
+                min-width: 200px;
+                width: 400px;
             }
             .searchbar:focus {
                 box-shadow: 0px 0px 2px 2px #B8EEED;
                 outline: none;
-                width: 400px;
                 transition: .8s;
             }
             .searchbar::placeholder {
@@ -69,6 +80,8 @@ export default function SearchBar(){
             .searchbox {
                 display: flex;
                 column-gap: 4px;
+                justify-content: center;
+                
             }
 
             .search-filter {
@@ -76,11 +89,22 @@ export default function SearchBar(){
                 column-gap: 2px;
                 margin-bottom: .5rem;
                 align-items: center;
+                justify-content: center;
+                
             }
             .option {
                 padding: 12px 12px;
                 border-radius: 2px;
                 cursor: pointer;
+                border: 0;
+                background-color: transparent; 
+                font-size: 1rem;
+                transition: all 0.4s;
+                ${props.dark && 'color: white'}
+            }
+            .option:hover {
+                background-color: #F4F4F4;
+                ${props.dark && 'color: inherit'}
             }
             .search-filter-title {
                 font-weight: 700;
@@ -90,8 +114,10 @@ export default function SearchBar(){
                 border: 0;
                 padding: 1rem;
             }
-            .search{
+            .dark {
+                color: white;
             }
+           
         `}</style>
         </div>
         
