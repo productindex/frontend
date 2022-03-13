@@ -9,7 +9,7 @@ export default function FullNavBar(props){
     const [locationQuery, setLocation] = useState('')
     const [searchType, setSearchType] = useState('BUSINESS')
     const router = useRouter();
-    
+
     const handleSubmit = (e : any) => {
         e.preventDefault()
         router.push({pathname: '/search', query: {find: findQuery, near: locationQuery, type: searchType}})
@@ -20,7 +20,7 @@ export default function FullNavBar(props){
             <div className="nav">
                 <div className='logo-box'>
                     <Link href='/'>
-                        <img src="/images/logo-light.png" alt="Product Index Logo" />
+                        { props.dark ? <img src="/images/logo-light.png" alt="Product Index Logo" /> : <img src="/images/logo-dark.png" alt="Product Index Logo" />}
                     </Link>
                 </div>
                     <div className="search-filter">

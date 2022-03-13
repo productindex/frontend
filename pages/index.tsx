@@ -31,8 +31,7 @@ export default function Home() {
             <h5 className='section-subtitle'>Product Index</h5>
             <h3 className='section-title'>What is this about?</h3>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem explicabo temporibus provident. Voluptates atque quo facere molestiae odio, quisquam quaerat culpa, perspiciatis tempora velit obcaecati delectus laboriosam aspernatur aliquid. Maiores cum exercitationem magni, tenetur reiciendis alias delectus, soluta eaque, ut quidem enim? Hic fuga totam laborum harum sint nam excepturi minus molestiae, quibusdam ratione labore enim nisi et commodi voluptas veniam repellat nesciunt ad? Illo modi cupiditate nam eveniet aliquam, perspiciatis assumenda repellendus possimus mollitia error esse, temporibus nostrum eius numquam dicta debitis et quae. Impedit ipsa sapiente repellat. Dolorum minima voluptatum sed officia, officiis esse blanditiis quos. Ut, repudiandae.
-            </p>
+Before Product Index, finding goods and services locally was an adventure. Relying on friends and family to point you in the right direction is limited by their personal experience. Product Index allows customers to find businesses that are right for them while driving more traffic to businesses that cater to their needs.            </p>
           </div>
         </div>
 
@@ -64,9 +63,6 @@ export default function Home() {
 
             <h4 className='section-title'>A digital place for your products and services to live</h4>
             <p>Add and manage your inventory with us. Increase your public visibility by doing the things you normally do and nothing more.</p>
-            <div className="btn-box">
-              <a href="#" className='btn cta-btn btn-primary'>Join waiting list</a>
-            </div>
 
 
           </div>

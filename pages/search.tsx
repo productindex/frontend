@@ -19,7 +19,7 @@ export default function Search() {
       <>
       
       <div className="product-container">
-      <FullNavBar />
+      <FullNavBar/>
       
       
         <div className="results-block">
