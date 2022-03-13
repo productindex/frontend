@@ -5,7 +5,7 @@ import React from 'react'
 import StarRatings from 'react-star-ratings';
 
 interface StoreRatingProps  {
-    rating?: string;
+    rating?: number;
 }
 const Ratings:  React.FC<StoreRatingProps>  = ({
     rating,
