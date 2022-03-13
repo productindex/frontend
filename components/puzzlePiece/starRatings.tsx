@@ -7,9 +7,8 @@ import StarRatings from 'react-star-ratings';
 interface StoreRatingProps  {
     rating?: string;
 }
-const Ratings:  React.FC<StartRatingProps>  = ({
+const Ratings:  React.FC<StoreRatingProps>  = ({
     rating,
-    closingTime,
 ...props
 }) => {
 
