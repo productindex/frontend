@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-// import axios from 'axios'
+import axios from 'axios'
 import * as Joi from 'joi';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 const ResetPasswordForm: React.FC = () => {
 
 const [password, setPassword] = useState('');
+const [successMsg, setSuccessMsg] = useState('')
+const [errorMsg, setErrorMsg] = useState('')
 const [error, setError] = useState<ErrObj>({});
 const router = useRouter()
 const { token } = router.query // To verify password change
@@ -48,14 +50,31 @@ const handleSubmit = (e: any) => {
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-      console.log(user)
+        axios({
+            method: 'post',
+            url: `${process.env.BACKEND_URL}/api/auth/reset-password/${token}`,
+            data: {
+                password: user.password,
+                password_confirm: user.password
+              }
+          }).then(({data})=> {
+             setSuccessMsg('Password reset was successful!')
+             setTimeout(function() {
+                router.push('/')
+              }, 5000);
+          })
+          .catch((err)=>  {
+            setErrorMsg(err.response.data.error)
+            console.log(err.response.data.error)
+
+          });
     }
 
 };
 
     return (
         <div className='form pane-form'>
-
+            {successMsg && <div className="success-alert"> {successMsg} </div> }
             <form onSubmit={handleSubmit}>
                 <TextField 
                     name='password'

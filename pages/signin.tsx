@@ -1,7 +1,15 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { LoginForm } from '../components/forms/loginForm'
 
 export default function Signin() {
+  const router = useRouter()
+  useEffect(()=> {
+    if (localStorage.getItem('prod_index_user_token')) {
+      router.push('/')
+    }
+  })
   return (
     <>
       <Head>

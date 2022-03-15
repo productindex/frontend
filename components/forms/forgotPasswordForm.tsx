@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-// import axios from 'axios'
+import axios from 'axios'
 import * as Joi from 'joi';
 
 const ForgotPasswordForm: React.FC = () => {
 
 const [email, setEmail] = useState('');
 const [error, setError] = useState<ErrObj>({});
+const [successMsg, setSuccessMsg] = useState('')
 
 interface ErrObj {
     email?: string;
@@ -43,14 +44,27 @@ const handleSubmit = (e: any) => {
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-      console.log(user)
+        axios({
+            method: 'post',
+            url: `${process.env.BACKEND_URL}/api/auth/forgot-password`,
+            data: {
+                email_address: user.email,
+              }
+          }).then(({data})=> {
+             setSuccessMsg('We\'ve sent reset instructions to your email address!')
+             console.log(data.reset_token)
+          })
+          .catch((err)=>  {
+            setSuccessMsg('We\'ve sent reset instructions to your email address!')
+
+          });
     }
 
 };
 
     return (
         <div className='form pane-form'>
-
+            {successMsg && <div className="success-alert"> {successMsg} </div> }
             <form onSubmit={handleSubmit}>
                 <TextField 
                     name='email'

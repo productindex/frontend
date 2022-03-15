@@ -110,16 +110,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                   .textbox::placeholder {
                     color: #CACACA;
                   }
-                  .error-alert {
-                      color: #C60000;
-                      padding: 4px 8px;
-                      border-radius: 2px;
-                      background-color: #FFDADA;
-                      display: inline-block;
-                      font-weight: 500;
-                      position: relative;
-                      top: -0.5rem;
-                  }
+
         `}</style>
         </div>
     )

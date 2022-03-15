@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-// import axios from 'axios'
+const axios = require('axios')
 import * as Joi from 'joi';
-const { joiPassword } = require("joi-password");
+import {useRouter} from 'next/router';
 
 const LoginForm: React.FC = () => {
+
+const router = useRouter()
 
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [error, setError] = useState<ErrObj>({});
+const [formError, setFormError] = useState('');
 
 interface ErrObj {
     email?: string;
@@ -41,20 +44,34 @@ const validateForm = () => {
     return errors
     
 }
-const handleSubmit = (e: any) => {
+const handleSubmit = async (e: any) => {
     e.preventDefault();
-
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-      console.log(user)
+        axios({
+            method: 'post',
+            url: `${process.env.BACKEND_URL}/api/auth/login`,
+            data: {
+                email_address: user.email,
+                password: user.password
+            }
+        }).then(({data})=> {
+            localStorage.setItem('prod_index_user_token', data.access_token);
+            router.replace('/')
+        })
+        .catch((err)=>  {
+            setFormError(err.response.data.error)
+            
+        
+        });
     }
 
 };
 
     return (
         <div className='form pane-form'>
-
+            {formError && <div className="error-alert"> {formError}</div> }
             <form onSubmit={handleSubmit}>
                 <TextField 
                     name='email'
@@ -86,6 +103,7 @@ const handleSubmit = (e: any) => {
             <div className="linkbox">
                 <p className='body'> Not a member? <span className='link-text'><Link href='/signup'><a className='link'>Sign Up</a></Link></span></p>
             </div>
+            
 
             <style jsx>{`
       

@@ -84,6 +84,26 @@ footer {
 .error {
   color: #C60000;
 }
+.error-alert {
+  color: #C60000;
+  padding: 4px 8px;
+  border-radius: 2px;
+  background-color: #FFDADA;
+  display: inline-block;
+  font-weight: 500;
+  position: relative;
+  top: -0.5rem;
+}
+.success-alert {
+  color: #337E10;
+  padding: 4px 8px;
+  border-radius: 2px;
+  background-color: #DAFFE2;
+  display: inline-block;
+  font-weight: 500;
+  position: relative;
+  top: -0.5rem;
+}
 
 .warning {
     color: #EEB612;
