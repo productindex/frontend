@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-// import axios from 'axios'
 import * as Joi from 'joi';
 import { Dropdown } from '../dropdown';
 import { Datepicker } from '../datepicker';

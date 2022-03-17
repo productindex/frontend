@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-import axios from 'axios'
+import { authAxios } from '../../util/axios';
 import * as Joi from 'joi';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
@@ -50,7 +50,7 @@ const handleSubmit = (e: any) => {
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-        axios({
+        authAxios({
             method: 'post',
             url: `${process.env.BACKEND_URL}/api/auth/reset-password/${token}`,
             data: {

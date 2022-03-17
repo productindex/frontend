@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-const axios = require('axios')
 import * as Joi from 'joi';
 import {useRouter} from 'next/router';
+import { authAxios } from '../../util/axios'
 
 const LoginForm: React.FC = () => {
 
@@ -49,7 +49,7 @@ const handleSubmit = async (e: any) => {
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-        axios({
+        authAxios({
             method: 'post',
             url: `${process.env.BACKEND_URL}/api/auth/login`,
             data: {
@@ -58,6 +58,7 @@ const handleSubmit = async (e: any) => {
             }
         }).then(({data})=> {
             localStorage.setItem('prod_index_user_token', data.access_token);
+            localStorage.setItem('refresh_token', data.refresh_token)
             router.replace('/')
         })
         .catch((err)=>  {
