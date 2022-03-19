@@ -1,8 +1,5 @@
 import { useRouter } from 'next/router'
-import SearchBar from '../components/searchBar'
-import Link from 'next/link'
 import { SearchCard } from '../components/cards/SearchCard'
-import NavBar from '../components/navbar';
 import { useState, useContext } from 'react';
 import FullNavBar from "../components/FullNavBar";
 
@@ -20,7 +17,6 @@ export default function Search() {
       
       <div className="product-container">
       <FullNavBar/>
-      
       
         <div className="results-block">
             { stores.length > 0 ? <h5>Search results: <span className='results'>{stores.length}</span></h5> :  <h5>No results found for: <span className='results'>{find} in {near}</span></h5>}
