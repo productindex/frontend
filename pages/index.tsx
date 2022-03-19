@@ -12,15 +12,15 @@ export default function Home() {
       </Head>
       <header className='header'>
         <div className="container">
-          <NavBar />
+        <NavBar dark user={'s'}/>
           <div className="cta-box">
             <h1 className='header-title'>Discovery starts with all</h1>
-            <div className="searchbox">
-              <SearchBar dark/>
-            </div>
             {/* <h4 className='header-subtitle'>We are here to fostor community built relationships between clients and businesses.</h4> */}
            
           </div>
+          <div className="searchbox">
+              <SearchBar dark/>
+            </div>
           
         </div>
         
@@ -100,7 +100,6 @@ Before Product Index, finding goods and services locally was an adventure. Relyi
           font-weight: 500;
         }
         .cta-box {
-          margin: 0 auto 6rem auto;
           text-align: center;
         }
 
@@ -109,8 +108,6 @@ Before Product Index, finding goods and services locally was an adventure. Relyi
           margin-top: .5rem;
         }
         section p {
-          line-height: 1.75rem;
-          font-size: 1.125rem;
           margin-top: 0.5rem;
         }
 
@@ -144,14 +141,15 @@ Before Product Index, finding goods and services locally was an adventure. Relyi
           margin-top: 1rem;
         }
         .searchbox {
-          margin: 2rem 0;
+          margin: 1rem 6rem 6rem 6rem;
         }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
+        @media (max-width: 940px) {
+          .searchbox {
+            margin: 1rem 0 6rem 0;
           }
+        }
+        @media (max-width: 450px) {
+
         }
       `}</style>
     </>

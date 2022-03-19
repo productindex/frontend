@@ -3,12 +3,13 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  /* font-family: 'Inter', sans-serif; */
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Inter', sans-serif;
 }
 .container {
   padding: 0 0.5rem;
@@ -54,6 +55,7 @@ h6 {
 p {
   color: #5C5C5C;
   font-size: 1.125rem;
+  line-height: 1.75rem
 }
 small {
   color: #5C5C5C;
@@ -207,7 +209,7 @@ footer {
 margin: 2rem 0 1rem 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 940px) {
   .auth-screens {
     height: auto;
 
@@ -234,5 +236,14 @@ margin: 2rem 0 1rem 0;
   }
   h2 {
     font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.125rem;
+  }
+  p {
+    font-size: 1rem;
   }
 }

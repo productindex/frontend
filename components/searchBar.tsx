@@ -36,7 +36,7 @@ export default function SearchBar(props){
                     <input type="text" name="Search" id="Search" className='searchbar' placeholder={`Try searching for 'Food'`} onChange={(e: any)=> setLocation(e.target.value)}/>
 
                 </div>
-                <button type='submit' className="btn-primary btn btn-search"><Image src='/images/Search.svg' width={24} height={24}/></button>
+                <button type='submit' className="btn-primary btn btn-search"><div><img src='/images/Search.svg' width={'24px'} height={'24px'} /></div><div className='search-word'>Search</div></button>
 
  
             </div>
@@ -64,10 +64,14 @@ export default function SearchBar(props){
                 color: #1c1c1c;
                 
             }
+            .search-field {
+                width: 100%;
+            }
             .searchbar {
                 transition: .8s;
                 min-width: 200px;
-                width: 400px;
+                min-width: 200px;
+                width: 100%;
             }
             .searchbar:focus {
                 box-shadow: 0px 0px 2px 2px #B8EEED;
@@ -100,7 +104,7 @@ export default function SearchBar(props){
                 background-color: transparent; 
                 font-size: 1rem;
                 transition: all 0.4s;
-                ${props.dark && 'color: white'}
+                ${props.dark && 'color: white'};
             }
             .option:hover {
                 background-color: #F4F4F4;
@@ -116,6 +120,45 @@ export default function SearchBar(props){
             }
             .dark {
                 color: white;
+            }
+            .search-word {
+                display: none;
+            }
+            @media (max-width: 450px) {
+                .nav {
+                    flex-wrap: wrap;
+                    flex: 1 1 100%;
+                }
+                .search-filter {
+                    order: 5;
+                    flex-grow: 1;
+                }
+                .searchbox {
+                    display: block;
+                }
+                .search-field:not(:last-child) {
+                    margin-bottom: .5rem;
+                }
+                .btn-search {
+                    width: 100%;
+                    padding: .5rem;
+                }
+                .navigation {
+                    padding-bottom: 0;
+                }
+                .btn-search {
+                    border: 0;
+                    padding: .875rem;
+                    display: flex;
+                    justify-content: center;
+                }
+                .search-word {
+                    line-height: 1.75rem;
+                    font-size: 1rem;
+                    margin-left: .5rem;
+                    display: inline-block;
+                }
+
             }
            
         `}</style>

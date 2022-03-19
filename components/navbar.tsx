@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import SearchBar from './searchBar'
+import { AvatarMenu } from '../components/pieces/AvatarMenu';
 export default function NavBar(props){
     const displayPhotoSrc = ''
     return (
@@ -9,22 +10,13 @@ export default function NavBar(props){
                     <Link href='/'>
                         {
                             props.dark ?
-                            <img src="/images/logo-dark.png" alt="Product Index Logo" />
-                            : <img src="/images/logo-light.png" alt="Product Index Logo" />
+                            <img src="/images/logo-light.png" alt="Product Index Logo" />
+                            : <img src="/images/logo-dark.png" alt="Product Index Logo" />
                         }
                         
                     </Link>
                 </div>
-                <div className='avatar'> 
-                    <div className='avatar-photo' >
-                        <img src={!displayPhotoSrc? '/images/Default-person.png' : displayPhotoSrc} />
-                    </div>
-                    <div className="user-menu">
-                        <div className="menu-option"><Link href='/profile'><a>Profile</a></Link></div>
-                        <div className="menu-option"><Link href='/help'><a>Help</a></Link></div>
-                        <div className="menu-option"><Link href='/logout'><a>Logout</a></Link></div>
-                    </div>
-                </div>
+                {props.dark? <AvatarMenu dark user={props.user}/> : <AvatarMenu user={props.user}/>}
             </div>
 
 
@@ -56,7 +48,7 @@ export default function NavBar(props){
                 }
     
                 .navigation {
-                    padding: 1.5rem;
+                    padding: 1.5rem 0;
                 }
                 .user-menu {
                     background-color: white;

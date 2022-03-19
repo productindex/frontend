@@ -33,16 +33,18 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
 }) => {
 
     return (
-        <div>
+        <>
         <Link href={slug}>
-            
-            <div className='card-search'>
+            <a className='card-search'> 
                     <div className="search-photo">
                         <img src={!imageSrc? '/images/Default-photo-store.png' : imageSrc} />
                     </div>
                     <div className="card-search-content">
                         <small>Business in {`${locationState}, ${locationCountry}`}</small> 
                         <h4>{businessName}</h4>
+                        <div className="card-search-review mobile-size">
+                            <div className="search-star-reviews"><div><Image src='/images/Star.svg' width={24} height={24}/></div><div>{`${reviewAvg} (${reviewCount})`}</div></div>
+                        </div>
                         <div className="meta-details">
                             <div className="availability"><StoreAvailability openingTime={openingTime} closingTime={closingTime} /></div>
                             <div className="location-box"><div> <Image src='/images/Pin.svg' width={24} height={24}/></div><span className='address'>{`${address}`}</span> </div>
@@ -52,15 +54,19 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
                             { tags && tags.length > 0 && tags.map(tag => <Tag description={tag} />)}
                         </div>
                     </div>
-                    <div className="card-search-options">
+                    <div className="card-search-review full-size">
                         <div className="search-star-reviews"><div><Image src='/images/Star.svg' width={24} height={24}/></div><div>{`${reviewAvg} (${reviewCount})`}</div></div>
                     </div>
-
-            </div>
+            </a>
         </Link>
 
         <style jsx> {
             `
+            a {
+                text-decoration: none;
+                display: inline-block;
+                width: 70%;
+            }
             .card-search {
                 height: 10.5rem;
                 display: flex;
@@ -122,18 +128,63 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
                 column-gap: 2px;
                 display: flex;
             }
-            .card-search-options {
+            .card-search-review {
                 margin-left: auto;
                 
             }
             .address {
                 color: #5C5C5C;
             }
+            .mobile-size {
+                display: none;
+            }
+            .full-size {
+                display: inline-block;;
+            }
+            @media (max-width: 940px) {
+                .card-search {
+                    width: 100%;
+                }
+            }
+            @media (max-width: 450px) {
+                .card-search {
+                    height: max-content;
+                    flex-wrap: wrap;
+                    flex: 1 1 100%;
+                }
+                .card-search-content {
+                    padding: .5rem;
+                }
+                .meta-details {
+                    display: block;
+                }
+                .card-search-review {
+                    // margin-left: 0;
+                    
+                }
+                .search-photo {
+                    width: 72px;
+                    height: 72px;
+                }
+                .search-star-reviews{
+                    padding: 0;
+                }
+                .full-size {
+                    display: none;
+                }
+                .mobile-size {
+                    display: inline-block;;
+                }
+                .meta-details {
+                    margin-top: 0;
+                }
+
+              }
             `
         }
             
         </style>
-    </div>
+    </>
     )
 
 }

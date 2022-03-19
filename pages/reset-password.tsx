@@ -80,7 +80,7 @@ export default function ForgotPassword() {
           text-transform: uppercase;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 940px) {
           .leftpane {
             display: none;
   

@@ -43,7 +43,8 @@ export default function Search() {
                 max-width: 1440px;
                 padding: 0 5%;
                 margin: 0 auto;
-                }
+            }
+            
         `}</style>
       </div>
 
