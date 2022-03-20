@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { SearchCard } from '../components/cards/SearchCard'
 import { useState, useContext } from 'react';
 import FullNavBar from "../components/FullNavBar";
+import Head from 'next/head';
 
 export default function Search() {
     const router = useRouter()
@@ -14,7 +15,10 @@ export default function Search() {
     return (
         
       <>
-      
+      <Head>
+            <title>Product Index{find && near &&`: ${find} in ${near}`} </title>
+            <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="product-container">
       <FullNavBar/>
       
@@ -44,7 +48,7 @@ export default function Search() {
                 padding: 0 5%;
                 margin: 0 auto;
             }
-            
+
         `}</style>
       </div>
 

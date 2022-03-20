@@ -5,7 +5,7 @@ export default function SignUp() {
   return (
     <>
       <Head>
-        <title>Product Index: Discovery starts with all </title>
+        <title>Product Index: Sign up today!</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='auth-screens'>

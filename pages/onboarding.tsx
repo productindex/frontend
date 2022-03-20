@@ -6,7 +6,7 @@ export default function Onboarding() {
   return (
     <>
       <Head>
-        <title>Product Index: Discovery starts with all </title>
+        <title>Product Index: Next steps </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='auth-screens'>

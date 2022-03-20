@@ -4,6 +4,7 @@ import { Tag } from "../../components/tag";
 // import SearchBar from "../../components/searchBar";
 import FullNavBar from "../../components/FullNavBar";
 import { useState } from 'react';
+import Head from "next/head";
 
 
 export default function BusinessStore() {
@@ -18,6 +19,10 @@ export default function BusinessStore() {
 
   return (
     <>
+      <Head>
+            <title>{businessName}  </title>
+            <link rel="icon" href="/favicon.ico" />
+      </Head>
       <main>
         <div className="product-container">
           <FullNavBar/>
