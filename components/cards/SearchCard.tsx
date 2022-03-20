@@ -37,7 +37,7 @@ const SearchCard:  React.FC<SearchCardProps>  = ({
         <Link href={slug}>
             <a className='card-search'> 
                     <div className="search-photo">
-                        <img src={!imageSrc? '/images/Default-photo-store.png' : imageSrc} />
+                        <img alt={businessName} src={!imageSrc? '/images/Default-photo-store.png' : imageSrc} />
                     </div>
                     <div className="card-search-content">
                         <small>Business in {`${locationState}, ${locationCountry}`}</small> 

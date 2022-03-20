@@ -18,7 +18,7 @@ const ProductCard:  React.FC<ProductCardProps>  = ({
     return (
         <div className="product-card">
             <div className="product-photo">
-                <img src={!photoSrc? '/images/Default-photo-item.png' : photoSrc} />
+                <img alt={productName} src={!photoSrc? '/images/Default-photo-item.png' : photoSrc} />
             </div>
             <div className="product-meta">
                 <h5>{productName}</h5>

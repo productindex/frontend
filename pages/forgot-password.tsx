@@ -10,6 +10,7 @@ export default function ForgotPassword() {
       <Head>
         <title>Product Index: Forgot your password </title>
         <link rel="icon" href="/favicon.ico" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <main className='auth-screens'>
 

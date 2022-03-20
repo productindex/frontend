@@ -8,6 +8,7 @@ export default function TermsOfService() {
       <Head>
         <title>Product Index: Terms of Service </title>
         <link rel="icon" href="/favicon.ico" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       </>
     )
