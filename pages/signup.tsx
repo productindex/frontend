@@ -7,7 +7,7 @@ export default function SignUp() {
       <Head>
         <title>Product Index: Sign up today!</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <main className='auth-screens'>
 

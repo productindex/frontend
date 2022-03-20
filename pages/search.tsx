@@ -19,7 +19,7 @@ export default function Search() {
             <title>Product Index{find && near &&`: ${find} in ${near}`} </title>
             <link rel="icon" href="/favicon.ico" />
             <meta name="robots" content="noindex, nofollow" />
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <div className="product-container">
       <FullNavBar/>

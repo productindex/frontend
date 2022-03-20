@@ -29,7 +29,7 @@ export default function BusinessStore() {
             <meta name="robots" content="index, follow" />
             <meta name="description" content={businessDescription}></meta>
             <meta name="keywords" content={`${tags.toString().replaceAll(',', ', ')}, ${businessCategory}, ${city}, ${country}, ${state}`}></meta>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <main>
         <div className="product-container">
