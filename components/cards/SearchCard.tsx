@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import React from 'react'
-import { StoreAvailability } from '../../components/puzzlePiece/storeAvailability'
+import { StoreAvailability } from '../../components/pieces/storeAvailability'
 import { Tag } from '../../components/tag'
 
 interface SearchCardProps  {
