@@ -15,6 +15,7 @@ export default function Signin() {
       <Head>
         <title>Product Index: Sign in </title>
         <link rel="icon" href="/favicon.ico" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <main className='auth-screens'>
 
