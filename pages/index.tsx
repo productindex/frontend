@@ -71,7 +71,7 @@ export default function Home() {
         <div className="container">
           <div className="section-box">
           <h3 className='section-title'>Have any questions?</h3>
-          <p>Email us at hello@theproductindex.io</p>
+          <p>Email us at helpdesk@theproductindex.io</p>
           </div>
         </div>
       </section>
