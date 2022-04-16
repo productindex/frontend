@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router'
-import SearchBar from '../components/searchBar'
-import Link from 'next/link'
 import { SearchCard } from '../components/cards/SearchCard'
-import NavBar from '../components/navbar';
 import { useState, useContext } from 'react';
 import FullNavBar from "../components/FullNavBar";
+import Head from 'next/head';
 
 export default function Search() {
     const router = useRouter()
@@ -17,10 +15,14 @@ export default function Search() {
     return (
         
       <>
-      
+      <Head>
+            <title>Product Index{find && near &&`: ${find} in ${near}`} </title>
+            <link rel="icon" href="/favicon.ico" />
+            <meta name="robots" content="noindex, nofollow" />
+            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      </Head>
       <div className="product-container">
       <FullNavBar/>
-      
       
         <div className="results-block">
             { stores.length > 0 ? <h5>Search results: <span className='results'>{stores.length}</span></h5> :  <h5>No results found for: <span className='results'>{find} in {near}</span></h5>}
@@ -47,7 +49,8 @@ export default function Search() {
                 max-width: 1440px;
                 padding: 0 5%;
                 margin: 0 auto;
-                }
+            }
+
         `}</style>
       </div>
 

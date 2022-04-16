@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import React from 'react'
-import { Ratings } from "../../components/puzzlePiece/starRatings"
+import { Ratings } from "../pieces/starRatings"
 
 interface ReviewCardProps  {
     personName: string;

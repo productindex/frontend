@@ -1,13 +1,22 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { OnboardingForm } from '../components/forms/onboardingForm'
+import {useRouter} from 'next/router';
+
 
 export default function Onboarding() {
+  const router = useRouter()
+  useEffect(()=> {
+    if (!localStorage.getItem('isSigningUp')) {
+      router.replace('/signup')
+    }
+  },[])
   return (
     <>
       <Head>
-        <title>Product Index: Discovery starts with all </title>
+        <title>Product Index: Next steps </title>
         <link rel="icon" href="/favicon.ico" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <main className='auth-screens'>
 
@@ -77,7 +86,7 @@ export default function Onboarding() {
           text-transform: uppercase;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 940px) {
           .leftpane {
             display: none;
   

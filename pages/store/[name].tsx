@@ -4,6 +4,7 @@ import { Tag } from "../../components/tag";
 // import SearchBar from "../../components/searchBar";
 import FullNavBar from "../../components/FullNavBar";
 import { useState } from 'react';
+import Head from "next/head";
 
 
 export default function BusinessStore() {
@@ -15,9 +16,21 @@ export default function BusinessStore() {
   const [businessDirections, setBusinessDirections] = useState('')
   const [products, setProducts] = useState([{name: "Product name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse cum unde beatae blanditiis alias officia ullam praesentium eius, explicabo corrupti.", price: '17.00', img: ''}])
   const [reviews, setReviews] = useState([{}])
+  const [businessCategory, setCategory] = useState('')
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
+  const [state, setState] = useState('')
 
   return (
     <>
+      <Head>
+            <title>{businessName} : Product Index </title>
+            <link rel="icon" href="/favicon.ico" />
+            <meta name="robots" content="index, follow" />
+            <meta name="description" content={businessDescription}></meta>
+            <meta name="keywords" content={`${tags.toString().replaceAll(',', ', ')}, ${businessCategory}, ${city}, ${country}, ${state}`}></meta>
+            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      </Head>
       <main>
         <div className="product-container">
           <FullNavBar/>

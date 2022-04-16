@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router'
+import { AvatarMenu } from './pieces/AvatarMenu';
 
 export default function FullNavBar(props){
     const displayPhotoSrc = ''
@@ -23,17 +24,13 @@ export default function FullNavBar(props){
                         { props.dark ? <img src="/images/logo-light.png" alt="Product Index Logo" /> : <img src="/images/logo-dark.png" alt="Product Index Logo" />}
                     </Link>
                 </div>
-                    <div className="search-filter">
+                <div className="search-filter">
                     <div className={`search-filter-title ${props.dark && 'dark'}`}> Looking for: </div>
                     <button className={`option`} id={`${searchType == 'BUSINESS' && 'active-selection'}`} onClick={()=> {setSearchType('BUSINESS')}}>Business</button>
                     <button className={`option`} id={`${searchType == 'ITEM' && 'active-selection'}`} onClick={()=> {setSearchType('ITEM')}}>Item</button>
                     <button className={`option`} id={`${searchType == 'SERVICE' && 'active-selection'}`} onClick={()=> {setSearchType('SERVICE')}}>Service</button>
                 </div>
-                <div className='avatar'> 
-                    <div className='avatar-photo' >
-                        <img src={!displayPhotoSrc? '/images/Default-person.png' : displayPhotoSrc} />
-                    </div>
-                </div>
+                <AvatarMenu user={'a'}/> 
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="searchbox">
@@ -49,7 +46,7 @@ export default function FullNavBar(props){
 
                     </div>
                     {/* <button className="btn-primary btn btn-search" onClick={()=>{console.log('Clicked!')}}><Image src='/images/Search.svg' width={24} height={24}/></button> */}
-                    <button type='submit' className="btn-primary btn btn-search"><Image src='/images/Search.svg' width={24} height={24}/></button>
+                    <button type='submit' className="btn-primary btn btn-search"><div><img src='/images/Search.svg' width={'24px'} height={'24px'} /></div><div className='search-word'>Search</div></button>
                 </div>
             </form>
             <style jsx>{`
@@ -62,22 +59,9 @@ export default function FullNavBar(props){
                     display: flex;
                     justify-content: space-between;
                 }
-                .avatar-photo img{
-                    height: 44px;
-                    width: 44px;
-                    border-radius: 100px;
-                    border: 1.5px solid #E5E9E8;
-                }
-                .avatar-name {
-                    color: white;
-                    line-height: 40px;
-                }
-                .avatar:hover {
-                    cursor: pointer;
-                }
     
                 .navigation {
-                    padding: 24px 0;
+                    padding: 1.5rem 0;
                 }
                 #active-selection {
                     background-color: #E7E7E7;
@@ -88,8 +72,10 @@ export default function FullNavBar(props){
                     border: 1.5px solid #E5E9E8;
                     color: #5C5C5C;
                     font-size: 1.125rem;
-                    min-width: 12.5rem;
                     border-radius: 2px;
+                    transition: .8s;
+                    min-width: 200px;
+                    width: 100%;
                 }
                 .search-label {
                     font-weight: 700;
@@ -99,10 +85,8 @@ export default function FullNavBar(props){
                     color: #1c1c1c;
                     
                 }
-                .searchbar {
-                    transition: .8s;
-                    min-width: 200px;
-                    width: 400px;
+                .search-field {
+                    width: 100%;
                 }
                 .searchbar:focus {
                     box-shadow: 0px 0px 2px 2px #B8EEED;
@@ -116,9 +100,9 @@ export default function FullNavBar(props){
                     display: flex;
                     column-gap: 4px;
                     justify-content: center;
-                    
+                    width: 100%;
                 }
-    
+
                 .search-filter {
                     display: flex;
                     column-gap: 2px;
@@ -150,10 +134,49 @@ export default function FullNavBar(props){
                     border: 0;
                     padding: 1rem;
                 }
+                .search-word {
+                    display: none;
+                }
                 .dark {
                     color: white;
                 }
-                
+
+                @media (max-width: 450px) {
+                    .nav {
+                        flex-wrap: wrap;
+                        flex: 1 1 100%;
+                    }
+                    .search-filter {
+                        order: 5;
+                        flex-grow: 1;
+                    }
+                    .searchbox {
+                        display: block;
+                    }
+                    .search-field:not(:last-child) {
+                        margin-bottom: .5rem;
+                    }
+                    .btn-search {
+                        width: 100%;
+                        padding: .5rem;
+                    }
+                    .navigation {
+                        padding-bottom: 0;
+                    }
+                    .btn-search {
+                        border: 0;
+                        padding: .875rem;
+                        display: flex;
+                        justify-content: center;
+                    }
+                    .search-word {
+                        line-height: 1.75rem;
+                        font-size: 1rem;
+                        margin-left: .5rem;
+                        display: inline-block;
+                    }
+
+                }
         `}</style>
         </div>
         

@@ -54,6 +54,7 @@ const SignupForm: React.FC = () => {
       const errors = validateForm()
       setError(errors)
       if (Object.values(errors).every(x => x === null || x === '')) {
+        localStorage.setItem('isSigningUp', 'true')
         router.replace({pathname: '/onboarding', query: {firstname: user.firstname, lastname: user.lastname ,email_address: user.email, password: user.password}}, '/signup')
       }
   };

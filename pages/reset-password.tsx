@@ -10,6 +10,7 @@ export default function ForgotPassword() {
       <Head>
         <title>Product Index: Create new password</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <main className='auth-screens'>
 
@@ -80,7 +81,7 @@ export default function ForgotPassword() {
           text-transform: uppercase;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 940px) {
           .leftpane {
             display: none;
   
