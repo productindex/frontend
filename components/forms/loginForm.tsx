@@ -57,8 +57,7 @@ const handleSubmit = async (e: any) => {
                 password: user.password
             }
         }).then(({data})=> {
-            localStorage.setItem('prod_index_user_token', data.access_token);
-            localStorage.setItem('refresh_token', data.refresh_token)
+            localStorage.setItem('isLoggedIn', 'true')
             router.replace('/')
         })
         .catch((err)=>  {

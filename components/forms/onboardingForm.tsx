@@ -18,7 +18,7 @@ const OnboardingForm: React.FC = () => {
   const [telephone, setTelephone] = useState('');
   const [city, setCity] = useState('');
   const router = useRouter()
-  const { firstname, lastname, password, email_address } = router.query // To verify password change
+  const { firstname, lastname, password, email_address } = router.query
   
 
   useEffect(() => {
@@ -81,6 +81,8 @@ const OnboardingForm: React.FC = () => {
         console.log(user)
         // router.push('/')
       }
+      localStorage.removeItem("isSigningUp");
+      router.push('/')
   };
   const genderList = [
     {

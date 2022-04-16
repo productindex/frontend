@@ -1,8 +1,16 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { OnboardingForm } from '../components/forms/onboardingForm'
+import {useRouter} from 'next/router';
+
 
 export default function Onboarding() {
+  const router = useRouter()
+  useEffect(()=> {
+    if (!localStorage.getItem('isSigningUp')) {
+      router.replace('/signup')
+    }
+  },[])
   return (
     <>
       <Head>

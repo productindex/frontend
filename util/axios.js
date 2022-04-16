@@ -1,12 +1,15 @@
 const axios = require('axios')
+import Cookies from 'js-cookie'
 
 const createInstance = () => {
   if (typeof window !== 'undefined') {
     // Perform localStorage action
     return axios.create({
       baseUrl: `${process.env.BACKEND_URL}`,
+      withCredentials: true,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('prod_index_user_token')}`
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       }
     })
   }
