@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import { SearchCard } from '../components/cards/SearchCard'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import FullNavBar from "../components/FullNavBar";
 import Head from 'next/head';
+
 
 export default function Search() {
     const router = useRouter()

@@ -4,17 +4,19 @@ import Link from 'next/link';
 import React from 'react'
 
 type Props = {
-    user?: string;
+    user?: any;
     dark?: boolean;
 }
 
 export const AvatarMenu = (props: Props) => {
+
+
   return (
       //Check to see if user is logged in. Display 'Login' if user isn't
     <div className='avatar-menu'> 
-        { props.user? 
+        { props.user.user_id? 
         <>
-            <Avatar />
+            <Avatar displayPhotoSrc={props.user.profile_pic}/>
             <div className="user-menu">
                 <Link href='/profile'><a className="menu-option">Profile</a></Link>
                 <Link href={process.env.BUSINESS_URL} ><a className="menu-option" target="_blank" rel="noopener noreferrer">Manage your business</a></Link>
