@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-// import axios from 'axios'
 import * as Joi from 'joi';
-import Router from 'next/router';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
-
 
 const SignupForm: React.FC = () => {
 

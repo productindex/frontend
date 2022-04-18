@@ -15,7 +15,6 @@ export const AvatarMenu = (props: Props) => {
     }
 
   return (
-      //Check to see if user is logged in. Display 'Login' if user isn't
     <div className='avatar-menu'> 
         {authCtx.isLoggedIn? 
         <>
@@ -28,7 +27,7 @@ export const AvatarMenu = (props: Props) => {
             </div>
         </>
         :
-        <><Link href='/signin'><button className='auth-link option'>Sign in</button></Link> <Link href='/signup'><button className='auth-link option'>Sign up</button></Link></>
+        <><Link href='/signin'><a href='/signin' className='auth-link'><button className='auth-link option'>Sign in</button></a></Link> <Link href='/signup'><a href='/signup' className='auth-link'><button className='auth-link option'>Sign up</button></a></Link></>
         }
     <style jsx>{`
         .avatar-menu  {

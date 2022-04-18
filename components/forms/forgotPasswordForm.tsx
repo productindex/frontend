@@ -3,13 +3,12 @@ import Link from 'next/link';
 import { TextField } from '../textfield';
 import { Authentication } from '../../api/auth';
 import * as Joi from 'joi';
+import { toasty } from '../../util/toasty'
 
 const ForgotPasswordForm: React.FC = () => {
 
 const [email, setEmail] = useState('');
 const [error, setError] = useState<ErrObj>({});
-const [successMsg, setSuccessMsg] = useState('')
-
 interface ErrObj {
     email?: string;
     password?: string;
@@ -21,7 +20,6 @@ const schema = Joi.object({
 const user = {
     email,
 }
-
 
 // Validates form properties and sets the Error state
 const validateForm = () => {
@@ -46,7 +44,7 @@ const handleSubmit = async (e: any) => {
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
         const response = await Authentication.forgotPassword(user.email)
-        if (response.success) setSuccessMsg('We\'ve sent reset instructions to your email address!')        
+        if (response.success) toasty('success', 'We\'ve sent reset instructions to your email address!')     
 
     }
 
@@ -54,7 +52,6 @@ const handleSubmit = async (e: any) => {
 
     return (
         <div className='form pane-form'>
-            {successMsg && <div className="success-alert"> {successMsg} </div> }
             <form onSubmit={handleSubmit}>
                 <TextField 
                     name='email'

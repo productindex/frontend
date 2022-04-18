@@ -43,7 +43,6 @@ export default function FullNavBar(props){
                         <input type="text" name="Search" id="Search" className='searchbar' placeholder={`Try searching for 'Food'`} onChange={(e: any)=> setLocation(e.target.value)}/>
 
                     </div>
-                    {/* <button className="btn-primary btn btn-search" onClick={()=>{console.log('Clicked!')}}><Image src='/images/Search.svg' width={24} height={24}/></button> */}
                     <button type='submit' className="btn-primary btn btn-search"><div><img src='/images/Search.svg' width={'24px'} height={'24px'} /></div><div className='search-word'>Search</div></button>
                 </div>
             </form>

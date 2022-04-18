@@ -5,9 +5,10 @@ import * as Joi from 'joi';
 import {useRouter} from 'next/router';
 import { Authentication } from '../../api/auth';
 import AuthContext from '../../context/AuthContext'
+import { toasty } from '../../util/toasty';
 
 
-const LoginForm: React.FC = () => {
+export const LoginForm = (props) => {
 
 const router = useRouter()
 const authCtx = useContext(AuthContext);
@@ -15,7 +16,6 @@ const authCtx = useContext(AuthContext);
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [error, setError] = useState<ErrObj>({});
-const [formError, setFormError] = useState('');
 
 interface ErrObj {
     email?: string;
@@ -43,24 +43,27 @@ const validateForm = () => {
     
 }
 const handleSubmit = async (e: any) => {
+    
     e.preventDefault();
+    props.handleValidations('This was unsuccessful', false)
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
         const res = await Authentication.login(email, password)
-        setFormError(res.error)
+        toasty('error', res.error)
+        
         if (res.success) {
             router.replace('/')
             authCtx.loadUser()
 
         }
+        
     }
 
 };
 
     return (
         <div className='form pane-form'>
-            {formError && <div className="error-alert"> {formError}</div> }
             <form onSubmit={handleSubmit}>
                 <TextField 
                     name='email'
@@ -106,4 +109,3 @@ const handleSubmit = async (e: any) => {
 
     )
 };
-export { LoginForm};

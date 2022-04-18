@@ -4,13 +4,13 @@ import * as Joi from 'joi';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
 import { Authentication } from '../../api/auth';
+import { toast } from 'react-toastify';
+import {toasty} from '../../util/toasty'
 
 
 const ResetPasswordForm: React.FC = () => {
 
 const [password, setPassword] = useState('');
-const [successMsg, setSuccessMsg] = useState('')
-const [errorMsg, setErrorMsg] = useState('')
 const [error, setError] = useState<ErrObj>({});
 const router = useRouter()
 const { token } = router.query // To verify password change
@@ -45,15 +45,14 @@ const validateForm = () => {
 }
 const handleSubmit = async (e: any) => {
     e.preventDefault();
-
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
         const response = await Authentication.resetPassword(token, user.password)
         if (!response.success) {
-            setErrorMsg(response.error) 
+            toasty('error', response.error);
         } else {
-            setSuccessMsg('Password reset was successful!')
+            toasty('success', 'Password reset was successful!')
             setTimeout(function() {
                 router.push('/')
               }, 5000);
@@ -64,8 +63,6 @@ const handleSubmit = async (e: any) => {
 
     return (
         <div className='form pane-form'>
-            {successMsg && <div className="success-alert"> {successMsg} </div> }
-            {errorMsg && <div className="error-alert"> {errorMsg} </div> }
             <form onSubmit={handleSubmit}>
                 <TextField 
                     name='password'

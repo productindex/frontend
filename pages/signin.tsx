@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { LoginForm } from '../components/forms/loginForm'
+import { toast } from 'react-toastify';
+
 
 export default function Signin() {
   const router = useRouter()
@@ -10,6 +12,7 @@ export default function Signin() {
       router.replace('/')
     }
   })
+  
   return (
     <>
       <Head>
@@ -17,6 +20,7 @@ export default function Signin() {
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
+
       <main className='auth-screens'>
 
           <div className="side-by-side">
@@ -53,7 +57,6 @@ export default function Signin() {
           width: 55%;
           padding: 8rem 0 5% 5%;
           background-color: #13C8C4;
-          // height: 100%;
         }
 
         .form-title {
@@ -74,6 +77,14 @@ export default function Signin() {
         .leftpane h2 {
           color: white;
           text-transform: uppercase;
+        }
+        .toast-popup {
+          position: absolute;
+          top: 24px;
+          left: 50%;
+          transform: translate(-50%, 0);
+          width: 70%;
+          height: 40px;
         }
 
         @media (max-width: 940px) {
