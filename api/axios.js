@@ -1,5 +1,4 @@
 const axios = require('axios')
-import Cookies from 'js-cookie'
 
 const createInstance = () => {
   if (typeof window !== 'undefined') {

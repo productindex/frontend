@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
 import * as Joi from 'joi';
 import {useRouter} from 'next/router';
-import { authAxios } from '../../util/axios'
+import { Authentication } from '../../api/auth';
+import AuthContext from '../../context/AuthContext'
+
 
 const LoginForm: React.FC = () => {
 
 const router = useRouter()
+const authCtx = useContext(AuthContext);
+
+
+
 
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
@@ -20,14 +26,9 @@ interface ErrObj {
 }
 
 const schema = Joi.object({
-    email: Joi.string().required().label('Email address').messages({'string.empty': 'Email address is required'}),
+    email: Joi.string().required().label('Email ad+dress').messages({'string.empty': 'Email address is required'}),
     password: Joi.string().required().messages({'string.empty': 'Password is required'}),
 });
-const user = {
-    email,
-    password
-}
-
 
 // Validates form properties and sets the Error state
 const validateForm = () => {
@@ -36,7 +37,7 @@ const validateForm = () => {
     const { error } = schema.validate({email: email, password: password}, options );
     if (error) {
         for (let e of error.details) {
-            let message = e.message.replaceAll("\"", "")
+            let message = e.message.replace(/"/g, "")
             errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
         } 
         return errors;
@@ -49,22 +50,13 @@ const handleSubmit = async (e: any) => {
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-        authAxios({
-            method: 'post',
-            url: `${process.env.BACKEND_URL}/api/auth/login`,
-            data: {
-                email_address: user.email,
-                password: user.password
-            }
-        }).then(({data})=> {
-            localStorage.setItem('isLoggedIn', 'true')
+        const res = await Authentication.login(email, password)
+        setFormError(res.error)
+        if (res.success) {
             router.replace('/')
-        })
-        .catch((err)=>  {
-            setFormError(err.response.data.error)
-            
-        
-        });
+            authCtx.loadUser()
+
+        }
     }
 
 };

@@ -3,8 +3,16 @@ import NavBar from '../components/navbar'
 import Image from 'next/image'
 import { TextField } from '../components/textfield'
 import { ForgotPasswordForm } from '../components/forms/forgotPasswordForm'
+import { useEffect } from 'react';
+import {useRouter} from 'next/router'
 
 export default function ForgotPassword() {
+  const router = useRouter()
+  useEffect(()=> {
+    if (localStorage.getItem('isLoggedIn')) {
+      router.replace('/')
+    }
+  })
   return (
     <>
       <Head>

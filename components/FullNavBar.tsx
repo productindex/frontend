@@ -2,15 +2,12 @@ import Link from 'next/link'
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router'
 import { AvatarMenu } from './pieces/AvatarMenu';
-import AuthContext from '../context/AuthContext'
 
 export default function FullNavBar(props){
     const [findQuery, setFind] = useState('')
     const [locationQuery, setLocation] = useState('')
     const [searchType, setSearchType] = useState('BUSINESS')
     const router = useRouter();
-
-    const authCtx = useContext(AuthContext);
 
     const handleSubmit = (e : any) => {
         e.preventDefault()
@@ -31,7 +28,7 @@ export default function FullNavBar(props){
                     <button className={`option`} id={`${searchType == 'ITEM' && 'active-selection'}`} onClick={()=> {setSearchType('ITEM')}}>Item</button>
                     <button className={`option`} id={`${searchType == 'SERVICE' && 'active-selection'}`} onClick={()=> {setSearchType('SERVICE')}}>Service</button>
                 </div>
-                <AvatarMenu user={authCtx.userData}/> 
+                <AvatarMenu /> 
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="searchbox">

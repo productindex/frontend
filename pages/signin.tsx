@@ -6,8 +6,8 @@ import { LoginForm } from '../components/forms/loginForm'
 export default function Signin() {
   const router = useRouter()
   useEffect(()=> {
-    if (localStorage.getItem('prod_index_user_token')) {
-      router.push('/')
+    if (localStorage.getItem('isLoggedIn')) {
+      router.replace('/')
     }
   })
   return (

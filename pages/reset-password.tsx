@@ -1,10 +1,15 @@
 import Head from 'next/head'
-import NavBar from '../components/navbar'
-import Image from 'next/image'
-import { TextField } from '../components/textfield'
 import { ResetPasswordForm } from '../components/forms/resetPasswordForm'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react';
 
-export default function ForgotPassword() {
+export default function ResetPassword() {
+  const router = useRouter()
+  useEffect(()=> {
+    if (localStorage.getItem('isLoggedIn')) {
+      router.replace('/')
+    }
+  })
   return (
     <>
       <Head>
