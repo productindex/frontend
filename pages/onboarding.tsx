@@ -31,7 +31,7 @@ export default function Onboarding() {
           <div className="rightpane">
             <div className="content">
               <div className="logo-box">
-                <img src="/images/logo.png" alt="Product Index Logo" />
+                <img src="/images/logo-dark.png" alt="Product Index Logo" />
               </div>
               <h3 className='form-title'>A bit about yourself</h3>
               <OnboardingForm />

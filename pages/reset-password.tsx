@@ -30,7 +30,7 @@ export default function ResetPassword() {
           <div className="rightpane">
             <div className="content">
               <div className="logo-box">
-                <img src="/images/logo.png" alt="Product Index Logo" />
+                <img src="/images/logo-dark.png" alt="Product Index Logo" />
               </div>
               <h3 className='form-title'>Create new password</h3>
               {/* <p>Glad to have you back! Create a new password for your account.</p> */}

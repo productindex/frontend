@@ -33,7 +33,7 @@ export default function ForgotPassword() {
           <div className="rightpane">
             <div className="content">
               <div className="logo-box">
-                <img src="/images/logo.png" alt="Product Index Logo" />
+                <img src="/images/logo-dark.png" alt="Product Index Logo" />
               </div>
               <h3 className='form-title'>Forgot password</h3>
               <ForgotPasswordForm />
