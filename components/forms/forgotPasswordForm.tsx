@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-import { authAxios } from '../../util/axios';
+import { Authentication } from '../../api/auth';
 import * as Joi from 'joi';
 
 const ForgotPasswordForm: React.FC = () => {
@@ -30,7 +30,8 @@ const validateForm = () => {
     const { error } = schema.validate({email: email}, options );
     if (error) {
         for (let e of error.details) {
-            let message = e.message.replaceAll("\"", "")
+            let message = e.message.replace(/"/g, "")
+            
             errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
         } 
         return errors;
@@ -38,26 +39,15 @@ const validateForm = () => {
     return errors
     
 }
-const handleSubmit = (e: any) => {
+const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-        authAxios({
-            method: 'post',
-            url: `${process.env.BACKEND_URL}/api/auth/forgot-password`,
-            data: {
-                email_address: user.email,
-              }
-          }).then(({data})=> {
-             setSuccessMsg('We\'ve sent reset instructions to your email address!')
-             console.log(data.reset_token)
-          })
-          .catch((err)=>  {
-            setSuccessMsg('We\'ve sent reset instructions to your email address!')
+        const response = await Authentication.forgotPassword(user.email)
+        if (response.success) setSuccessMsg('We\'ve sent reset instructions to your email address!')        
 
-          });
     }
 
 };

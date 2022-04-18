@@ -1,10 +1,15 @@
 import Head from 'next/head'
-import NavBar from '../components/navbar'
-import Image from 'next/image'
-import { TextField } from '../components/textfield'
 import { ResetPasswordForm } from '../components/forms/resetPasswordForm'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react';
 
-export default function ForgotPassword() {
+export default function ResetPassword() {
+  const router = useRouter()
+  useEffect(()=> {
+    if (localStorage.getItem('isLoggedIn')) {
+      router.replace('/')
+    }
+  })
   return (
     <>
       <Head>
@@ -25,7 +30,7 @@ export default function ForgotPassword() {
           <div className="rightpane">
             <div className="content">
               <div className="logo-box">
-                <img src="/images/logo.png" alt="Product Index Logo" />
+                <img src="/images/logo-dark.png" alt="Product Index Logo" />
               </div>
               <h3 className='form-title'>Create new password</h3>
               {/* <p>Glad to have you back! Create a new password for your account.</p> */}

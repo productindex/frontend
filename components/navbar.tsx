@@ -1,8 +1,6 @@
 import Link from 'next/link'
-import SearchBar from './searchBar'
 import { AvatarMenu } from '../components/pieces/AvatarMenu';
 export default function NavBar(props){
-    const displayPhotoSrc = ''
     return (
         <div className='navigation'>
             <div className="nav">
@@ -16,7 +14,7 @@ export default function NavBar(props){
                         
                     </Link>
                 </div>
-                {props.dark? <AvatarMenu dark user={props.user}/> : <AvatarMenu user={props.user}/>}
+                {props.dark? <AvatarMenu dark /> : <AvatarMenu />}
             </div>
 
 

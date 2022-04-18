@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import Link from 'next/link';
 import { TextField } from '../textfield';
-import { authAxios } from '../../util/axios';
 import * as Joi from 'joi';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
+import { Authentication } from '../../api/auth';
 
 
 const ResetPasswordForm: React.FC = () => {
@@ -36,7 +35,7 @@ const validateForm = () => {
     const { error } = schema.validate({password: password}, options );
     if (error) {
         for (let e of error.details) {
-            let message = e.message.replaceAll("\"", "")
+            let message = e.message.replace(/"/g, "")
             errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
         } 
         return errors;
@@ -44,30 +43,21 @@ const validateForm = () => {
     return errors
     
 }
-const handleSubmit = (e: any) => {
+const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {
-        authAxios({
-            method: 'post',
-            url: `${process.env.BACKEND_URL}/api/auth/reset-password/${token}`,
-            data: {
-                password: user.password,
-                password_confirm: user.password
-              }
-          }).then(({data})=> {
-             setSuccessMsg('Password reset was successful!')
-             setTimeout(function() {
+        const response = await Authentication.resetPassword(token, user.password)
+        if (!response.success) {
+            setErrorMsg(response.error) 
+        } else {
+            setSuccessMsg('Password reset was successful!')
+            setTimeout(function() {
                 router.push('/')
               }, 5000);
-          })
-          .catch((err)=>  {
-            setErrorMsg(err.response.data.error)
-            console.log(err.response.data.error)
-
-          });
+        }
     }
 
 };
@@ -75,6 +65,7 @@ const handleSubmit = (e: any) => {
     return (
         <div className='form pane-form'>
             {successMsg && <div className="success-alert"> {successMsg} </div> }
+            {errorMsg && <div className="error-alert"> {errorMsg} </div> }
             <form onSubmit={handleSubmit}>
                 <TextField 
                     name='password'

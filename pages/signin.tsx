@@ -6,8 +6,8 @@ import { LoginForm } from '../components/forms/loginForm'
 export default function Signin() {
   const router = useRouter()
   useEffect(()=> {
-    if (localStorage.getItem('prod_index_user_token')) {
-      router.push('/')
+    if (localStorage.getItem('isLoggedIn')) {
+      router.replace('/')
     }
   })
   return (
@@ -30,7 +30,7 @@ export default function Signin() {
           <div className="rightpane">
             <div className="content">
               <div className="logo-box">
-                <img src="/images/logo.png" alt="Product Index Logo" />
+                <img src="/images/logo-dark.png" alt="Product Index Logo" />
               </div>
               <h3 className='form-title'>Sign in</h3>
               <LoginForm />

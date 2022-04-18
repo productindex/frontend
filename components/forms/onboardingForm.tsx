@@ -66,7 +66,7 @@ const OnboardingForm: React.FC = () => {
     const { error } = schema.validate({birthday: birthday, gender: gender, country: country, state: state, city: city}, options );
     if (error) {
       for (let e of error.details) {
-          let message = e.message.replaceAll("\"", "")
+          let message = e.message.replace(/"/g, "")
           errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
       } 
       return errors;

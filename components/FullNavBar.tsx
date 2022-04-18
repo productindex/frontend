@@ -1,11 +1,9 @@
 import Link from 'next/link'
-import { useState } from 'react';
-import Image from 'next/image';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/router'
 import { AvatarMenu } from './pieces/AvatarMenu';
 
 export default function FullNavBar(props){
-    const displayPhotoSrc = ''
     const [findQuery, setFind] = useState('')
     const [locationQuery, setLocation] = useState('')
     const [searchType, setSearchType] = useState('BUSINESS')
@@ -30,7 +28,7 @@ export default function FullNavBar(props){
                     <button className={`option`} id={`${searchType == 'ITEM' && 'active-selection'}`} onClick={()=> {setSearchType('ITEM')}}>Item</button>
                     <button className={`option`} id={`${searchType == 'SERVICE' && 'active-selection'}`} onClick={()=> {setSearchType('SERVICE')}}>Service</button>
                 </div>
-                <AvatarMenu user={'a'}/> 
+                <AvatarMenu /> 
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="searchbox">

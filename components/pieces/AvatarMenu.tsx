@@ -1,25 +1,30 @@
 import { Avatar } from '../bits/Avatar';
 import Link from 'next/link';
-
-import React from 'react'
+import React, {useContext} from 'react'
+import AuthContext from '../../context/AuthContext'
 
 type Props = {
-    user?: string;
+    user?: any;
     dark?: boolean;
 }
 
 export const AvatarMenu = (props: Props) => {
+    const authCtx = useContext(AuthContext);
+    const handleSignOut = () => {
+        authCtx.logout()
+    }
+
   return (
       //Check to see if user is logged in. Display 'Login' if user isn't
     <div className='avatar-menu'> 
-        { props.user? 
+        {authCtx.isLoggedIn? 
         <>
-            <Avatar />
+            <Avatar displayPhotoSrc={authCtx.userData['profile_pic']}/>
             <div className="user-menu">
                 <Link href='/profile'><a className="menu-option">Profile</a></Link>
                 <Link href={process.env.BUSINESS_URL} ><a className="menu-option" target="_blank" rel="noopener noreferrer">Manage your business</a></Link>
                 <Link href='/help'><a className="menu-option">Help</a></Link>
-                <Link href='/logout'><a className="menu-option">Logout</a></Link>
+                <Link href=''><a className="menu-option" onClick={handleSignOut}>Logout</a></Link>
             </div>
         </>
         :
