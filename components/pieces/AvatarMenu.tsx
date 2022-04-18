@@ -28,7 +28,7 @@ export const AvatarMenu = (props: Props) => {
             </div>
         </>
         :
-        <><Link href='/signin'><button className='auth-link option'>Sign in</button></Link> <Link href='/signup'><button className='auth-link option'>Sign up</button></Link></>
+        <><Link href='/signin'><a href='/signin' className='auth-link'><button className='auth-link option'>Sign in</button></a></Link> <Link href='/signup'><a href='/signup' className='auth-link'><button className='auth-link option'>Sign up</button></a></Link></>
         }
     <style jsx>{`
         .avatar-menu  {
