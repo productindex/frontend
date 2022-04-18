@@ -44,8 +44,6 @@ export const Authentication = {
             location.reload();
             return {success: true, data: 'What this is?'}
             
-        }).catch((err)=> {
-            console.log(err.response.data.message)
         })
     },
     forgotPassword: (emailAddress) : Promise<ApiResponse> => {
