@@ -4,6 +4,7 @@ import { TextField } from '../textfield';
 import * as Joi from 'joi';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
+import { AuthErrorMessages } from '../../const/errors';
 
 const SignupForm: React.FC = () => {
 
@@ -21,10 +22,10 @@ const SignupForm: React.FC = () => {
       lastname?: string;
   }
   const schema = Joi.object({
-      firstname: Joi.string().min(2).required().label('First name').messages({'string.empty': 'First name is required'}),
-      lastname: Joi.string().min(2).required().label('Last name').messages({'string.empty': 'Last name is required'}),
-      email: Joi.string().required().label('Email address').messages({'string.empty': 'Email address is required'}),
-      password: joiPassword.string().min(8).minOfSpecialCharacters(1).minOfLowercase(0).minOfUppercase(0).minOfNumeric(1).noWhiteSpaces().required().messages({'string.min': 'Password must be at least 8 characters long', 'string.empty': 'Password is required'}),
+      firstname: Joi.string().min(2).required().label('First name').messages({'string.empty': AuthErrorMessages.firstNameRequired}),
+      lastname: Joi.string().min(2).required().label('Last name').messages({'string.empty': AuthErrorMessages.lastNameRequired}),
+      email: Joi.string().required().label('Email address').messages({'string.empty': AuthErrorMessages.emailAddressRequired}),
+      password: joiPassword.string().min(8).minOfSpecialCharacters(1).minOfLowercase(0).minOfUppercase(0).minOfNumeric(1).noWhiteSpaces().required().messages({'string.min': AuthErrorMessages.passwordStringLength, 'string.empty': AuthErrorMessages.passwordRequired}),
   });
 
   const user = {

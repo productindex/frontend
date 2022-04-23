@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import Link from 'next/link';
 import { TextField } from '../textfield';
 import * as Joi from 'joi';
 import { Dropdown } from '../dropdown';
 import { Datepicker } from '../datepicker';
-const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
+import { AuthErrorMessages } from '../../const/errors';
 
 
 const OnboardingForm: React.FC = () => {
@@ -41,11 +40,11 @@ const OnboardingForm: React.FC = () => {
       city?: string;
   }
   const schema = Joi.object({
-      birthday: Joi.string().required().messages({'string.empty': 'Birthday is required'}),
-      country: Joi.string().required().messages({'string.empty': 'Country is required'}),
-      state: Joi.string().required().messages({'string.empty': 'State is required'}),
-      gender: Joi.string().required().messages({'string.empty': 'Gender is required'}),
-      city: Joi.string().required().messages({'string.empty': 'Gender is required'})
+      birthday: Joi.string().required().messages({'string.empty': AuthErrorMessages.birthdayRequired}),
+      country: Joi.string().required().messages({'string.empty': AuthErrorMessages.countryRequired}),
+      state: Joi.string().required().messages({'string.empty': AuthErrorMessages.stateRequired}),
+      gender: Joi.string().required().messages({'string.empty': AuthErrorMessages.genderRequired}),
+      city: Joi.string().required().messages({'string.empty': AuthErrorMessages.cityRequired})
   });
 
   const user = {

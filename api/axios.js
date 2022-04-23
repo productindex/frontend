@@ -3,7 +3,7 @@ const axios = require('axios')
 const createInstance = () => {
   if (typeof window !== 'undefined') {
     // Perform localStorage action
-    return axios.create({
+    const instance = axios.create({
       baseUrl: `${process.env.BACKEND_URL}`,
       withCredentials: true,
       headers: {
@@ -11,6 +11,16 @@ const createInstance = () => {
         'Content-Type': 'application/json'
       }
     })
+    instance.interceptors.response.use(resp => resp, 
+      (error) => {
+       const code = error.response.status 
+       if (code == 403) {
+        return instance.post('/auth/token')
+       }
+       return Promise.reject(error);
+    })
+    return instance
+
   }
 
 }

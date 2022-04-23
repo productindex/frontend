@@ -6,7 +6,7 @@ import {useRouter} from 'next/router';
 import { Authentication } from '../../api/auth';
 import AuthContext from '../../context/AuthContext'
 import { toasty } from '../../util/toasty';
-
+import { AuthErrorMessages } from '../../const/errors';
 
 export const LoginForm = (props) => {
 
@@ -23,8 +23,8 @@ interface ErrObj {
 }
 
 const schema = Joi.object({
-    email: Joi.string().required().label('Email ad+dress').messages({'string.empty': 'Email address is required'}),
-    password: Joi.string().required().messages({'string.empty': 'Password is required'}),
+    email: Joi.string().required().label('Email address').messages({'string.empty': AuthErrorMessages.emailAddressRequired}),
+    password: Joi.string().required().messages({'string.empty': AuthErrorMessages.passwordRequired}),
 });
 
 // Validates form properties and sets the Error state
@@ -45,7 +45,6 @@ const validateForm = () => {
 const handleSubmit = async (e: any) => {
     
     e.preventDefault();
-    props.handleValidations('This was unsuccessful', false)
     const errors = validateForm()
     setError(errors)
     if (Object.values(errors).every(x => x === null || x === '')) {

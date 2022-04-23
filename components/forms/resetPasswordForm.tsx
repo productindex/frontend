@@ -4,8 +4,8 @@ import * as Joi from 'joi';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
 import { Authentication } from '../../api/auth';
-import { toast } from 'react-toastify';
 import {toasty} from '../../util/toasty'
+import { AuthSuccessMessages } from '../../const/success';
 
 
 const ResetPasswordForm: React.FC = () => {
@@ -52,7 +52,7 @@ const handleSubmit = async (e: any) => {
         if (!response.success) {
             toasty('error', response.error);
         } else {
-            toasty('success', 'Password reset was successful!')
+            toasty('success', AuthSuccessMessages.successfulPasswordReset)
             setTimeout(function() {
                 router.push('/')
               }, 5000);

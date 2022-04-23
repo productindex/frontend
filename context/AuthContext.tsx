@@ -32,6 +32,8 @@ export const AuthContextProvider = (props) => {
                     profile_pic: profile_pic_url
                 }
                 setUserData(user)
+            }).catch(() => {
+                setUserData({})
             })
         }
         return

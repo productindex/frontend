@@ -5,6 +5,7 @@ import { Tag } from "../../components/tag";
 import FullNavBar from "../../components/FullNavBar";
 import { useState } from 'react';
 import Head from "next/head";
+import { EmptyStateMessages } from "../../const/errors";
 
 
 export default function BusinessStore() {
@@ -43,7 +44,7 @@ export default function BusinessStore() {
           </div>
           <div className="store-content">
             <div className="main-content">
-              <h4 className='business-name'> {businessName ? businessName : 'No Business Name'}</h4>
+              <h4 className='business-name'> {businessName ? businessName : EmptyStateMessages.businessStoreName}</h4>
               <div className="tag-box">
                 {tags.map(tag => <Tag description={tag}/>)}
               </div>
@@ -55,7 +56,7 @@ export default function BusinessStore() {
                 products.length > 0 ?    
                 products.map(product => <ProductCard productName={product.name} description={product.description} price={product.price} photoSrc={product.img}/>)
                 
-               : <div className='empty-box'> No Products or Services listed for this business</div>
+               : <div className='empty-box'> {EmptyStateMessages.noProductsOrServices}</div>
               }
               </div>
               <section className="review-section">
@@ -63,7 +64,7 @@ export default function BusinessStore() {
           <div className="review-section-box">
             {   reviews.length > 0 ?
               <ReviewCard personName='Tammy Taylor' starRatings={1} reviewDate='Yesterday at 8pm' comments='Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore inventore nulla laudantium nisi consequuntur odit doloribus iste, repudiandae obcaecati! Nam voluptate voluptates tenetur quidem quas magnam tempora pariatur incidunt dignissimos quo in sunt itaque modi obcaecati animi labore hic necessitatibus iure consequuntur placeat esse, rem eum ipsum? Voluptate, excepturi fugiat?'/>
-            : <div className='empty-box'> No Reviews left as yet. Be the first one!</div>
+            : <div className='empty-box'> {EmptyStateMessages.reviews}</div>
             }            
           </div>
         </section>
@@ -95,7 +96,7 @@ export default function BusinessStore() {
               </div>
               <div className="card">
                 <h5>Directions</h5>
-                <p>{businessDirections ? businessDirections : 'No directions available'}</p>
+                <p>{businessDirections ? businessDirections : EmptyStateMessages.directionsInfo}</p>
               </div>
             </div>
           </div>
