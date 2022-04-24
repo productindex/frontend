@@ -10,7 +10,7 @@ export const Authentication = {
     getUserDetails: async (): Promise<ApiResponse> => {
         return authAxios({
             method: 'get',
-            url: `${process.env.BACKEND_URL}/api/user/1`,
+            url: `${process.env.BACKEND_URL}/api/user`,
         }).then(({data}) => {
             return {success: true, data: data}
         }).catch((err) => {return {error: err.response.data.error}})

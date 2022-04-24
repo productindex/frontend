@@ -15,7 +15,7 @@ const createInstance = () => {
       (error) => {
        const code = error.response.status 
        if (code == 401) {
-        return instance.post('/auth/token')
+        return instance.post(`${process.env.BACKEND_URL}/api/auth/token`)
        }
        return Promise.reject(error);
     })
