@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { AuthErrorMessages } from '../../const/errors';
 import AuthContext from '../../context/AuthContext'
 import { Authentication } from '../../api/auth';
+import { toasty } from '../../util/toasty';
+import { AuthSuccessMessages } from '../../const/success';
 
 
 const OnboardingForm: React.FC = () => {
@@ -80,12 +82,12 @@ const OnboardingForm: React.FC = () => {
       const errors = validateForm()
       setError(errors)
       if (Object.values(errors).every(x => x === null || x === '')) {
-        console.log(user)
         const res = await Authentication.register(user)
         if (res.success){
           localStorage.removeItem("isSigningUp");
           router.replace('/')
           authCtx.loadUser()
+          toasty('success', AuthSuccessMessages.onboarding)
 
         }
       }
