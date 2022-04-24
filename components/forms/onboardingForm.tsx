@@ -1,13 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { TextField } from '../textfield';
 import * as Joi from 'joi';
 import { Dropdown } from '../dropdown';
 import { Datepicker } from '../datepicker';
 import { useRouter } from 'next/router'
 import { AuthErrorMessages } from '../../const/errors';
+import AuthContext from '../../context/AuthContext'
+import { Authentication } from '../../api/auth';
 
 
 const OnboardingForm: React.FC = () => {
+  const authCtx = useContext(AuthContext);
 
   const [birthday, setBirthday] = useState('');
   const [country, setCountry] = useState('');
@@ -48,15 +51,15 @@ const OnboardingForm: React.FC = () => {
   });
 
   const user = {
-    firstname,
-    lastname,
+    first_name: firstname,
+    last_name: lastname,
     email_address,
     password,
-    birthday,
+    dob: birthday,
     gender,
     country,
     state,
-    telephone,
+    primary_phone: telephone,
     city
 }
   const validateForm = () => {
@@ -72,16 +75,21 @@ const OnboardingForm: React.FC = () => {
     }
     return errors
   }
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
       e.preventDefault();
       const errors = validateForm()
       setError(errors)
       if (Object.values(errors).every(x => x === null || x === '')) {
         console.log(user)
-        // router.push('/')
+        const res = await Authentication.register(user)
+        if (res.success){
+          localStorage.removeItem("isSigningUp");
+          router.replace('/')
+          authCtx.loadUser()
+
+        }
       }
-      localStorage.removeItem("isSigningUp");
-      router.push('/')
+      
   };
   const genderList = [
     {

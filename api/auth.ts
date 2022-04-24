@@ -32,8 +32,30 @@ export const Authentication = {
             
         });
     },
-    register: async () => {
-
+    register: async (user) : Promise<ApiResponse> => {
+        return authAxios({
+            method: 'post',
+            url: `${process.env.BACKEND_URL}/api/auth/register`,
+            data: {
+                email_address: user.email_address,
+                password: user.password,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                dob: user.dob,
+                state: user.state,
+                city: user.city,
+                country: user.country,
+                primary_phone: user.primary_phone,
+                gender: user.gender
+            }
+        }).then(()=> {
+            localStorage.setItem('isLoggedIn', 'true')
+            return {success: true}
+        })
+        .catch((err)=>  {
+            return {error: err.response.data.error}
+            
+        });
     },
     logout: async () : Promise<ApiResponse>=> {
         return authAxios({

@@ -8,8 +8,7 @@ import AuthContext from '../../context/AuthContext'
 import { toasty } from '../../util/toasty';
 import { AuthErrorMessages } from '../../const/errors';
 
-export const LoginForm = (props) => {
-
+export const LoginForm = () => {
 const router = useRouter()
 const authCtx = useContext(AuthContext);
 

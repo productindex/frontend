@@ -14,7 +14,7 @@ const createInstance = () => {
     instance.interceptors.response.use(resp => resp, 
       (error) => {
        const code = error.response.status 
-       if (code == 403) {
+       if (code == 401) {
         return instance.post('/auth/token')
        }
        return Promise.reject(error);
