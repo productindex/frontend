@@ -1,4 +1,5 @@
 export const AuthSuccessMessages = {
     successfulPasswordReset: 'Password reset was successful!',
-    onboarding: 'Welcome! You are now a member of Product Index!'
+    onboarding: 'Welcome! Please check your email to verify your account',
+    verified: 'You\'re legit! We\'ve successfully verified your email address.'
 }

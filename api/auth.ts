@@ -100,5 +100,19 @@ export const Authentication = {
             return {error: err.response.data.error}
 
           });
+    },
+    verify: (token) : Promise<ApiResponse> => {
+        return authAxios({
+            method: 'get',
+            url: `${process.env.BACKEND_URL}/api/auth/verify?token=${token}`,
+          }).then(()=> {
+              return {success: true}
+
+          })
+          .catch((err)=>  {
+            console.log(err.message)
+            return {error: err.response.data.error}
+
+          });
     }
 }

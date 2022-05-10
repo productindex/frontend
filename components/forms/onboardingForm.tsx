@@ -85,6 +85,7 @@ const OnboardingForm: React.FC = () => {
         const res = await Authentication.register(user)
         if (res.success){
           localStorage.removeItem("isSigningUp");
+          await Authentication.login(email_address, password)
           router.replace('/')
           authCtx.loadUser()
           toasty('success', AuthSuccessMessages.onboarding)

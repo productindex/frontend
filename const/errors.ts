@@ -10,6 +10,7 @@ export const AuthErrorMessages = {
     firstNameRequired: 'First name is required',
     lastNameRequired: 'Last name is required',
     passwordStringLength: 'Password must be at least 8 characters long',
+    verificationFailed: 'Oops. We couldn\'t verify your account at this time.'
 
 }
 
