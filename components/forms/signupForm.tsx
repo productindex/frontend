@@ -5,6 +5,7 @@ import * as Joi from 'joi';
 const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
 import { AuthErrorMessages } from '../../const/errors';
+import { User } from '../../api/user';
 
 const SignupForm: React.FC = () => {
 
@@ -34,7 +35,7 @@ const SignupForm: React.FC = () => {
     email,
     password
 }
-  const validateForm = () => {
+  const validateForm = async () => {
     const errors: ErrObj = {email: '', password: '', firstname: '', lastname: ''};
     const options = {abortEarly: false}
     const { error } = schema.validate({email: email, password: password, firstname: firstname, lastname: lastname}, options );
@@ -43,15 +44,21 @@ const SignupForm: React.FC = () => {
           let message = e.message.replace(/"/g, "")
           errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
       } 
+      const {data} = await User.find(email, null)
+      if (data && !errors['email']) {
+        errors['email'] = AuthErrorMessages.emailTaken
+      }
       return errors;
     }
+
     return errors
   }
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
       e.preventDefault();
-      const errors = validateForm()
+      const errors = await validateForm()
       setError(errors)
-      if (Object.values(errors).every(x => x === null || x === '')) {
+      
+      if (Object.values(errors).every(x => x === null || x === '') && !error['email']) {
         localStorage.setItem('isSigningUp', 'true')
         router.replace({pathname: '/onboarding', query: {firstname: user.firstname, lastname: user.lastname ,email_address: user.email, password: user.password}}, '/signup')
       }
