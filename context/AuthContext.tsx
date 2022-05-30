@@ -32,8 +32,9 @@ export const AuthContextProvider = (props) => {
                     profile_pic: profile_pic_url
                 }
                 setUserData(user)
-            }).catch(() => {
+            }).catch(async () => {
                 setUserData({})
+                await Authentication.logout()
             })
         }
         return

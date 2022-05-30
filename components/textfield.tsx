@@ -10,6 +10,7 @@ interface TextFieldProps  {
     error?: string;
     show?: boolean;
     optional?: boolean;
+    disabled?: boolean;
 }
 
 const TextField: React.FC<TextFieldProps>  = ({ 
@@ -24,6 +25,7 @@ const TextField: React.FC<TextFieldProps>  = ({
     error,
     show,
     optional,
+    disabled,
     ...props
     
 
@@ -59,6 +61,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                 id={name}
                 onChange={onChange}
                 value={valueType == 'telephone'? formatTelephone() : value}
+                disabled={disabled}
                 
             />
             {valueType=='password' && <button type='button' className='show-hide' onMouseDown={showHide} onMouseUp={showHide}>{showPassword? 'hide' : 'show'}</button>}

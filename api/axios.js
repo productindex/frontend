@@ -12,12 +12,14 @@ const createInstance = () => {
       }
     })
     instance.interceptors.response.use(resp => resp, 
-      (error) => {
-       const code = error.response.status 
-       if (code == 401) {
-        return instance.post(`${process.env.BACKEND_URL}/api/auth/token`)
-       }
-       return Promise.reject(error);
+      async (error) => {
+        const originalRequest = error.config; 
+        const code = error.response.status 
+        if (code == 401) {
+          await instance.post(`${process.env.BACKEND_URL}/api/auth/token`)
+          return instance(originalRequest)
+        }
+        return Promise.reject(error);
     })
     return instance
 
