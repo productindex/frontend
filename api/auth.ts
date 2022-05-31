@@ -64,7 +64,7 @@ export const Authentication = {
         }).then(({})=> {
             localStorage.removeItem('isLoggedIn')
             location.reload();
-            return {success: true, data: 'What this is?'}
+            return {success: true}
             
         })
     },
@@ -110,7 +110,6 @@ export const Authentication = {
 
           })
           .catch((err)=>  {
-            console.log(err.message)
             return {error: err.response.data.error}
 
           });

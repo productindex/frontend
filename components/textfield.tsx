@@ -38,8 +38,11 @@ const TextField: React.FC<TextFieldProps>  = ({
       if (valueType == 'telephone' || valueType == 'tel') return 'tel'
       return valueType
     }
-    const showHide = () => {
-      setShowPassword(!showPassword)
+    const showPass = () => {
+      setShowPassword(true)
+    }
+    const hidePass = () => {
+      setShowPassword(false)
     }
 
     const formatTelephone = () => {
@@ -64,7 +67,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                 disabled={disabled}
                 
             />
-            {valueType=='password' && <button type='button' className='show-hide' onMouseDown={showHide} onMouseUp={showHide}>{showPassword? 'hide' : 'show'}</button>}
+            {valueType=='password' && <button type='button' className='show-hide' onPointerDown={showPass} onPointerUp={hidePass}>{showPassword? 'hide' : 'show'}</button>}
             {error && <div className="error-alert">{error}</div>}
             <style jsx>{`
                 .label {
@@ -81,6 +84,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                       border: 1.5px solid #E5E9E8;
                       text-transform: uppercase;
                       display: inline-block;
+                      user-select: none;
                   }
                   
                   .label-regular {
