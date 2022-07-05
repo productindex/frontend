@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { Authentication } from '../../api/auth';
 import { TextField } from '../../components/textfield';
-import { Dropdown } from '../../components/dropdown';
-
 import NavBar from '../../components/navbar';
 import ProfileSidebar from '../../components/ProfileSidebar';
 
@@ -23,6 +21,7 @@ export default function Profile  (props: Props) {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+    const [formChange, setFormChange] = useState(true)
     const [error, setError] = useState<ErrObj>({});
 
     const user = {
@@ -36,15 +35,23 @@ export default function Profile  (props: Props) {
       console.log(user)
     }
 
+    const handleChange = (e) => {
+        e.preventDefault()
+        if (formChange) {
+            setFormChange(false)
+        }
+    }
+
   return (
   <div className='container'>
     <NavBar />
+    <br />
     <div className="side-by-side">
       <ProfileSidebar />
       <div className='profile'>
                 <h4>Profile - Update password</h4>
                 <hr />
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} onChange={handleChange}>
 
                     <TextField 
                         name='current-password'
@@ -77,8 +84,7 @@ export default function Profile  (props: Props) {
                         
                     />
                  
-                 <input  type="submit" value="Update Password" className='btn btn-primary btn-form' />
-                 {/* <button onClick={toggleDisableStatus}>Edit info</button> */}
+                 <input  type="submit" value="Update Password" disabled={formChange} className='btn btn-primary btn-form' />
               </form>
               <style>{`
                 .profile {

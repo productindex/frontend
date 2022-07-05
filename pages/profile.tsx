@@ -39,6 +39,7 @@ export default function Profile  (props: Props) {
     const [error, setError] = useState<ErrObj>({});
     const [telephone, setTelephone] = useState('');
     const [city, setCity] = useState('');
+    const [formChange, setFormChange] = useState(true)
 
     const user = {
       first_name: firstname,
@@ -73,15 +74,22 @@ export default function Profile  (props: Props) {
       console.log(user)
     }
 
+    const handleChange = (e) => {
+      e.preventDefault()
+      setFormChange(false)
+  }
+    
+
   return (
   <div className='container'>
     <NavBar />
+    <br />
     <div className="side-by-side">
       <ProfileSidebar />
       <div className='profile'>
               <h4>Profile - Your information</h4>
               <hr />
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} onChange={handleChange}>
 
                 <div className="double-textbox">
                   <TextField 
@@ -160,8 +168,7 @@ export default function Profile  (props: Props) {
                       
                   />
                  
-                 <input  type="submit" value="Save Changes" className='btn btn-primary btn-form' />
-                 {/* <button onClick={toggleDisableStatus}>Edit info</button> */}
+                 <input type="submit" value="Save Changes" disabled={formChange} className='btn btn-primary btn-form' />
               </form>
               <style>{`
                 .profile {
