@@ -67,10 +67,16 @@ footer {
 }
 .double-textbox {
   display: flex;
-  width: 100%;
   column-gap: 1rem;
+  justify-content: space-between;
 }
 
+hr {
+  margin-bottom: 1.25rem;
+  background-color: #A0A0A0;
+  height: 1px;
+  border: none;
+}
 .auth-screens {
   height: 97vh;
   max-height: auto;

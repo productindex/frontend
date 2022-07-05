@@ -3,18 +3,50 @@ import { ReviewCard } from "../../components/cards/ReviewCard";
 import { Tag } from "../../components/tag";
 // import SearchBar from "../../components/searchBar";
 import FullNavBar from "../../components/FullNavBar";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from "next/head";
 import { EmptyStateMessages } from "../../const/errors";
+import { StoreApi } from "../../api/store";
+import { useRouter } from "next/router";
+import { ReviewsApi } from '../../api/review';
 
 
 export default function BusinessStore() {
+  const router = useRouter()
+  useEffect(()=> {
+    loadStoreInfo()
+  }, [router.query.name])
+
+  const loadStoreInfo = async () => {
+    const { data : storeData} = await StoreApi.getStoreInfo(0, router.query.name)
+    const { data : businessData } = await StoreApi.getBusinessInfo(storeData['business_id'])
+    const { data : reviewData } = await ReviewsApi.getStoreReviews(storeData['id'])
+    const { data : inventoryData } = await StoreApi.getStoreInventory(storeData['id'])
+    
+    const hours = storeData['StoreHour'] || null
+    const contactInfo = storeData['StoreContact']
+
+    setBusinessName(businessData['business_name'])
+    setBusinessDescription(businessData['description'])
+    setTags(buildBusinessTags(businessData['BusinessTags']))
+    setCategory(businessData['category'])
+    setCity(storeData['city'])
+    setCountry(storeData['country'])
+    setState(storeData['state'])
+    setReviews(reviewData)
+
+    setStoreData(storeData)
+    setBusinessHours(buildStoreHours(hours))
+    setBusinessContact(buildStoreContact(contactInfo))
+  }
+
+  const [storeData, setStoreData] = useState({})
+  
   const [businessName, setBusinessName] = useState(`No Business Name`)
   const [tags, setTags] = useState(['Soul Food', 'Chicken', 'Pizza']);
   const [businessDescription, setBusinessDescription] = useState(`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores velit rerum eum aliquid exercitationem nam mollitia, saepe sunt dicta consequatur aut, alias odit. Consequatur repellendus iure rerum odio placeat perspiciatis nisi ab ad, rem magni soluta dolore qui accusantium dolor nihil libero architecto aperiam cumque obcaecati accusamus iusto odit consectetur?`)
-  const [businessHours, setBusinessHours] = useState({Monday: '09:00AM - 05:00PM', Tuesday: '09:00AM - 05:00PM', Wednesday: '09:00AM - 05:00PM', Thursday: '09:00AM - 05:00PM', Friday: '09:00AM - 05:00PM', Saturday: '09:00AM - 05:00PM', Sunday: '09:00AM - 05:00PM'})
-  const [businessContact, setBusinessContact] = useState( {phoneOne: '(242) 123 - 4567', phoneTwo: '(242) 123 - 4567', email_address: 'me@example.com'})
-  const [businessDirections, setBusinessDirections] = useState('')
+  const [businessHours, setBusinessHours] = useState({Monday: null, Tuesday: null, Wednesday: null, Thursday: null, Friday: null, Saturday: null, Sunday: null})
+  const [businessContact, setBusinessContact] = useState(null)
   const [products, setProducts] = useState([{name: "Product name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse cum unde beatae blanditiis alias officia ullam praesentium eius, explicabo corrupti.", price: '17.00', img: ''}])
   const [reviews, setReviews] = useState([{}])
   const [businessCategory, setCategory] = useState('')
@@ -22,6 +54,43 @@ export default function BusinessStore() {
   const [country, setCountry] = useState('')
   const [state, setState] = useState('')
   const tagList = tags.toString().replace(/,/g, ', ')
+
+
+  const buildStoreHours = (hours) => {
+      //TODO: Move this to a util function
+    if (!hours) return {Monday: null, Tuesday: null, Wednesday: null, Thursday: null, Friday: null, Saturday: null, Sunday: null}
+    return {
+      Monday: hours['monday_open']? `${hours['monday_open']} - ${hours['monday_closed']}` : null,
+      Tuesday: hours['tuesday_open']? `${hours['tuesday_open']} - ${hours['tuesday_closed']}` : null,
+      Wednesday: hours['wednesday_open']? `${hours['wednesday_open']} - ${hours['wednesday_closed']}` : null,
+      Thursday: hours['thursday_open']? `${hours['thursday_open']} - ${hours['thursday_closed']}` : null,
+      Friday: hours['friday_open']? `${hours['friday_open']} - ${hours['friday_closed']}` : null,
+      Saturday: hours['saturday_open']? `${hours['saturday_open']} - ${hours['saturday_closed']}` : null,
+      Sunday: hours['sunday_open']?`${hours['sunday_open']} - ${hours['sunday_closed']}` : null
+    }
+  }
+
+  const buildStoreContact = (contact) => {
+    //TODO: Move this to a util function
+    return {
+      PhoneOne: contact['phone'],
+      PhoneTwo: contact['phone_2'],
+      PhoneThree: contact['phone_3'],
+      Instagram: contact['instagram_url'],
+      Facebook: contact['facebook_url'],
+      Twitter: contact['twitter_url'],
+      Website: contact['business_website'],
+      Email: contact['email']
+    }
+  }
+
+  const buildBusinessTags = (tags) => {
+    const tagList = []
+    for (let i = 0; i< tags.length; i++) {
+      tagList.push(tags[i].tag)
+    }
+    return tagList
+  }
   return (
     
     <>
@@ -63,7 +132,7 @@ export default function BusinessStore() {
                 <h4>What people are saying</h4>
           <div className="review-section-box">
             {   reviews.length > 0 ?
-              <ReviewCard personName='Tammy Taylor' starRatings={1} reviewDate='Yesterday at 8pm' comments='Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore inventore nulla laudantium nisi consequuntur odit doloribus iste, repudiandae obcaecati! Nam voluptate voluptates tenetur quidem quas magnam tempora pariatur incidunt dignissimos quo in sunt itaque modi obcaecati animi labore hic necessitatibus iure consequuntur placeat esse, rem eum ipsum? Voluptate, excepturi fugiat?'/>
+            reviews.map(review => <ReviewCard personName={`${review['User']['first_name']} ${review['User']['last_name']}`} starRatings={review['rating_number']} reviewDate='Yesterday at 8pm' comments={review['comment']}/>)
             : <div className='empty-box'> {EmptyStateMessages.reviews}</div>
             }            
           </div>
@@ -74,7 +143,7 @@ export default function BusinessStore() {
               <div className="card">
                 <h5>Business Hours</h5>
                 <ul>
-                  <li><span className='item-title'>Mon:</span> {businessHours.Monday ? businessHours.Monday: <span className='error'>Closed</span>}</li>
+                  <li><span className='item-title'>Mon:</span> {businessHours['Monday'] ? businessHours['Monday']: <span className='error'>Closed</span>}</li>
                   <li><span className='item-title'>Tues:</span> {businessHours.Tuesday ? businessHours.Tuesday : <span className='error'>Closed</span>}</li>
                   <li><span className='item-title'>Wed:</span> {businessHours.Wednesday ? businessHours.Wednesday : <span className='error'>Closed</span>}</li>
                   <li><span className='item-title'>Thurs:</span> {businessHours.Thursday ? businessHours.Thursday : <span className='error'>Closed</span>}</li>
@@ -87,16 +156,23 @@ export default function BusinessStore() {
                 <h5>Contact Us</h5>
                 {businessContact?            
                 <ul>
-                  {businessContact.phoneOne && <li><span className='item-title'>Phone 1: </span> {businessContact.phoneOne}</li>}
-                  {businessContact.phoneTwo && <li><span className='item-title'>Phone 2: </span> {businessContact.phoneTwo}</li>}
-                  {businessContact.email_address && <li><span className='item-title'>Email: </span> {businessContact.email_address}</li> }
+                  {/* TODO: Add social media icons or a link mask (eg. 'Visit page' link) instead of raw links */}
+                  {businessContact.PhoneOne && <li><span className='item-title'>Phone 1: </span> {businessContact.PhoneOne}</li>}
+                  {businessContact.PhoneTwo && <li><span className='item-title'>Phone 2: </span> {businessContact.PhoneTwo}</li>}
+                  {businessContact.PhoneThree && <li><span className='item-title'>Phone 3: </span> {businessContact.PhoneThree}</li>}
+                  {businessContact.Email && <li><span className='item-title'>Email: </span> {businessContact.Email}</li> }
+                  {businessContact.Instagram && <li><span className='item-title'>Instagram: </span> {businessContact.Instagram}</li> }
+                  {businessContact.Facebook && <li><span className='item-title'>Facebook: </span> {businessContact.Facebook}</li> }
+                  {businessContact.Twitter && <li><span className='item-title'>Twitter: </span> {businessContact.Twitter}</li> }
+                  {businessContact.Website && <li><span className='item-title'>Website: </span> {businessContact.Website}</li> }
                 </ul> 
                 : <p className='description'> No contact info </p>
                 }
               </div>
               <div className="card">
-                <h5>Directions</h5>
-                <p>{businessDirections ? businessDirections : EmptyStateMessages.directionsInfo}</p>
+                <h5>Address</h5>
+                <p>{storeData['address_line_1'] ? storeData['address_line_1'] : EmptyStateMessages.directionsInfo}</p>
+                {/* <p>{storeData['address_line_2'] ? storeData['address_line_2'] : EmptyStateMessages.directionsInfo}</p> */}
               </div>
             </div>
           </div>

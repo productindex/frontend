@@ -54,7 +54,7 @@ const TextField: React.FC<TextFieldProps>  = ({
 
     }
     return (
-        <div>
+        <div className='text-container'>
             <label className={`label label-regular`} htmlFor={name}>{valueLabel} {optional && <span className='label-optional'>(Optional)</span>}</label><br />
             <input 
                 type={toggleType()} 
@@ -106,16 +106,19 @@ const TextField: React.FC<TextFieldProps>  = ({
                     box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     -webkit-box-sizing: border-box;
-                    // min-width: 12.5rem;
                     letter-spacing: 0.05rem;
                     font-size: 1.125rem;
                     width: 100%;
+                    letter-spacing: 0.05rem;
                   }
                   .textbox:focus {
                     box-shadow: 0px 0px 2px 2px #B8EEED;
                   }
                   .textbox::placeholder {
                     color: #CACACA;
+                  }
+                  .text-container {
+                    width: 100%;
                   }
 
         `}</style>

@@ -4,6 +4,7 @@ import { TextField } from '../components/textfield';
 import { Dropdown } from '../components/dropdown';
 
 import NavBar from '../components/navbar';
+import ProfileSidebar from '../components/ProfileSidebar';
 
 type Props = {}
 interface ErrObj {
@@ -75,8 +76,11 @@ export default function Profile  (props: Props) {
   return (
   <div className='container'>
     <NavBar />
-    <div className='profile'>
-        
+    <div className="side-by-side">
+      <ProfileSidebar />
+      <div className='profile'>
+              <h4>Profile - Your information</h4>
+              <hr />
               <form onSubmit={handleSubmit}>
 
                 <div className="double-textbox">
@@ -161,14 +165,23 @@ export default function Profile  (props: Props) {
               </form>
               <style>{`
                 .profile {
-                  // max-width: 1000px;
-                  margin: 0 auto;
+                  margin-left: 10%;
                 }
+
+                h4 {
+                  margin-bottom: .75rem;
+                }
+                form {
+                  min-width: 550px;
+              }
               
               `}
                 
               </style>
       </div>
+    </div>
+    
+    
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { authAxios } from './axios';
+import { ApiErrorMessage } from './errorMessages/apiErrorMessages';
 
 interface ApiResponse {
     success: boolean;
@@ -13,7 +14,9 @@ export const Authentication = {
             url: `${process.env.BACKEND_URL}/api/user`,
         }).then(({data}) => {
             return {success: true, data: data}
-        }).catch((err) => {return {error: err.response.data.error}})
+        }).catch((err) => {
+            return {error: err.response?.data ? err.response.data.error : ApiErrorMessage.FailedFetchingUserDetails}
+        })
     },
     login: async (emailAddress, password) : Promise<ApiResponse> => {
         return authAxios({
@@ -28,7 +31,7 @@ export const Authentication = {
             return {success: true}
         })
         .catch((err)=>  {
-            return {error: err.response.data.error}
+            return {error: err.response?.data ? err.response.data.error : ApiErrorMessage.FailedLoggingDefault}
             
         });
     },
@@ -53,7 +56,7 @@ export const Authentication = {
             return {success: true}
         })
         .catch((err)=>  {
-            return {error: err.response.data.error}
+            return {error: err.response?.data ? err.response.data.error : ApiErrorMessage.FailedRegistering}
             
         });
     },
@@ -66,6 +69,8 @@ export const Authentication = {
             location.reload();
             return {success: true}
             
+        }).catch(err => {
+            return {error: err.response?.data ? err.response.data.error : ApiErrorMessage.FailedLoggedOut}
         })
     },
     forgotPassword: (emailAddress) : Promise<ApiResponse> => {

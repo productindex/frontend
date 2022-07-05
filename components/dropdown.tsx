@@ -58,7 +58,6 @@ const Dropdown: React.FC<TextFieldProps>  = ({
                     -moz-box-sizing: border-box;
                     -webkit-box-sizing: border-box;
                     font-size: 1rem;
-                    // min-width: 10.5rem;
                     letter-spacing: 0.05rem;
                     font-size: 1.125rem;
                     width: 100%;
