@@ -165,7 +165,8 @@ hr {
   background-color: #2EB7BE;;
 }
 .btn-primary:disabled {
-  background-color: #C9F1E9;
+  background-color: #C6E7E0;
+  cursor: default;
 }
 .btn-primary:focus {
   outline: none;  
