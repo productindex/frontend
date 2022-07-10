@@ -1,5 +1,4 @@
-import { options } from 'joi';
-import React, {useState} from 'react';
+import React from 'react';
 interface TextFieldProps  {
     name?: string;
     valueType?: string;
@@ -10,6 +9,7 @@ interface TextFieldProps  {
     className?: string;
     error?: string;
     optionList?: {value?: string, name?: string, default?: Boolean}[];
+    //TODO: add onBlur
 }
 
 const Datepicker: React.FC<TextFieldProps>  = ({ 
@@ -36,7 +36,7 @@ const Datepicker: React.FC<TextFieldProps>  = ({
               className='textbox'/>
 
             {error && <div className="error-alert">{error}</div>}
-            <style jsx>{`
+            <style>{`
                   .label {
                     color: #1c1c1c;
                     font-weight: 700;

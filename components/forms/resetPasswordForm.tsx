@@ -1,54 +1,22 @@
 import React, {useState} from 'react';
 import { TextField } from '../textfield';
-import * as Joi from 'joi';
-const { joiPassword } = require("joi-password");
 import { useRouter } from 'next/router'
 import { Authentication } from '../../api/auth';
 import {toasty} from '../../util/toasty'
 import { AuthSuccessMessages } from '../../const/success';
-
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 const ResetPasswordForm: React.FC = () => {
+    const router = useRouter()
+    const { token } = router.query // To verify password change
 
-const [password, setPassword] = useState('');
-const [error, setError] = useState<ErrObj>({});
-const router = useRouter()
-const { token } = router.query // To verify password change
-
-
-interface ErrObj {
-    password?: string;
-}
-
-const schema = Joi.object({
-  password: joiPassword.string().min(8).minOfSpecialCharacters(1).minOfLowercase(0).minOfUppercase(0).minOfNumeric(1).noWhiteSpaces().required().messages({'string.min': 'Password must be at least 8 characters long', 'string.empty': 'Password is required'}),
-});
-const user = {
-    password
-}
-
-
-// Validates form properties and sets the Error state
-const validateForm = () => {
-    const errors: ErrObj = { password: ''};
-    const options = {abortEarly: false}
-    const { error } = schema.validate({password: password}, options );
-    if (error) {
-        for (let e of error.details) {
-            let message = e.message.replace(/"/g, "")
-            errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
-        } 
-        return errors;
-    }
-    return errors
-    
-}
-const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const errors = validateForm()
-    setError(errors)
-    if (Object.values(errors).every(x => x === null || x === '')) {
-        const response = await Authentication.resetPassword(token, user.password)
+    const formik = useFormik({
+        initialValues: {
+            password: ''
+        },
+        onSubmit: async (values) => {
+        const response = await Authentication.resetPassword(token, values.password)
         if (!response.success) {
             toasty('error', response.error);
         } else {
@@ -56,25 +24,28 @@ const handleSubmit = async (e: any) => {
             setTimeout(function() {
                 router.push('/')
               }, 5000);
-        }
-    }
-
-};
+        }        },
+        validationSchema: Yup.object({
+            password: Yup.string().required('Password is required')
+        })
+        
+    })
 
     return (
         <div className='form pane-form'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
                 <TextField 
                     name='password'
                     valueType='password'
                     valueLabel='Password'
-                    onChange={(e: any)=> setPassword(e.target.value)}
-                    value={password}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
                     className='med-textbox'
-                    error={error.password}
+                    error={formik.errors.password}
+                    onBlur={formik.handleBlur}
                 />
                   
-              <input type="submit" value="Reset my password" className='btn btn-primary btn-form' />
+              <input type="submit" value="Reset my password" className='btn btn-primary btn-form' disabled={formik.isSubmitting} />
                 
                
             </form>    

@@ -10,7 +10,7 @@ export default function ProfileSidebar({}: Props) {
             <Link href='/profile/password'><a className="nav-selector">Password</a></Link>
 
         
-        <style jsx>{`
+        <style>{`
             .nav-selector {
                 padding: 12px 8px;
                 margin-bottom: 4px;

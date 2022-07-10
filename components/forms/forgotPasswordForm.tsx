@@ -1,70 +1,43 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
 import { Authentication } from '../../api/auth';
-import * as Joi from 'joi';
 import { toasty } from '../../util/toasty'
+import {useFormik} from 'formik'
+import * as Yup from 'yup'
 
 const ForgotPasswordForm: React.FC = () => {
 
-const [email, setEmail] = useState('');
-const [error, setError] = useState<ErrObj>({});
-interface ErrObj {
-    email?: string;
-    password?: string;
-}
-
-const schema = Joi.object({
-    email: Joi.string().required().label('Email address').messages({'string.empty': 'Email address is required'}),
-});
-const user = {
-    email,
-}
-
-// Validates form properties and sets the Error state
-const validateForm = () => {
-    const errors: ErrObj = {email: '', password: ''};
-    const options = {abortEarly: false}
-    const { error } = schema.validate({email: email}, options );
-    if (error) {
-        for (let e of error.details) {
-            let message = e.message.replace(/"/g, "")
-            
-            errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
-        } 
-        return errors;
-    }
-    return errors
-    
-}
-const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    const errors = validateForm()
-    setError(errors)
-    if (Object.values(errors).every(x => x === null || x === '')) {
-        const response = await Authentication.forgotPassword(user.email)
-        if (response.success) toasty('success', 'We\'ve sent reset instructions to your email address!')     
-
-    }
-
-};
+    const formik = useFormik({
+        initialValues: {
+            email: ''
+        },
+        onSubmit: async (values) => {
+            const response = await Authentication.forgotPassword(values.email)
+            if (response.success) toasty('success', 'We\'ve sent reset instructions to your email address!') //TODO: Add this to const
+        },
+        validationSchema: Yup.object({
+            email:  Yup.string().email('This doesn\'t seem like a valid email').required('Email address is required') // TODO: Add to const
+        })
+        
+    })
 
     return (
         <div className='form pane-form'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
                 <TextField 
                     name='email'
                     valueType='email'
                     valuePlaceholder='me@example.com'
                     valueLabel='Email address'
-                    onChange={(e: any)=> setEmail(e.target.value)}
-                    value={email}
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
                     className='med-textbox'
-                    error={error.email}
+                    error={formik.errors.email}
+                    onBlur={formik.handleBlur}
                 />
 
-                  <input type="submit" value="Send me reset instructions" className='btn btn-primary btn-form' />
+                <input type="submit" value="Send me reset instructions" className='btn btn-primary btn-form' disabled={formik.isSubmitting}/>
                 
             </form>    
             <div className="linkbox">

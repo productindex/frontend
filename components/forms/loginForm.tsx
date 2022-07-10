@@ -1,53 +1,25 @@
 import React, {useState, useContext} from 'react';
 import Link from 'next/link';
 import { TextField } from '../textfield';
-import * as Joi from 'joi';
 import {useRouter} from 'next/router';
 import { Authentication } from '../../api/auth';
 import AuthContext from '../../context/AuthContext'
 import { toasty } from '../../util/toasty';
 import { AuthErrorMessages } from '../../const/errors';
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 export const LoginForm = () => {
 const router = useRouter()
 const authCtx = useContext(AuthContext);
 
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [error, setError] = useState<ErrObj>({});
-
-interface ErrObj {
-    email?: string;
-    password?: string;
-}
-
-const schema = Joi.object({
-    email: Joi.string().required().label('Email address').messages({'string.empty': AuthErrorMessages.emailAddressRequired}),
-    password: Joi.string().required().messages({'string.empty': AuthErrorMessages.passwordRequired}),
-});
-
-// Validates form properties and sets the Error state
-const validateForm = () => {
-    const errors: ErrObj = {email: '', password: ''};
-    const options = {abortEarly: false}
-    const { error } = schema.validate({email: email, password: password}, options );
-    if (error) {
-        for (let e of error.details) {
-            let message = e.message.replace(/"/g, "")
-            errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
-        } 
-        return errors;
-    }
-    return errors
-    
-}
-const handleSubmit = async (e: any) => {
-    
-    e.preventDefault();
-    const errors = validateForm()
-    setError(errors)
-    if (Object.values(errors).every(x => x === null || x === '')) {
-        const res = await Authentication.login(email, password)
+const formik = useFormik({
+    initialValues: {
+        email: '',
+        password: ''
+    },
+    onSubmit: async (values) => {
+        const res = await Authentication.login(values.email, values.password)
         toasty('error', res.error)
         
         if (res.success) {
@@ -55,38 +27,42 @@ const handleSubmit = async (e: any) => {
             authCtx.loadUser()
 
         }
-        
-    }
-
-};
+    },
+    validationSchema: Yup.object({
+        email:  Yup.string().email('This doesn\'t seem like a valid email').required('Email address is required'), // TODO: Add to const
+        password: Yup.string().required('Password is required')
+    })
+})
 
     return (
         <div className='form pane-form'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
                 <TextField 
                     name='email'
                     valueType='email'
                     valuePlaceholder='me@example.com'
                     valueLabel='Email address'
-                    onChange={(e: any)=> setEmail(e.target.value)}
-                    value={email}
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
                     className='med-textbox'
-                    error={error.email}
+                    error={formik.errors.email}
+                    onBlur= {formik.handleBlur}
                 />
                 <TextField 
                     name='password'
                     valueType='password'
                     valueLabel='Password'
-                    onChange={(e: any)=> setPassword(e.target.value)}
-                    value={password}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
                     className='med-textbox'
-                    error={error.password}
+                    error={formik.errors.password}
+                    onBlur={formik.handleBlur}
                 />
                   <div className="forgot">
                     <Link href='/forgot-password'><a className='link'>Forgot password?</a></Link>
                   </div>
                   
-                  <input type="submit" value="Sign in" disabled={false} className='btn btn-primary btn-form' />
+                  <input type="submit" value="Sign in" disabled={formik.isSubmitting} className='btn btn-primary btn-form' />
                 
                
             </form>    
@@ -95,7 +71,7 @@ const handleSubmit = async (e: any) => {
             </div>
             
 
-            <style jsx>{`
+            <style>{`
       
         .forgot {
           padding: .5rem 0 1rem 0;
@@ -106,4 +82,4 @@ const handleSubmit = async (e: any) => {
 
 
     )
-};
+}

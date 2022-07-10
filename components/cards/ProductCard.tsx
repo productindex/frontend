@@ -26,7 +26,7 @@ const ProductCard:  React.FC<ProductCardProps>  = ({
                 <h5>{price}</h5>
             </div>
 
-        <style jsx> {
+        <style> {
             `
             .product-card {
                 display: flex;

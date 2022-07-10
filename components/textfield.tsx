@@ -11,6 +11,7 @@ interface TextFieldProps  {
     show?: boolean;
     optional?: boolean;
     disabled?: boolean;
+    onBlur: any;
 }
 
 const TextField: React.FC<TextFieldProps>  = ({ 
@@ -26,6 +27,7 @@ const TextField: React.FC<TextFieldProps>  = ({
     show,
     optional,
     disabled,
+    onBlur,
     ...props
     
 
@@ -58,18 +60,19 @@ const TextField: React.FC<TextFieldProps>  = ({
             <label className={`label label-regular`} htmlFor={name}>{valueLabel} {optional && <span className='label-optional'>(Optional)</span>}</label><br />
             <input 
                 type={toggleType()} 
-                className={error ? `textbox-error textbox ${className}` : `${className} textbox`} 
+                className={error && onBlur ? `textbox-error textbox ${className}` : `${className} textbox`} 
                 name={name} 
                 placeholder={valuePlaceholder }
                 id={name}
                 onChange={onChange}
                 value={valueType == 'telephone'? formatTelephone() : value}
                 disabled={disabled}
+                onBlur={onBlur}
                 
             />
             {valueType=='password' && <button type='button' className='show-hide' onPointerDown={showPass} onPointerUp={hidePass}>{showPassword? 'hide' : 'show'}</button>}
-            {error && <div className="error-alert">{error}</div>}
-            <style jsx>{`
+            {error && onBlur && <div className="error-alert">{error}</div>}
+            <style>{`
                 .label {
                     color: #1c1c1c;
                     font-weight: 700;

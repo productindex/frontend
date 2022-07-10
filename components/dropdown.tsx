@@ -1,5 +1,4 @@
-import { options } from 'joi';
-import React, {useState} from 'react';
+import React from 'react';
 interface TextFieldProps  {
     name?: string;
     valueType?: string;
@@ -11,6 +10,7 @@ interface TextFieldProps  {
     error?: string;
     disabled?: boolean;
     optionList?: {value?: string, name?: string, default?: Boolean}[];
+    //TODO: add onBlur
 }
 
 const Dropdown: React.FC<TextFieldProps>  = ({ 
@@ -36,7 +36,7 @@ const Dropdown: React.FC<TextFieldProps>  = ({
                 {optionList && <> <option disabled hidden value={'-'}> - </option> {optionList.map((item) => <option key={item.name} value={item.value}>{item.name}</option> )}</>}
               </select>
             {error && <div className="error-alert">{error}</div>}
-            <style jsx>{`
+            <style>{`
                   .label {
                     color: #1c1c1c;
                     font-weight: 700;
