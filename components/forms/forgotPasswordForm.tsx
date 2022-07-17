@@ -1,10 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { TextField } from "../textfield";
+import { TextField } from "@productindex/components/formElements/Textfield"
 import { Authentication } from "../../api/auth";
 import { toasty } from "../../util/toasty";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AuthErrorMessages } from "@productindex/const/errors";
+import { AuthSuccessMessages } from "@productindex/const/success";
 
 const ForgotPasswordForm: React.FC = () => {
   const formik = useFormik({
@@ -16,13 +18,13 @@ const ForgotPasswordForm: React.FC = () => {
       if (response.success)
         toasty(
           "success",
-          "We've sent reset instructions to your email address!"
-        ); //TODO: Add this to const
+          AuthSuccessMessages.forgotPassword
+        );
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("This doesn't seem like a valid email")
-        .required("Email address is required"), // TODO: Add to const
+        .email(AuthErrorMessages.invalidEmail)
+        .required(AuthErrorMessages.emailAddressRequired),
     }),
   });
 
@@ -36,9 +38,9 @@ const ForgotPasswordForm: React.FC = () => {
           valueLabel="Email address"
           onChange={formik.handleChange}
           value={formik.values.email}
-          className="med-textbox"
           error={formik.errors.email}
           onBlur={formik.handleBlur}
+          showLabel
         />
 
         <input
@@ -50,8 +52,7 @@ const ForgotPasswordForm: React.FC = () => {
       </form>
       <div className="linkbox">
         <p className="body">
-          {" "}
-          Remembered?{" "}
+          Remembered?
           <span className="link-text">
             <Link href="/signin">
               <a className="link">Sign In</a>

@@ -1,7 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 import { Ratings } from "../pieces/starRatings";
+import styles from '@productindex/components/cards/cards.module.css'
 
 interface ReviewCardProps {
   personName: string;
@@ -14,51 +13,21 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   starRatings,
   reviewDate,
   comments,
-  ...props
 }) => {
   return (
-    <div className="review-card">
-      <div className="identity">
-        <div className="avatar-photo"></div>
-        <div className="name-box">
+    <div className={styles.reviewCard}>
+      <div className={styles.identity}>
+        <div className={styles.avatarPhoto}></div>
+        <div>
           <h5>{personName}</h5>
         </div>
       </div>
 
-      <div className="review-stars">
+      <div className={styles.reviewStars}>
         <Ratings rating={starRatings} />
       </div>
       <small>{reviewDate}</small>
       <p className="description">{comments}</p>
-
-      <style jsx>
-        {" "}
-        {`
-          .review-card:not(:last-child) {
-            margin-bottom: 1.5rem;
-          }
-          .review-stars {
-            margin-top: 0.25rem;
-            margin-bottom: 0.5rem;
-          }
-          .description {
-            margin-top: 0.5rem;
-            font-size: 1rem;
-            line-height: 1.5rem;
-          }
-          .identity {
-            display: flex;
-            column-gap: 0.5rem;
-            align-items: center;
-          }
-          .avatar-photo {
-            width: 32px;
-            height: 32px;
-            background-color: black;
-            border-radius: 24px;
-          }
-        `}
-      </style>
     </div>
   );
 };

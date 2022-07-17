@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 
 interface StoreAvailabilityProps {
@@ -8,8 +6,7 @@ interface StoreAvailabilityProps {
 }
 const StoreAvailability: React.FC<StoreAvailabilityProps> = ({
   openingTime,
-  closingTime,
-  ...props
+  closingTime
 }) => {
   const availabilityStatus = (openingTime, closingTime) => {
     const currentTime = new Date().toLocaleTimeString();

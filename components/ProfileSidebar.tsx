@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-type Props = {};
 
-export default function ProfileSidebar({}: Props) {
+
+export default function ProfileSidebar() {
   return (
     <div className="profile-sidebar">
       <Link href="/profile">

@@ -22,7 +22,7 @@ export const Avatar = (props: Props) => {
             : props.displayPhotoSrc
         }
       />
-      <style jsx>
+      <style>
         {`
           .avatar-img {
             height: ${avatarSize()};

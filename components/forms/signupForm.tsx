@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { TextField } from "../textfield";
+import { TextField } from "@productindex/components/formElements/Textfield"
 import { useRouter } from "next/router";
 import { AuthErrorMessages } from "../../const/errors";
 import { useFormik } from "formik";
@@ -67,9 +67,9 @@ const SignupForm: React.FC = () => {
             valueLabel="First name"
             onChange={formik.handleChange}
             value={formik.values.firstname}
-            className="med-textbox"
             error={formik.errors.firstname}
             onBlur={formik.handleBlur}
+            showLabel
           />
           <TextField
             name="lastname"
@@ -78,9 +78,9 @@ const SignupForm: React.FC = () => {
             valueLabel="Last name"
             onChange={formik.values.lastname}
             value={formik.values.lastname}
-            className="med-textbox"
             error={formik.errors.lastname}
             onBlur={formik.handleBlur}
+            showLabel
           />
         </div>
 
@@ -91,9 +91,9 @@ const SignupForm: React.FC = () => {
           valueLabel="Email address"
           onChange={formik.handleChange}
           value={formik.values.email}
-          className="med-textbox"
           error={formik.errors.email}
           onBlur={formik.handleBlur}
+          showLabel
         />
         <TextField
           name="password"
@@ -101,9 +101,9 @@ const SignupForm: React.FC = () => {
           valueLabel="Password"
           onChange={formik.handleBlur}
           value={formik.values.password}
-          className="med-textbox"
           error={formik.errors.password}
           onBlur={formik.handleBlur}
+          showLabel
         />
         <div className="legal-box">
           <small>

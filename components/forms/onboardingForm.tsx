@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { TextField } from "../textfield";
-import { Dropdown } from "../dropdown";
+import { TextField } from "@productindex/components/formElements/Textfield";
+import { Dropdown } from "@productindex/components/formElements/dropdown";
 import { Datepicker } from "../datepicker";
 import { useRouter } from "next/router";
 import { AuthErrorMessages } from "../../const/errors";
@@ -15,9 +15,6 @@ const OnboardingForm: React.FC = () => {
   const authCtx = useContext(AuthContext);
 
   const [birthday, setBirthday] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
-  const [gender, setGender] = useState("");
   const router = useRouter();
   const { firstname, lastname, password, email_address } = router.query;
 
@@ -62,6 +59,7 @@ const OnboardingForm: React.FC = () => {
         last_name: lastname,
         email_address,
         password,
+        birthday,
         dob: values.birthday,
         gender: values.gender,
         country: values.country,
@@ -69,6 +67,7 @@ const OnboardingForm: React.FC = () => {
         primary_phone: values.telephone,
         city: values.city,
       };
+    
       const res = await Authentication.register(user);
       if (res.success) {
         localStorage.removeItem("isSigningUp");
@@ -95,7 +94,6 @@ const OnboardingForm: React.FC = () => {
             optionList={genderList}
             onChange={formik.handleChange}
             error={formik.errors.gender}
-            value={formik.values.gender}
           />
           <Datepicker
             valueLabel="Birthday"
@@ -110,14 +108,14 @@ const OnboardingForm: React.FC = () => {
             optionList={[{ name: "The Bahamas", value: "BAH" }]}
             onChange={formik.handleChange}
             error={formik.errors.country}
-            value={formik.values.country}
+            showLabel
           />
           <Dropdown
             valueLabel="State/Island"
             optionList={[{ name: "New Providence", value: "NEW PROVIDENCE" }]}
             onChange={formik.handleChange}
             error={formik.errors.state}
-            value={formik.values.state}
+            showLabel
           />
         </div>
 
@@ -127,9 +125,9 @@ const OnboardingForm: React.FC = () => {
           valueLabel="City"
           onChange={formik.handleChange}
           value={formik.values.city}
-          className="med-textbox"
           error={formik.errors.city}
           onBlur={formik.handleBlur}
+          showLabel
         />
 
         <TextField
@@ -137,12 +135,12 @@ const OnboardingForm: React.FC = () => {
           valueType="telephone"
           valuePlaceholder="242 123 4567"
           valueLabel="Phone contact"
-          optional={true}
+          isOptional
           onChange={formik.handleChange}
           value={formik.values.telephone}
-          className="med-textbox"
           error={formik.errors.telephone}
           onBlur={formik.handleBlur}
+          showLabel
         />
 
         <input

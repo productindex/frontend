@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { StoreAvailability } from "../../components/pieces/storeAvailability";
 import { Tag } from "../../components/tag";
-
+//TODO: Add this to a CSS module
 interface SearchCardProps {
   businessName?: string;
   slug?: string;
@@ -28,8 +28,7 @@ const SearchCard: React.FC<SearchCardProps> = ({
   reviewCount,
   imageSrc,
   openingTime,
-  closingTime,
-  ...props
+  closingTime
 }) => {
   return (
     <>
@@ -84,7 +83,7 @@ const SearchCard: React.FC<SearchCardProps> = ({
         </a>
       </Link>
 
-      <style jsx>
+      <style>
         {" "}
         {`
           a {

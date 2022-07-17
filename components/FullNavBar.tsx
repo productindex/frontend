@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState} from "react";
 import { useRouter } from "next/router";
 import { AvatarMenu } from "./pieces/AvatarMenu";
 
@@ -100,7 +100,7 @@ export default function FullNavBar(props) {
           </button>
         </div>
       </form>
-      <style jsx>{`
+      <style> {`
         .logo-box img {
           width: 162px;
           cursor: pointer;

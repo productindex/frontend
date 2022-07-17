@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
-import { TextField } from "../textfield";
+import { TextField } from "@productindex/components/formElements/Textfield";
 import { useRouter } from "next/router";
 import { Authentication } from "../../api/auth";
 import AuthContext from "../../context/AuthContext";
@@ -29,9 +29,9 @@ export const LoginForm = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("This doesn't seem like a valid email")
-        .required("Email address is required"), // TODO: Add to const
-      password: Yup.string().required("Password is required"),
+        .email(AuthErrorMessages.invalidEmail)
+        .required(AuthErrorMessages.emailAddressRequired),
+      password: Yup.string().required(AuthErrorMessages.passwordRequired),
     }),
   });
 
@@ -45,9 +45,9 @@ export const LoginForm = () => {
           valueLabel="Email address"
           onChange={formik.handleChange}
           value={formik.values.email}
-          className="med-textbox"
           error={formik.errors.email}
           onBlur={formik.handleBlur}
+          showLabel
         />
         <TextField
           name="password"
@@ -55,9 +55,9 @@ export const LoginForm = () => {
           valueLabel="Password"
           onChange={formik.handleChange}
           value={formik.values.password}
-          className="med-textbox"
           error={formik.errors.password}
           onBlur={formik.handleBlur}
+          showLabel
         />
         <div className="forgot">
           <Link href="/forgot-password">

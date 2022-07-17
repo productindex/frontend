@@ -1,28 +1,20 @@
 import React from "react";
 interface TextFieldProps {
   name?: string;
-  valueType?: string;
-  valuePlaceholder?: string;
   valueLabel?: string;
   onChange?: any;
   value?: string;
-  className?: string;
   error?: string;
-  optionList?: { value?: string; name?: string; default?: Boolean }[];
+  optionList?: { value?: string; name?: string; default?: boolean }[];
   //TODO: add onBlur
 }
 
 const Datepicker: React.FC<TextFieldProps> = ({
   name,
-  valueType,
-  valuePlaceholder,
   valueLabel,
   value,
-  className,
   onChange,
-  error,
-  optionList,
-  ...props
+  error
 }) => {
   return (
     <div className="form-element">

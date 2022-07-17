@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { TextField } from "../textfield";
+import React from "react";
+import { TextField } from "@productindex/components/formElements/Textfield";
 import { useRouter } from "next/router";
 import { Authentication } from "../../api/auth";
 import { toasty } from "../../util/toasty";
@@ -43,9 +43,9 @@ const ResetPasswordForm: React.FC = () => {
           valueLabel="Password"
           onChange={formik.handleChange}
           value={formik.values.password}
-          className="med-textbox"
           error={formik.errors.password}
           onBlur={formik.handleBlur}
+          showLabel
         />
 
         <input
