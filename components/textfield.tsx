@@ -73,9 +73,8 @@ const TextField: React.FC<TextFieldProps>  = ({
             {valueType=='password' && <button type='button' className='show-hide' onPointerDown={showPass} onPointerUp={hidePass}>{showPassword? 'hide' : 'show'}</button>}
             {error && onBlur && <div className="error-alert">{error}</div>}
             <style>{`
-                .label {
+                  .label {
                     color: #1c1c1c;
-                    font-weight: 700;
                   }
                   .show-hide {
                       postion: absolute;
@@ -91,7 +90,8 @@ const TextField: React.FC<TextFieldProps>  = ({
                   }
                   
                   .label-regular {
-                    font-size: 1.125em;
+                    font-size: 1em;
+                    letter-spacing: 1px;
                   }
                   .label-optional {
                     font-weight: 400;
