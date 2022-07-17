@@ -1,33 +1,37 @@
-import React from 'react'
+import React from "react";
 
-interface ProductCardProps  {
-    photoSrc?: string;
-    productName: string;
-    description: string;
-    price?: string;
+interface ProductCardProps {
+  photoSrc?: string;
+  productName: string;
+  description: string;
+  price?: string;
 }
-const ProductCard:  React.FC<ProductCardProps>  = ({
-    photoSrc,
-    productName,
-    description,
-    price,
-...props
+const ProductCard: React.FC<ProductCardProps> = ({
+  photoSrc,
+  productName,
+  description,
+  price,
+  ...props
 }) => {
-    return (
-        <div className="product-card">
-            <div className="product-photo">
-                <img alt={productName} src={!photoSrc? '/images/Default-photo-item.png' : photoSrc} />
-            </div>
-            <div className="product-meta">
-                <h5>{productName}</h5>
-                <p className='description'>{description}</p>
-                </div>
-                <div className="product-price">
-                <h5>{price}</h5>
-            </div>
+  return (
+    <div className="product-card">
+      <div className="product-photo">
+        <img
+          alt={productName}
+          src={!photoSrc ? "/images/Default-photo-item.png" : photoSrc}
+        />
+      </div>
+      <div className="product-meta">
+        <h5>{productName}</h5>
+        <p className="description">{description}</p>
+      </div>
+      <div className="product-price">
+        <h5>{price}</h5>
+      </div>
 
-        <style> {
-            `
+      <style>
+        {" "}
+        {`
             .product-card {
                 display: flex;
                 width: 100%;
@@ -63,13 +67,10 @@ const ProductCard:  React.FC<ProductCardProps>  = ({
                 padding: .5rem 1rem;
                 margin-left: auto;
             }
-            `
-        }
-            
-        </style>
+            `}
+      </style>
     </div>
-    )
+  );
+};
 
-}
-
- export {ProductCard}
+export { ProductCard };

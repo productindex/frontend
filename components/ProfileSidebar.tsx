@@ -1,16 +1,19 @@
-import React from 'react'
-import Link from 'next/link'
-type Props = {}
+import React from "react";
+import Link from "next/link";
+type Props = {};
 
 export default function ProfileSidebar({}: Props) {
   return (
-    <div className='profile-sidebar'>
+    <div className="profile-sidebar">
+      <Link href="/profile">
+        <a className="nav-selector">Your information</a>
+      </Link>
+      <Link href="/profile/password">
+        <a className="nav-selector">Password</a>
+      </Link>
 
-            <Link href='/profile'><a className="nav-selector">Your information</a></Link>
-            <Link href='/profile/password'><a className="nav-selector">Password</a></Link>
-
-        
-        <style>{`
+      <style>
+        {`
             .nav-selector {
                 padding: 12px 8px;
                 margin-bottom: 4px;
@@ -36,9 +39,7 @@ export default function ProfileSidebar({}: Props) {
                 font-weight: 600;
             }
         `}
-
-        </style>
-
+      </style>
     </div>
-  )
+  );
 }

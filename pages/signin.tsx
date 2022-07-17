@@ -1,18 +1,17 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { LoginForm } from '../components/forms/loginForm'
-import { toast } from 'react-toastify';
-
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { LoginForm } from "../components/forms/loginForm";
+import { toast } from "react-toastify";
 
 export default function Signin() {
-  const router = useRouter()
-  useEffect(()=> {
-    if (localStorage.getItem('isLoggedIn')) {
-      router.replace('/')
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn")) {
+      router.replace("/");
     }
-  })
-  
+  });
+
   return (
     <>
       <Head>
@@ -21,26 +20,27 @@ export default function Signin() {
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
 
-      <main className='auth-screens'>
-
-          <div className="side-by-side">
+      <main className="auth-screens">
+        <div className="side-by-side">
           <div className="leftpane">
             <div className="content">
-              <h2 className=''>Doing business just got easier</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et doloribus unde esse incidunt vitae excepturi, optio tempora corporis tempore voluptate.</p>
+              <h2 className="">Doing business just got easier</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
+                doloribus unde esse incidunt vitae excepturi, optio tempora
+                corporis tempore voluptate.
+              </p>
             </div>
-
           </div>
           <div className="rightpane">
             <div className="content">
               <div className="logo-box">
                 <img src="/images/logo-dark.png" alt="Product Index Logo" />
               </div>
-              <h3 className='form-title'>Sign in</h3>
+              <h3 className="form-title">Sign in</h3>
               <LoginForm />
             </div>
           </div>
-
         </div>
       </main>
 
@@ -49,21 +49,20 @@ export default function Signin() {
       </footer>
 
       <style jsx>{`
-
         .logo-box {
           margin-bottom: 1.5rem;
         }
         .leftpane {
           width: 55%;
           padding: 8rem 0 5% 5%;
-          background-color: #13C8C4;
+          background-color: #13c8c4;
         }
 
         .form-title {
           margin-bottom: 1rem;
         }
         .leftpane .content {
-            max-width: 450px;
+          max-width: 450px;
         }
         .rightpane .content {
           max-width: 450px;
@@ -90,15 +89,12 @@ export default function Signin() {
         @media (max-width: 940px) {
           .leftpane {
             display: none;
-  
-            
           }
           .rightpane {
             width: 100%;
           }
         }
-  
       `}</style>
     </>
-  )
+  );
 }

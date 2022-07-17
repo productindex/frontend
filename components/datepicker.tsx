@@ -1,42 +1,46 @@
-import React from 'react';
-interface TextFieldProps  {
-    name?: string;
-    valueType?: string;
-    valuePlaceholder?: string;
-    valueLabel?: string;
-    onChange?: any;
-    value?: string;
-    className?: string;
-    error?: string;
-    optionList?: {value?: string, name?: string, default?: Boolean}[];
-    //TODO: add onBlur
+import React from "react";
+interface TextFieldProps {
+  name?: string;
+  valueType?: string;
+  valuePlaceholder?: string;
+  valueLabel?: string;
+  onChange?: any;
+  value?: string;
+  className?: string;
+  error?: string;
+  optionList?: { value?: string; name?: string; default?: Boolean }[];
+  //TODO: add onBlur
 }
 
-const Datepicker: React.FC<TextFieldProps>  = ({ 
-
-    name,
-    valueType,
-    valuePlaceholder,
-    valueLabel,
-    value,
-    className,
-    onChange,
-    error,
-    optionList,
-    ...props
-    
-
+const Datepicker: React.FC<TextFieldProps> = ({
+  name,
+  valueType,
+  valuePlaceholder,
+  valueLabel,
+  value,
+  className,
+  onChange,
+  error,
+  optionList,
+  ...props
 }) => {
-    return (
-        <div className='form-element'>
-            <label className="label label-regular" htmlFor={name}>{valueLabel}</label><br />
-            <input type="date" id="start" name="trip-start"
-              value = {value}
-              onChange={onChange}
-              className='textbox'/>
+  return (
+    <div className="form-element">
+      <label className="label label-regular" htmlFor={name}>
+        {valueLabel}
+      </label>
+      <br />
+      <input
+        type="date"
+        id="start"
+        name="trip-start"
+        value={value}
+        onChange={onChange}
+        className="textbox"
+      />
 
-            {error && <div className="error-alert">{error}</div>}
-            <style>{`
+      {error && <div className="error-alert">{error}</div>}
+      <style>{`
                   .label {
                     color: #1c1c1c;
                     font-weight: 700;
@@ -86,7 +90,7 @@ const Datepicker: React.FC<TextFieldProps>  = ({
                     width: 100%;
                   }
         `}</style>
-        </div>
-    )
+    </div>
+  );
 };
 export { Datepicker };

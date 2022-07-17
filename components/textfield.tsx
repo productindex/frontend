@@ -1,78 +1,98 @@
-import React, {useState} from 'react';
-interface TextFieldProps  {
-    name?: string;
-    valueType?: string;
-    valuePlaceholder?: string;
-    valueLabel?: string;
-    onChange?: any;
-    value?: string;
-    className?: string;
-    error?: string;
-    show?: boolean;
-    optional?: boolean;
-    disabled?: boolean;
-    onBlur: any;
+import React, { useState } from "react";
+interface TextFieldProps {
+  name?: string;
+  valueType?: string;
+  valuePlaceholder?: string;
+  valueLabel?: string;
+  onChange?: any;
+  value?: string;
+  className?: string;
+  error?: string;
+  show?: boolean;
+  optional?: boolean;
+  disabled?: boolean;
+  onBlur: any;
 }
 
-const TextField: React.FC<TextFieldProps>  = ({ 
-
-    name,
-    valueType,
-    valuePlaceholder,
-    valueLabel,
-    value,
-    className,
-    onChange,
-    error,
-    show,
-    optional,
-    disabled,
-    onBlur,
-    ...props
-    
-
+const TextField: React.FC<TextFieldProps> = ({
+  name,
+  valueType,
+  valuePlaceholder,
+  valueLabel,
+  value,
+  className,
+  onChange,
+  error,
+  show,
+  optional,
+  disabled,
+  onBlur,
+  ...props
 }) => {
-    const [showPassword, setShowPassword] = useState(false)
-    const toggleType = () => {
-      if (valueType == 'password' && showPassword == true) {
-        return 'text'
-      }
-      if (valueType == 'telephone' || valueType == 'tel') return 'tel'
-      return valueType
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleType = () => {
+    if (valueType == "password" && showPassword == true) {
+      return "text";
     }
-    const showPass = () => {
-      setShowPassword(true)
-    }
-    const hidePass = () => {
-      setShowPassword(false)
-    }
+    if (valueType == "telephone" || valueType == "tel") return "tel";
+    return valueType;
+  };
+  const showPass = () => {
+    setShowPassword(true);
+  };
+  const hidePass = () => {
+    setShowPassword(false);
+  };
 
-    const formatTelephone = () => {
-      if (!value) return value;
-      const phoneNumber = value.replace(/[^\d]/g,'');
-      if (phoneNumber.length < 4) return phoneNumber;
-      if (phoneNumber.length < 7) { return `(${phoneNumber.slice(0,3)})` + ' ' + phoneNumber.slice(3) }
-      return `(${phoneNumber.slice(0,3)})` + ' ' + `${phoneNumber.slice(3,6)}` + ' - ' + phoneNumber.slice(6,10) 
-
+  const formatTelephone = () => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, "");
+    if (phoneNumber.length < 4) return phoneNumber;
+    if (phoneNumber.length < 7) {
+      return `(${phoneNumber.slice(0, 3)})` + " " + phoneNumber.slice(3);
     }
     return (
-        <div className='text-container'>
-            <label className={`label label-regular`} htmlFor={name}>{valueLabel} {optional && <span className='label-optional'>(Optional)</span>}</label><br />
-            <input 
-                type={toggleType()} 
-                className={error && onBlur ? `textbox-error textbox ${className}` : `${className} textbox`} 
-                name={name} 
-                placeholder={valuePlaceholder }
-                id={name}
-                onChange={onChange}
-                value={valueType == 'telephone'? formatTelephone() : value}
-                disabled={disabled}
-                onBlur={onBlur}
-                
-            />
-            {valueType=='password' && <button type='button' className='show-hide' onPointerDown={showPass} onPointerUp={hidePass}>{showPassword? 'hide' : 'show'}</button>}
-            {error && onBlur && <div className="error-alert">{error}</div>}
-            <style>{`
+      `(${phoneNumber.slice(0, 3)})` +
+      " " +
+      `${phoneNumber.slice(3, 6)}` +
+      " - " +
+      phoneNumber.slice(6, 10)
+    );
+  };
+  return (
+    <div className="text-container">
+      <label className={`label label-regular`} htmlFor={name}>
+        {valueLabel}{" "}
+        {optional && <span className="label-optional">(Optional)</span>}
+      </label>
+      <br />
+      <input
+        type={toggleType()}
+        className={
+          error && onBlur
+            ? `textbox-error textbox ${className}`
+            : `${className} textbox`
+        }
+        name={name}
+        placeholder={valuePlaceholder}
+        id={name}
+        onChange={onChange}
+        value={valueType == "telephone" ? formatTelephone() : value}
+        disabled={disabled}
+        onBlur={onBlur}
+      />
+      {valueType == "password" && (
+        <button
+          type="button"
+          className="show-hide"
+          onPointerDown={showPass}
+          onPointerUp={hidePass}
+        >
+          {showPassword ? "hide" : "show"}
+        </button>
+      )}
+      {error && onBlur && <div className="error-alert">{error}</div>}
+      <style>{`
                   .label {
                     color: #1c1c1c;
                   }
@@ -125,7 +145,7 @@ const TextField: React.FC<TextFieldProps>  = ({
                   }
 
         `}</style>
-        </div>
-    )
+    </div>
+  );
 };
 export { TextField };
