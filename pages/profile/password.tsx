@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Authentication } from "../../api/auth";
-import { TextField } from "../../components/textfield";
-import NavBar from "../../components/navbar";
-import ProfileSidebar from "../../components/ProfileSidebar";
+import { Authentication } from "@productindex/api/auth";
+import { TextField } from "@productindex/components/formElements/Textfield";
+import NavBar from "@productindex/components/Navigation/Navbar";
+import ProfileSidebar from "@productindex/components/ProfileSidebar";
 
 type Props = {};
 interface ErrObj {

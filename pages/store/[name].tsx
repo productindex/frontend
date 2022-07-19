@@ -1,14 +1,14 @@
-import { ProductCard } from "../../components/cards/ProductCard";
-import { ReviewCard } from "../../components/cards/ReviewCard";
-import { Tag } from "../../components/tag";
+import { ProductCard } from "@productindex/components/cards/ProductCard";
+import { ReviewCard } from "@productindex/components/cards/ReviewCard";
+import { Tag } from "@productindex/components/tag";
 // import SearchBar from "../../components/searchBar";
-import FullNavBar from "../../components/FullNavBar";
+import FullNavBar from "@productindex/components/Navigation/FullNavBar";
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import { EmptyStateMessages } from "../../const/errors";
-import { StoreApi } from "../../api/store";
+import { EmptyStateMessages } from "@productindex/const/errors";
+import { StoreApi } from "@productindex/api/store";
 import { useRouter } from "next/router";
-import { ReviewsApi } from "../../api/review";
+import { ReviewsApi } from "@productindex/api/review";
 
 export default function BusinessStore() {
   const router = useRouter();

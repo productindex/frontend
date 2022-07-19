@@ -1,7 +1,7 @@
 import Head from "next/head";
-import NavBar from "../components/navbar";
+import NavBar from "@productindex/components/Navigation/Navbar";
 import Image from "next/image";
-import SearchBar from "../components/searchBar";
+import SearchBar from "@productindex/components/searchBar";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <header className="header">
         <div className="container">
-          <NavBar dark user={"s"} />
+          <NavBar dark />
           <div className="cta-box">
             <h1 className="header-title">Discovery starts with all</h1>
             {/* <h4 className='header-subtitle'>We are here to fostor community built relationships between clients and businesses.</h4> */}
@@ -104,7 +104,7 @@ export default function Home() {
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         .header {
           background-color: #1c1c1c;
         }

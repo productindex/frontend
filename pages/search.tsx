@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { SearchCard } from "../components/cards/SearchCard";
+import { SearchCard } from "@productindex/components/cards/SearchCard";
 import { useState, useContext, useEffect } from "react";
-import FullNavBar from "../components/FullNavBar";
+import FullNavBar from "@productindex/components/Navigation/FullNavBar";
+import CollapseSearchBar from "@productindex/components/CollapseSearchBar";
 import Head from "next/head";
 
 export default function Search() {
@@ -35,6 +36,7 @@ export default function Search() {
       </Head>
       <div className="product-container">
         <FullNavBar />
+        {/* <CollapseSearchBar /> */}
 
         <div className="results-block">
           {stores.length > 0 ? (

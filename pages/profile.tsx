@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import { Authentication } from '../api/auth';
+import { Authentication } from '@productindex/api/auth';
 import { TextField } from '@productindex/components/formElements/Textfield';
 import { Dropdown } from '@productindex/components/formElements/dropdown';
 
-import NavBar from '../components/navbar';
-import ProfileSidebar from '../components/ProfileSidebar';
+import NavBar from '@productindex/components/Navigation/Navbar';
+import ProfileSidebar from '@productindex/components/ProfileSidebar';
 
 interface ErrObj {
   firstname?: string;

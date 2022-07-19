@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState} from "react";
 import { useRouter } from "next/router";
-import { AvatarMenu } from "./pieces/AvatarMenu";
+import { AvatarMenu } from "@productindex/components/pieces/AvatarMenu";
 
 export default function FullNavBar(props) {
   const [findQuery, setFind] = useState("");
@@ -31,7 +31,6 @@ export default function FullNavBar(props) {
         </div>
         <div className="search-filter">
           <div className={`search-filter-title ${props.dark && "dark"}`}>
-            {" "}
             Looking for:{" "}
           </div>
           <button

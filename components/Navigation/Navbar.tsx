@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AvatarMenu } from "../components/pieces/AvatarMenu";
+import { AvatarMenu } from "@productindex/components/pieces/AvatarMenu";
 export default function NavBar(props) {
   return (
     <div className="navigation">

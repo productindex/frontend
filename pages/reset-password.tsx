@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ResetPasswordForm } from "../components/forms/resetPasswordForm";
+import { ResetPasswordForm } from "@productindex/components/forms/resetPasswordForm";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
