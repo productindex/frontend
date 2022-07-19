@@ -3,13 +3,13 @@ import styles from './elements.module.css'
 type Props = {
     name: string;
     valueLabel: string;
-    isOptional: boolean;
+    isOptional?: boolean;
 }
 
 function Label({name, valueLabel, isOptional}: Props) {
   return (
     <> 
-        <label className={`${styles.label}`} htmlFor={name}>{valueLabel} {isOptional && <span className='label-optional'>(Optional)</span>}</label><br />
+        <label className={`${styles.label}`} htmlFor={name}>{valueLabel} {isOptional && <span>(Optional)</span>}</label><br />
     </>
   )
 }

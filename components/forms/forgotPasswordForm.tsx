@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { TextField } from "@productindex/components/formElements/Textfield"
 import { Authentication } from "../../api/auth";
 import { toasty } from "../../util/toasty";
@@ -7,6 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AuthErrorMessages } from "@productindex/const/errors";
 import { AuthSuccessMessages } from "@productindex/const/success";
+import { FormLink } from "@productindex/components/formElements/FormLink";
 
 const ForgotPasswordForm: React.FC = () => {
   const formik = useFormik({
@@ -29,7 +29,7 @@ const ForgotPasswordForm: React.FC = () => {
   });
 
   return (
-    <div className="form pane-form">
+    <>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           name="email"
@@ -50,17 +50,16 @@ const ForgotPasswordForm: React.FC = () => {
           disabled={formik.isSubmitting}
         />
       </form>
-      <div className="linkbox">
+      <br />
+      <div>
         <p className="body">
-          Remembered?
-          <span className="link-text">
-            <Link href="/signin">
-              <a className="link">Sign In</a>
-            </Link>
+          Remembered? {' '}
+          <span>
+            <FormLink text='Sign In' href='/signin' />
           </span>
         </p>
       </div>
-    </div>
+    </>
   );
 };
 export { ForgotPasswordForm };

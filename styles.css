@@ -186,29 +186,13 @@ hr {
 .leftpane .content {
   max-width: 450px;
 }
-.link {
-  color: #13c8c4;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 500;
-  transition: all 0.4s;
-  text-decoration: none;
-}
-.link:hover {
-  color: #4be0dd;
-}
-.link:active {
-  color: #2eb7be;
-}
+
 .btn-form {
   padding: 12px 24px;
   font-size: 1.125rem;
   font-weight: 700;
   width: 100%;
   border: 0;
-}
-.linkbox {
-  margin: 2rem 0 1rem 0;
 }
 
 @media (max-width: 940px) {

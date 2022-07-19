@@ -1,11 +1,11 @@
 import React from "react";
-import Link from "next/link";
 import { TextField } from "@productindex/components/formElements/Textfield"
 import { useRouter } from "next/router";
 import { AuthErrorMessages } from "../../const/errors";
 import { useFormik } from "formik";
 import * as Yup from "Yup";
 import { User } from "../../api/user";
+import { FormLink } from "@productindex/components/formElements/FormLink";
 
 const SignupForm: React.FC = () => {
   const formik = useFormik({
@@ -57,7 +57,7 @@ const SignupForm: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className="form pane-form">
+    <>
       <form onSubmit={formik.handleSubmit}>
         <div className="double-textbox">
           <TextField
@@ -76,7 +76,7 @@ const SignupForm: React.FC = () => {
             valueType="text"
             valuePlaceholder="Doe"
             valueLabel="Last name"
-            onChange={formik.values.lastname}
+            onChange={formik.handleChange}
             value={formik.values.lastname}
             error={formik.errors.lastname}
             onBlur={formik.handleBlur}
@@ -99,7 +99,7 @@ const SignupForm: React.FC = () => {
           name="password"
           valueType="password"
           valueLabel="Password"
-          onChange={formik.handleBlur}
+          onChange={formik.handleChange}
           value={formik.values.password}
           error={formik.errors.password}
           onBlur={formik.handleBlur}
@@ -108,16 +108,12 @@ const SignupForm: React.FC = () => {
         <div className="legal-box">
           <small>
             Creating an account means that you’ve read and agreed to our{" "}
-            <span className="link-text link">
-              <Link href="/help/terms-of-service">
-                <a className="link">Terms of Service</a>
-              </Link>{" "}
+            <span className="link">
+              <FormLink href={"/help/terms-of-service"} text={"Terms of Service"}/>
             </span>{" "}
             and{" "}
-            <span className="link-text">
-              <Link href="/help/privacy">
-                <a className="link"> Privacy policy </a>
-              </Link>
+            <span>
+              <FormLink href={"/help/privacy"} text={"Privacy policy"}/>
             </span>
           </small>
         </div>
@@ -128,14 +124,13 @@ const SignupForm: React.FC = () => {
           className="btn btn-primary btn-form"
         />
       </form>
-      <div className="linkbox">
+      <div>
+        <br />
         <p>
-          {" "}
           Already a member?{" "}
-          <span className="link-text">
-            <Link href="/signin">
-              <a className="link">Sign In</a>
-            </Link>
+          <span>
+            <FormLink href={"/signin"} text={"Sign In"}/>
+            
           </span>
         </p>
       </div>
@@ -149,7 +144,7 @@ const SignupForm: React.FC = () => {
         }
   
       `}</style>
-    </div>
+    </>
   );
 };
 export { SignupForm };

@@ -47,15 +47,14 @@
   letter-spacing: 1px;
 }
 .showHide {
-  position: absolute;
+  position: relative;
   transform: translateY(-3.4rem);
-  margin-left: auto; /* this was float: right;*/
+  float: right;
   margin-right: 2rem;
   padding: 6px;
   cursor: pointer;
   border: 1.5px solid #E5E9E8;
   text-transform: uppercase;
-  display: inline-block;
   user-select: none;
 }
 .textContainer {
@@ -74,9 +73,29 @@
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
+  user-select: none;
   cursor: pointer;
   font-size: 16px;
   letter-spacing: 1px;
   background-color: #f4f4f4;
   margin: 0.5rem 0.5rem 1rem 0px;
+}
+
+.link {
+  color: #13c8c4;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  transition: all 0.4s;
+  text-decoration: none;
+}
+.link:hover {
+  color: #4be0dd;
+}
+.link:active {
+  color: #2eb7be;
+}
+
+.linkbox {
+  margin: 2rem 0 1rem 0;
 }

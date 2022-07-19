@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Link from "next/link";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import { useRouter } from "next/router";
 import { Authentication } from "../../api/auth";
@@ -8,6 +7,7 @@ import { toasty } from "../../util/toasty";
 import { AuthErrorMessages } from "../../const/errors";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { FormLink } from "../formElements/FormLink";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ export const LoginForm = () => {
   });
 
   return (
-    <div className="form pane-form">
+    <> 
       <form onSubmit={formik.handleSubmit}>
         <TextField
           name="email"
@@ -59,11 +59,10 @@ export const LoginForm = () => {
           onBlur={formik.handleBlur}
           showLabel
         />
-        <div className="forgot">
-          <Link href="/forgot-password">
-            <a className="link">Forgot password?</a>
-          </Link>
+        <div>
+          <FormLink text={'Forgot Password?'} href={'/forgot-password'}/>
         </div>
+        <br />
 
         <input
           type="submit"
@@ -72,25 +71,14 @@ export const LoginForm = () => {
           className="btn btn-primary btn-form"
         />
       </form>
-      <div className="linkbox">
-        <p className="body">
-          {" "}
-          Not a member?{" "}
-          <span className="link-text">
-            <Link href="/signup">
-              <a className="link">Sign Up</a>
-            </Link>
+      <div>
+        <br />
+        <p className="body"> Not a member? { ' ' }
+          <span>
+            <FormLink text={'Sign Up'} href={'/signup'}/>
           </span>
         </p>
       </div>
-
-      <style>{`
-      
-        .forgot {
-          padding: .5rem 0 1rem 0;
-        }
-  
-      `}</style>
-    </div>
+    </>
   );
 };

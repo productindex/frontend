@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import { Dropdown } from "@productindex/components/formElements/dropdown";
-import { Datepicker } from "../datepicker";
+import { Datepicker } from "@productindex/components/formElements/datepicker";
 import { useRouter } from "next/router";
 import { AuthErrorMessages } from "../../const/errors";
 import AuthContext from "../../context/AuthContext";
@@ -13,8 +13,6 @@ import * as Yup from "yup";
 
 const OnboardingForm: React.FC = () => {
   const authCtx = useContext(AuthContext);
-
-  const [birthday, setBirthday] = useState("");
   const router = useRouter();
   const { firstname, lastname, password, email_address } = router.query;
 
@@ -59,7 +57,6 @@ const OnboardingForm: React.FC = () => {
         last_name: lastname,
         email_address,
         password,
-        birthday,
         dob: values.birthday,
         gender: values.gender,
         country: values.country,
@@ -67,6 +64,7 @@ const OnboardingForm: React.FC = () => {
         primary_phone: values.telephone,
         city: values.city,
       };
+      console.log(user)
     
       const res = await Authentication.register(user);
       if (res.success) {
@@ -86,18 +84,20 @@ const OnboardingForm: React.FC = () => {
     }),
   });
   return (
-    <div className="form pane-form">
+    <>
       <form onSubmit={formik.handleSubmit}>
         <div className="double-textbox">
           <Dropdown
             valueLabel="Gender"
             optionList={genderList}
-            onChange={formik.handleChange}
+            onChange={(e)=> formik.setFieldValue('gender', e.target.value)}
+            value={formik.values.gender}
             error={formik.errors.gender}
+            showLabel
           />
           <Datepicker
             valueLabel="Birthday"
-            onChange={(e: any) => setBirthday(e.target.value)}
+            onChange={(e)=> formik.setFieldValue('birthday', e.target.value)}
             error={formik.errors.birthday}
             value={formik.values.birthday}
           />
@@ -105,16 +105,18 @@ const OnboardingForm: React.FC = () => {
         <div className="double-textbox">
           <Dropdown
             valueLabel="Country"
-            optionList={[{ name: "The Bahamas", value: "BAH" }]}
-            onChange={formik.handleChange}
+            optionList={[{ name: "The Bahamas", value: "BAH" }, { name: "Nassau", value: "BAH" }]}
+            onChange={(e)=> formik.setFieldValue('country', e.target.value)}
             error={formik.errors.country}
+            value={formik.values.country}
             showLabel
           />
           <Dropdown
             valueLabel="State/Island"
             optionList={[{ name: "New Providence", value: "NEW PROVIDENCE" }]}
-            onChange={formik.handleChange}
+            onChange={(e)=> formik.setFieldValue('state', e.target.value)}
             error={formik.errors.state}
+            value={formik.values.state}
             showLabel
           />
         </div>
@@ -150,7 +152,7 @@ const OnboardingForm: React.FC = () => {
           className="btn btn-primary btn-form"
         />
       </form>
-    </div>
+    </>
   );
 };
 export { OnboardingForm };

@@ -1,7 +1,4 @@
 import Head from "next/head";
-import NavBar from "../components/navbar";
-import Image from "next/image";
-import { TextField } from "../components/textfield";
 import { ForgotPasswordForm } from "../components/forms/forgotPasswordForm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -48,7 +45,7 @@ export default function ForgotPassword() {
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         .auth-screens {
           min-height: 97vh;
         }

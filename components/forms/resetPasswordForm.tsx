@@ -6,6 +6,7 @@ import { toasty } from "../../util/toasty";
 import { AuthSuccessMessages } from "../../const/success";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AuthErrorMessages } from '../../const/errors';
 
 const ResetPasswordForm: React.FC = () => {
   const router = useRouter();
@@ -30,12 +31,12 @@ const ResetPasswordForm: React.FC = () => {
       }
     },
     validationSchema: Yup.object({
-      password: Yup.string().required("Password is required"),
+      password: Yup.string().required(AuthErrorMessages.passwordRequired),
     }),
   });
 
   return (
-    <div className="form pane-form">
+    <>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           name="password"
@@ -55,7 +56,7 @@ const ResetPasswordForm: React.FC = () => {
           disabled={formik.isSubmitting}
         />
       </form>
-    </div>
+    </>
   );
 };
 export { ResetPasswordForm };
