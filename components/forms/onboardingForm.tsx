@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TextField } from "@productindex/components/formElements/Textfield";
-import { Dropdown } from "@productindex/components/formElements/dropdown";
+import { Dropdown } from "@productindex/components/formElements/Dropdown";
 import { Datepicker } from "@productindex/components/formElements/Datepicker";
 import { useRouter } from "next/router";
 import { AuthErrorMessages } from "../../const/errors";

@@ -60,6 +60,7 @@ export default function Profile(props: Props) {
               value={currentPassword}
               className="med-textbox"
               error={error.firstname}
+              showLabel
             />
             <TextField
               name="new-password"
@@ -69,6 +70,7 @@ export default function Profile(props: Props) {
               value={newPassword}
               className="med-textbox"
               error={error.lastname}
+              showLabel
             />
             <TextField
               name="password-confirm"
@@ -78,6 +80,7 @@ export default function Profile(props: Props) {
               value={newPasswordConfirm}
               className="med-textbox"
               error={error.lastname}
+              showLabel
             />
 
             <input
