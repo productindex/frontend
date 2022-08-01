@@ -4,7 +4,6 @@ import { Dropdown } from '@productindex/components/formElements/Dropdown';
 import { TextArea } from '@productindex/components/formElements/TextArea';
 import { ReviewCard } from '@productindex/components/cards/ReviewCard';
 import { useEffect } from 'react';
-ReviewCard
 
 type Props = {
     open: boolean;

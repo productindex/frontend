@@ -24,35 +24,39 @@ export default function BusinessStore() {
     // setModalOpen(true)
   }
   const loadStoreInfo = async () => {
-    const { data: storeData } = await StoreApi.getStoreInfo(
+    const { data : storeData }  = await StoreApi.getStoreInfo(
       0,
       router.query.name
     );
-    const { data: businessData } = await StoreApi.getBusinessInfo(
-      storeData["business_id"]
-    );
-    const { data: reviewData } = await ReviewsApi.getStoreReviews(
-      storeData["id"]
-    );
-    const { data: inventoryData } = await StoreApi.getStoreInventory(
-      storeData["id"]
-    );
+      if (storeData) {
+        const { data: businessData } = await StoreApi.getBusinessInfo(
+          storeData["business_id"]
+        );
+        const { data: reviewData } = await ReviewsApi.getStoreReviews(
+          storeData["id"]
+        );
+        const { data: inventoryData } = await StoreApi.getStoreInventory(
+          storeData["id"]
+        );
+      
 
-    const hours = storeData["StoreHour"] || null;
-    const contactInfo = storeData["StoreContact"];
 
-    setBusinessName(businessData["business_name"]);
-    setBusinessDescription(businessData["description"]);
-    setTags(buildBusinessTags(businessData["BusinessTags"]));
-    setCategory(businessData["category"]);
-    setCity(storeData["city"]);
-    setCountry(storeData["country"]);
-    setState(storeData["state"]);
-    setReviews(reviewData);
+      const hours = storeData["StoreHour"] || null;
+      const contactInfo = storeData["StoreContact"];
 
-    setStoreData(storeData);
-    setBusinessHours(buildStoreHours(hours));
-    setBusinessContact(buildStoreContact(contactInfo));
+      setBusinessName(businessData["business_name"]);
+      setBusinessDescription(businessData["description"]);
+      setTags(buildBusinessTags(businessData["BusinessTags"]));
+      setCategory(businessData["category"]);
+      setCity(storeData["city"]);
+      setCountry(storeData["country"]);
+      setState(storeData["state"]);
+      setReviews(reviewData);
+
+      setStoreData(storeData);
+      setBusinessHours(buildStoreHours(hours));
+      setBusinessContact(buildStoreContact(contactInfo));
+    }
   };
 
   const [storeData, setStoreData] = useState({});
@@ -221,7 +225,7 @@ export default function BusinessStore() {
                   {reviews.length > 0 ? (
                     reviews.map((review) => (
                       <ReviewCard
-                        reportReview={ reportReview(review['id'])}
+                        // reportReview={() => reportReview(review['id'])}
                         id={review['id']}
                         personName={`${review?.["User"]?.first_name} ${review["User"]?.last_name}`}
                         starRatings={review["rating_number"]}
