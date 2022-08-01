@@ -9,6 +9,9 @@ import { EmptyStateMessages } from "@productindex/const/errors";
 import { StoreApi } from "@productindex/api/store";
 import { useRouter } from "next/router";
 import { ReviewsApi } from "@productindex/api/review";
+import contextTime from '@productindex/util/contextTime'
+import { TextArea } from "@productindex/components/formElements/TextArea";
+import ReportReviewModel from "@productindex/components/modals/ReportReviewModel";
 
 export default function BusinessStore() {
   const router = useRouter();
@@ -16,6 +19,10 @@ export default function BusinessStore() {
     loadStoreInfo();
   }, [router.query.name]);
 
+  const reportReview = (reviewId) => {
+    console.log(reviewId)
+    // setModalOpen(true)
+  }
   const loadStoreInfo = async () => {
     const { data: storeData } = await StoreApi.getStoreInfo(
       0,
@@ -80,6 +87,8 @@ export default function BusinessStore() {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const tagList = tags.toString().replace(/,/g, ", ");
+  const [reviewInput, setReviewInput] = useState('')
+  const [modalOpen, setModalOpen] = useState(false)
 
   const buildStoreHours = (hours) => {
     //TODO: Move this to a util function
@@ -132,6 +141,9 @@ export default function BusinessStore() {
     };
   };
 
+  const submitReview = () => {
+    console.log(reviewInput)
+  }
   const buildBusinessTags = (tags) => {
     const tagList = [];
     for (let i = 0; i < tags.length; i++) {
@@ -195,15 +207,27 @@ export default function BusinessStore() {
                 )}
               </div>
               <section className="review-section">
+                <h5>Add a review</h5>
+                <ReportReviewModel open={modalOpen} />
+                <TextArea 
+                  name={'add-review'}
+                  valuePlaceholder={'Add your first review now'}
+                  onChange={(e)=> {setReviewInput(e.target.value)}}
+                  value={reviewInput}
+                />
+                <button onClick={()=> submitReview()}>Submit review</button>
                 <h4>What people are saying</h4>
                 <div className="review-section-box">
                   {reviews.length > 0 ? (
                     reviews.map((review) => (
                       <ReviewCard
-                        personName={`${review["User"]["first_name"]} ${review["User"]["last_name"]}`}
+                        reportReview={ reportReview(review['id'])}
+                        id={review['id']}
+                        personName={`${review?.["User"]?.first_name} ${review["User"]?.last_name}`}
                         starRatings={review["rating_number"]}
-                        reviewDate="Yesterday at 8pm"
+                        reviewDate={contextTime(review["insert_date"])}
                         comments={review["comment"]}
+                        reportable
                       />
                     ))
                   ) : (
@@ -354,7 +378,7 @@ export default function BusinessStore() {
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         .store-photo {
           background-color: pink;
           height: 250px;

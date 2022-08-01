@@ -99,3 +99,8 @@
 .linkbox {
   margin: 2rem 0 1rem 0;
 }
+
+.textArea {
+  height: 8.2em;
+  resize: none;
+}

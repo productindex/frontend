@@ -19,6 +19,6 @@
       "@productindex/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "util/contextTime.js"],
   "exclude": ["node_modules"]
 }

@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
       <div className={styles.productMeta}>
         <h5>{productName}</h5>
-        <p className="description">{description}</p>
+        <p className={styles.description}>{description}</p>
       </div>
       <div className={styles.productPrice}>
         <h5>{price}</h5>

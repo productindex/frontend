@@ -135,6 +135,8 @@ hr {
   transition: all 0.4s;
   border-radius: 2px;
   cursor: pointer;
+  border: 0;
+  letter-spacing: 1px;
 }
 .btn:hover {
   transform: translateY(-2px);
@@ -168,7 +170,24 @@ hr {
   outline: none;
   box-shadow: 0px 0px 0px 4px #89e3e1;
 }
+.btn-secondary {
+  background-color: #1c1c1c;
+  color: white;
+}
+.btn-secondary:hover {
+  background-color: #5C5C5C;
+}
+.btn-secondary:active {
+  background-color: #000000;
+}
+.btn-secondary:disabled {
+  background-color: #E5E9E8;
+}
+.review-btn {
+  padding: .5rem 2rem;
+  
 
+}
 .rightpane {
   width: 45%;
   padding-right: 5%;

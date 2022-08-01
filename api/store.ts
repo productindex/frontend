@@ -14,7 +14,7 @@ export const StoreApi = {
         return { success: true, data: data };
       })
       .catch((err) => {
-        return { error: err.response.data.error };
+        return { error: err?.response?.data?.error };
       });
   },
   getBusinessInfo: async (businessId) => {
@@ -26,7 +26,7 @@ export const StoreApi = {
         return { success: true, data: data };
       })
       .catch((err) => {
-        return { error: err.response.data.error };
+        return { error: err?.response?.data?.error };
       });
   },
   getStoreInventory: async (storeId) => {
@@ -38,7 +38,7 @@ export const StoreApi = {
         return { success: true, data: data };
       })
       .catch((err) => {
-        return { error: err.response.data.error };
+        return { error: err?.response?.data?.error };
       });
   },
 };

@@ -12,7 +12,7 @@ const Ratings: React.FC<StoreRatingProps> = ({ rating }) => {
         starRatedColor="#3DB2B0"
         numberOfStars={5}
         name="rating"
-        starDimension="24px"
+        starDimension="16px"
         starSpacing="2px"
         starEmptyColor="#E5E9E8"
       />
