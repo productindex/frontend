@@ -10,7 +10,7 @@ interface ReviewCardProps {
   updatedDate? : string;
   id: number;
   reportReview?: any;
-  reportable? : boolean
+  reportable? : boolean;
 }
 const ReviewCard: React.FC<ReviewCardProps> = ({
   personName,
@@ -20,7 +20,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   updatedDate,
   id,
   reportReview,
-  reportable
+  reportable,
 }) => {
   return (
     <div className={styles.reviewCard} key={id}>
@@ -33,11 +33,11 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
 
       <div className={styles.reviewStars}>
         <Ratings rating={starRatings} />
-        {reportable && <div onClick={reportReview} className={styles.link}>Report Review</div>}
       </div>
        <small>Reviewed {reviewDate}</small> 
       {updatedDate && (updatedDate !== reviewDate) && <small> Updated Review</small>}
       <p className={styles.reviewDescription}>{comments}</p>
+      {reportable && <div onClick={reportReview} className={styles.link}>Report Review</div>}
     </div>
   );
 };

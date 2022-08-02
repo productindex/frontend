@@ -34,8 +34,8 @@
     margin-left: auto;
 }
 
-.reviewCard:not(:last-child) {
-    margin-bottom: 1.5rem;
+.reviewCard {
+    margin-top: 1.5rem;
   }
 
 .reviewStars {
@@ -60,4 +60,21 @@ width: 2rem;
 height: 2rem;
 background-color: black;
 border-radius: 1.5rem;
+}
+
+.link {
+    color: #131313;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    transition: all 0.4s;
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+}
+.link:hover {
+    color: #4be0dd;
+}
+.link:active {
+    color: #2eb7be;
 }

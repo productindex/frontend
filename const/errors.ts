@@ -17,7 +17,7 @@ export const AuthErrorMessages = {
 
 export const EmptyStateMessages = {
   contactInfo: "No contact information to share at this time",
-  directionsInfo: "No directions to share at this time",
+  directionsInfo: "No address to share at this time",
   businessStoreName: "Store name is unavailable",
   noProductsOrServices: "No Products or Services listed for this business",
   reviews: "No reviews left as yet. Be the first one!",

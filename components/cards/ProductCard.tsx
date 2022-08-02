@@ -6,15 +6,17 @@ interface ProductCardProps {
   productName: string;
   description: string;
   price?: string;
+  id: number | string;
 }
 const ProductCard: React.FC<ProductCardProps> = ({
   photoSrc,
   productName,
   description,
   price,
+  id
 }) => {
   return (
-    <div className={styles.productCard}>
+    <div className={styles.productCard} key={id}>
       <div className={styles.productPhoto}>
         <img
           alt={productName}

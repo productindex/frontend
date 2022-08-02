@@ -10,20 +10,16 @@ type Props = {
 }
 
 function ReportReviewModel({open}: Props) {
-    const [isOpened, setOpen] = useState(true)
-    useEffect(() => {
-        setOpen(open)
-    }, [open])
    
   return (
   <>
     {   
-    isOpened ? 
+    open ? 
         <div>
-            <div className={styles.modalOverlay} onClick={()=> setOpen(false)}>
+            <div className={styles.modalOverlay} onClick={()=> open=false}>
             </div>
             <div className={styles.modal}>
-            <span className={styles.closeBtn} onClick={()=> setOpen(false)}><img src=' /icons/Cross.svg' /> </span>
+            <span className={styles.closeBtn} onClick={()=> open=false}><img src=' /icons/Cross.svg' /> </span>
                 <div className={styles.modalContent}>
                    
                     <h4>Report a Review</h4>

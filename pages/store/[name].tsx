@@ -1,4 +1,4 @@
-import { ProductCard } from "@productindex/components/cards/ProductCard";
+import ProductListBox from "@productindex/components/Boxes/ProductListBox";
 import { ReviewCard } from "@productindex/components/cards/ReviewCard";
 import { Tag } from "@productindex/components/tag";
 // import SearchBar from "../../components/searchBar";
@@ -12,6 +12,10 @@ import { ReviewsApi } from "@productindex/api/review";
 import contextTime from '@productindex/util/contextTime'
 import { TextArea } from "@productindex/components/formElements/TextArea";
 import ReportReviewModel from "@productindex/components/modals/ReportReviewModel";
+import  BusinessContactCard  from '@productindex/components/cards/BusinessContactCard';
+import BusinessStoreHoursCard from '../../components/cards/BusinessStoreHoursCard';
+import BusinessAddressCard from "@productindex/components/cards/BusinessAddressCard";
+import ReviewsBox from "@productindex/components/Boxes/ReviewsBox";
 
 export default function BusinessStore() {
   const router = useRouter();
@@ -19,10 +23,6 @@ export default function BusinessStore() {
     loadStoreInfo();
   }, [router.query.name]);
 
-  const reportReview = (reviewId) => {
-    console.log(reviewId)
-    // setModalOpen(true)
-  }
   const loadStoreInfo = async () => {
     const { data : storeData }  = await StoreApi.getStoreInfo(
       0,
@@ -39,8 +39,6 @@ export default function BusinessStore() {
           storeData["id"]
         );
       
-
-
       const hours = storeData["StoreHour"] || null;
       const contactInfo = storeData["StoreContact"];
 
@@ -52,102 +50,27 @@ export default function BusinessStore() {
       setCountry(storeData["country"]);
       setState(storeData["state"]);
       setReviews(reviewData);
-
       setStoreData(storeData);
-      setBusinessHours(buildStoreHours(hours));
-      setBusinessContact(buildStoreContact(contactInfo));
+      setBusinessHours(hours);
+      setBusinessContact(contactInfo);
+      setProducts(inventoryData)
     }
   };
 
   const [storeData, setStoreData] = useState({});
-
   const [businessName, setBusinessName] = useState(`No Business Name`);
-  const [tags, setTags] = useState(["Soul Food", "Chicken", "Pizza"]);
-  const [businessDescription, setBusinessDescription] = useState(
-    `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores velit rerum eum aliquid exercitationem nam mollitia, saepe sunt dicta consequatur aut, alias odit. Consequatur repellendus iure rerum odio placeat perspiciatis nisi ab ad, rem magni soluta dolore qui accusantium dolor nihil libero architecto aperiam cumque obcaecati accusamus iusto odit consectetur?`
-  );
-  const [businessHours, setBusinessHours] = useState({
-    Monday: null,
-    Tuesday: null,
-    Wednesday: null,
-    Thursday: null,
-    Friday: null,
-    Saturday: null,
-    Sunday: null,
-  });
+  const [tags, setTags] = useState(["Unavailble", "Unavailble", "Unavailble"]);
+  const [businessDescription, setBusinessDescription] = useState('');
+  const [businessHours, setBusinessHours] = useState(null);
   const [businessContact, setBusinessContact] = useState(null);
-  const [products, setProducts] = useState([
-    {
-      name: "Product name",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse cum unde beatae blanditiis alias officia ullam praesentium eius, explicabo corrupti.",
-      price: "17.00",
-      img: "",
-    },
-  ]);
-  const [reviews, setReviews] = useState([{}]);
+  const [products, setProducts] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [businessCategory, setCategory] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const tagList = tags.toString().replace(/,/g, ", ");
-  const [reviewInput, setReviewInput] = useState('')
-  const [modalOpen, setModalOpen] = useState(false)
 
-  const buildStoreHours = (hours) => {
-    //TODO: Move this to a util function
-    if (!hours)
-      return {
-        Monday: null,
-        Tuesday: null,
-        Wednesday: null,
-        Thursday: null,
-        Friday: null,
-        Saturday: null,
-        Sunday: null,
-      };
-    return {
-      Monday: hours["monday_open"]
-        ? `${hours["monday_open"]} - ${hours["monday_closed"]}`
-        : null,
-      Tuesday: hours["tuesday_open"]
-        ? `${hours["tuesday_open"]} - ${hours["tuesday_closed"]}`
-        : null,
-      Wednesday: hours["wednesday_open"]
-        ? `${hours["wednesday_open"]} - ${hours["wednesday_closed"]}`
-        : null,
-      Thursday: hours["thursday_open"]
-        ? `${hours["thursday_open"]} - ${hours["thursday_closed"]}`
-        : null,
-      Friday: hours["friday_open"]
-        ? `${hours["friday_open"]} - ${hours["friday_closed"]}`
-        : null,
-      Saturday: hours["saturday_open"]
-        ? `${hours["saturday_open"]} - ${hours["saturday_closed"]}`
-        : null,
-      Sunday: hours["sunday_open"]
-        ? `${hours["sunday_open"]} - ${hours["sunday_closed"]}`
-        : null,
-    };
-  };
-
-  const buildStoreContact = (contact) => {
-    //TODO: Move this to a util function
-    return {
-      PhoneOne: contact["phone"],
-      PhoneTwo: contact["phone_2"],
-      PhoneThree: contact["phone_3"],
-      Instagram: contact["instagram_url"],
-      Facebook: contact["facebook_url"],
-      Twitter: contact["twitter_url"],
-      Website: contact["business_website"],
-      Email: contact["email"],
-    };
-  };
-
-  const submitReview = () => {
-    console.log(reviewInput)
-  }
   const buildBusinessTags = (tags) => {
     const tagList = [];
     for (let i = 0; i < tags.length; i++) {
@@ -193,186 +116,16 @@ export default function BusinessStore() {
               <p className="description">
                 {businessDescription ? businessDescription : "-"}
               </p>
-              <div className="product-list">
-                {products.length > 0 ? (
-                  products.map((product) => (
-                    <ProductCard
-                      productName={product.name}
-                      description={product.description}
-                      price={product.price}
-                      photoSrc={product.img}
-                    />
-                  ))
-                ) : (
-                  <div className="empty-box">
-                    {" "}
-                    {EmptyStateMessages.noProductsOrServices}
-                  </div>
-                )}
-              </div>
+              <ProductListBox products={products}/>
               <section className="review-section">
-                <h5>Add a review</h5>
-                <ReportReviewModel open={modalOpen} />
-                <TextArea 
-                  name={'add-review'}
-                  valuePlaceholder={'Add your first review now'}
-                  onChange={(e)=> {setReviewInput(e.target.value)}}
-                  value={reviewInput}
-                />
-                <button onClick={()=> submitReview()}>Submit review</button>
-                <h4>What people are saying</h4>
-                <div className="review-section-box">
-                  {reviews.length > 0 ? (
-                    reviews.map((review) => (
-                      <ReviewCard
-                        // reportReview={() => reportReview(review['id'])}
-                        id={review['id']}
-                        personName={`${review?.["User"]?.first_name} ${review["User"]?.last_name}`}
-                        starRatings={review["rating_number"]}
-                        reviewDate={contextTime(review["insert_date"])}
-                        comments={review["comment"]}
-                        reportable
-                      />
-                    ))
-                  ) : (
-                    <div className="empty-box">
-                      {" "}
-                      {EmptyStateMessages.reviews}
-                    </div>
-                  )}
-                </div>
+              <ReviewsBox reviews={reviews}/>
               </section>
             </div>
 
             <div className="side-bar">
-              <div className="card">
-                <h5>Business Hours</h5>
-                <ul>
-                  <li>
-                    <span className="item-title">Mon:</span>{" "}
-                    {businessHours["Monday"] ? (
-                      businessHours["Monday"]
-                    ) : (
-                      <span className="error">Closed</span>
-                    )}
-                  </li>
-                  <li>
-                    <span className="item-title">Tues:</span>{" "}
-                    {businessHours.Tuesday ? (
-                      businessHours.Tuesday
-                    ) : (
-                      <span className="error">Closed</span>
-                    )}
-                  </li>
-                  <li>
-                    <span className="item-title">Wed:</span>{" "}
-                    {businessHours.Wednesday ? (
-                      businessHours.Wednesday
-                    ) : (
-                      <span className="error">Closed</span>
-                    )}
-                  </li>
-                  <li>
-                    <span className="item-title">Thurs:</span>{" "}
-                    {businessHours.Thursday ? (
-                      businessHours.Thursday
-                    ) : (
-                      <span className="error">Closed</span>
-                    )}
-                  </li>
-                  <li>
-                    <span className="item-title">Fri:</span>{" "}
-                    {businessHours.Friday ? (
-                      businessHours.Friday
-                    ) : (
-                      <span className="error">Closed</span>
-                    )}
-                  </li>
-                  <li>
-                    <span className="item-title">Sat:</span>{" "}
-                    {businessHours.Saturday ? (
-                      businessHours.Saturday
-                    ) : (
-                      <span className="error">Closed</span>
-                    )}
-                  </li>
-                  <li>
-                    <span className="item-title">Sun:</span>{" "}
-                    {businessHours.Sunday ? (
-                      businessHours.Sunday
-                    ) : (
-                      <span className="error">Closed</span>
-                    )}
-                  </li>
-                </ul>
-              </div>
-              <div className="card">
-                <h5>Contact Us</h5>
-                {businessContact ? (
-                  <ul>
-                    {/* TODO: Add social media icons or a link mask (eg. 'Visit page' link) instead of raw links */}
-                    {businessContact.PhoneOne && (
-                      <li>
-                        <span className="item-title">Phone 1: </span>{" "}
-                        {businessContact.PhoneOne}
-                      </li>
-                    )}
-                    {businessContact.PhoneTwo && (
-                      <li>
-                        <span className="item-title">Phone 2: </span>{" "}
-                        {businessContact.PhoneTwo}
-                      </li>
-                    )}
-                    {businessContact.PhoneThree && (
-                      <li>
-                        <span className="item-title">Phone 3: </span>{" "}
-                        {businessContact.PhoneThree}
-                      </li>
-                    )}
-                    {businessContact.Email && (
-                      <li>
-                        <span className="item-title">Email: </span>{" "}
-                        {businessContact.Email}
-                      </li>
-                    )}
-                    {businessContact.Instagram && (
-                      <li>
-                        <span className="item-title">Instagram: </span>{" "}
-                        {businessContact.Instagram}
-                      </li>
-                    )}
-                    {businessContact.Facebook && (
-                      <li>
-                        <span className="item-title">Facebook: </span>{" "}
-                        {businessContact.Facebook}
-                      </li>
-                    )}
-                    {businessContact.Twitter && (
-                      <li>
-                        <span className="item-title">Twitter: </span>{" "}
-                        {businessContact.Twitter}
-                      </li>
-                    )}
-                    {businessContact.Website && (
-                      <li>
-                        <span className="item-title">Website: </span>{" "}
-                        {businessContact.Website}
-                      </li>
-                    )}
-                  </ul>
-                ) : (
-                  <p className="description"> No contact info </p>
-                )}
-              </div>
-              <div className="card">
-                <h5>Address</h5>
-                <p>
-                  {storeData["address_line_1"]
-                    ? storeData["address_line_1"]
-                    : EmptyStateMessages.directionsInfo}
-                </p>
-                {/* <p>{storeData['address_line_2'] ? storeData['address_line_2'] : EmptyStateMessages.directionsInfo}</p> */}
-              </div>
+              <BusinessStoreHoursCard businessStoreHours={businessHours}/>
+              <BusinessContactCard contactInfo={businessContact}/>
+              <BusinessAddressCard addressInfo={storeData}/>
             </div>
           </div>
         </div>
@@ -467,6 +220,9 @@ export default function BusinessStore() {
           height: 200px;
           justify-content: center;
           line-height: 200px;
+        }
+        .yourReview {
+          margin-bottom: 2rem;
         }
       `}</style>
     </>
