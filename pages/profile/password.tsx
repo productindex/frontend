@@ -1,40 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Authentication } from "@productindex/api/auth";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import NavBar from "@productindex/components/Navigation/Navbar";
 import ProfileSidebar from "@productindex/components/ProfileSidebar";
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 
-type Props = {};
-interface ErrObj {
-  firstname?: string;
-  lastname?: string;
-  email?: string;
-  telephone?: string;
-  birthday?: string;
-  gender?: string;
-  country?: string;
-  state?: string;
-  city?: string;
-}
-
-export default function Profile(props: Props) {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+export default function Profile() {
   const [formChange, setFormChange] = useState(true);
-  const [error, setError] = useState<ErrObj>({});
 
-  const user = {
-    current_password: currentPassword,
-    new_password: newPassword,
-    new_password_confirm: newPasswordConfirm,
-  };
+  const formik = useFormik({
+    initialValues: {
+      currentPassword: '',
+      newPassword: '',
+      newPasswordConfirm: ''
+    },
+    onSubmit: async (values) => {
+      console.log(values)
+    },
+    validationSchema: Yup.object({
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(user);
-  };
-
+    })
+    
+  })
   const handleChange = (e) => {
     e.preventDefault();
     if (formChange) {
@@ -51,36 +39,36 @@ export default function Profile(props: Props) {
         <div className="profile">
           <h4>Profile - Update password</h4>
           <hr />
-          <form onSubmit={handleSubmit} onChange={handleChange}>
+          <form onSubmit={formik.handleSubmit} onChange={handleChange}>
             <TextField
-              name="current-password"
+              name="currentPassword"
               valueType="password"
               valueLabel="Current Password"
-              onChange={(e: any) => setCurrentPassword(e.target.value)}
-              value={currentPassword}
-              className="med-textbox"
-              error={error.firstname}
+              onChange={formik.handleChange}
+              value={formik.values.currentPassword}
+              error={formik.errors.currentPassword}
               showLabel
+              onBlur={formik.handleBlur}
             />
             <TextField
-              name="new-password"
+              name="newPassword"
               valueType="password"
               valueLabel="New Password"
-              onChange={(e: any) => setNewPassword(e.target.value)}
-              value={newPassword}
-              className="med-textbox"
-              error={error.lastname}
+              onChange={formik.handleChange}
+              value={formik.values.newPassword}
+              error={formik.errors.newPassword}
               showLabel
+              onBlur={formik.handleBlur}
             />
             <TextField
-              name="password-confirm"
+              name="newPasswordConfirm"
               valueType="password"
               valueLabel="Confirm New Password"
-              onChange={(e: any) => setNewPasswordConfirm(e.target.value)}
-              value={newPasswordConfirm}
-              className="med-textbox"
-              error={error.lastname}
+              onChange={formik.handleChange}
+              value={formik.values.newPasswordConfirm}
+              error={formik.errors.newPasswordConfirm}
               showLabel
+              onBlur={formik.handleBlur}
             />
 
             <input
