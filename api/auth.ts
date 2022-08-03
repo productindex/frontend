@@ -1,3 +1,4 @@
+import { Cookies } from "next/dist/server/web/spec-extension/cookies";
 import { authAxios } from "./axios";
 import { ApiErrorMessage } from "./errorMessages/apiErrorMessages";
 
@@ -34,7 +35,6 @@ export const Authentication = {
       },
     })
       .then(() => {
-        localStorage.setItem("isLoggedIn", "true");
         return { success: true };
       })
       .catch((err) => {
@@ -63,7 +63,6 @@ export const Authentication = {
       },
     })
       .then(() => {
-        localStorage.setItem("isLoggedIn", "true");
         return { success: true };
       })
       .catch((err) => {
@@ -79,8 +78,7 @@ export const Authentication = {
       method: "delete",
       url: `${process.env.BACKEND_URL}/api/auth/logout`,
     })
-      .then(({}) => {
-        localStorage.removeItem("isLoggedIn");
+      .then(() => {
         location.reload();
         return { success: true };
       })

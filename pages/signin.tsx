@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { LoginForm } from "../components/forms/loginForm";
 import { toast } from "react-toastify";
+import Cookies from 'js-cookie'
 
 export default function Signin() {
   const router = useRouter();
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
+    if (Cookies.get('isLoggedIn')) {
       router.replace("/");
     }
   });

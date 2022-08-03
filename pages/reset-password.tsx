@@ -2,11 +2,12 @@ import Head from "next/head";
 import { ResetPasswordForm } from "@productindex/components/forms/resetPasswordForm";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Cookies from 'js-cookie'
 
 export default function ResetPassword() {
   const router = useRouter();
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
+    if (Cookies.get('isLoggedIn')) {
       router.replace("/");
     }
   });

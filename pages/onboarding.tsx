@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export default function Onboarding() {
   const router = useRouter();
   useEffect(() => {
-    if (!localStorage.getItem("isSigningUp")) {
+    if (!sessionStorage.getItem("isSigningUp")) {
       router.replace("/signup");
     }
   }, []);
@@ -45,7 +45,7 @@ export default function Onboarding() {
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         .auth-screens {
           min-height: 97vh;
         }

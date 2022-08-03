@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import { Authentication } from '@productindex/api/auth';
+import { User } from '@productindex/api/user'
 import { TextField } from '@productindex/components/formElements/Textfield';
 import { Dropdown } from '@productindex/components/formElements/Dropdown';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import {AuthSuccessMessages} from '@productindex/const/success'
 
 import NavBar from '@productindex/components/Navigation/Navbar';
 import ProfileSidebar from '@productindex/components/ProfileSidebar';
+import { toasty } from '@productindex/util/toasty';
+import { Datepicker } from '@productindex/components/formElements/Datepicker';
+import { AuthErrorMessages } from "@productindex/const/errors";
 
 //TODO: Add formik to this page
 export default function Profile  () {
@@ -23,9 +28,22 @@ export default function Profile  () {
     },
     onSubmit: async (values) => {
       console.log(values)
+      const user = await User.updateProfile(values)
+      if (user.success) setFormChange(true)
+      toasty('success', AuthSuccessMessages.updatedProfile) //TODO: Add this to a const
     },
     validationSchema: Yup.object({
-
+      birthday: Yup.string().required(AuthErrorMessages.birthdayRequired),
+      country: Yup.string().required(AuthErrorMessages.countryRequired),
+      state: Yup.string().required(AuthErrorMessages.stateRequired),
+      gender: Yup.string().required(AuthErrorMessages.genderRequired),
+      city: Yup.string().required(AuthErrorMessages.cityRequired), 
+      firstname: Yup.string()
+      .required(AuthErrorMessages.firstNameRequired)
+      .min(2, AuthErrorMessages.nameMinCharacters),
+    lastname: Yup.string()
+      .required(AuthErrorMessages.lastNameRequired)
+      .min(2, AuthErrorMessages.nameMinCharacters),     
     }),
     enableReinitialize: true
   })
@@ -33,15 +51,15 @@ export default function Profile  () {
     const loadUserDetails = async () => {
         const { data } = await Authentication.getUserDetails()
         if (data) {
-          formik.values.firstname = data.first_name 
+          console.log(data)
           formik.setFieldValue('firstname', data.first_name)
           formik.setFieldValue('lastname', data.last_name)
           formik.setFieldValue('gender', data.gender)
-          formik.setFieldValue('country', data.country)
-          formik.setFieldValue('state', data.state)
+          formik.setFieldValue('country', data.country) //TODO: Match this with returned value from db
+          formik.setFieldValue('state', data.state) //TODO: Match this with returned value from db
           formik.setFieldValue('telephone', data.primary_phone_contact)
           formik.setFieldValue('city', data.city)
-          formik.setFieldValue('birthday', data.birthday)
+          formik.setFieldValue('birthday', data.date_of_birth) //TODO: Match this with returned value from db
         }
 
     }
@@ -50,15 +68,15 @@ export default function Profile  () {
     const genderList = [
       {
         name: "Male",
-        value: "MALE"
+        value: "Male"
       },
       {
         name: "Female",
-        value: "FEMALE"
+        value: "Female"
       },
       {
         name: "Prefer not to say",
-        value: "UNIDENTIFIED"
+        value: "Unidentified"
       }
     ]
     useEffect(()  => {
@@ -117,6 +135,13 @@ export default function Profile  () {
                     value={formik.values.gender}
                     showLabel
                     
+                  />
+                  <Datepicker
+                    name='birthday'
+                    valueLabel="Birthday"
+                    onChange={(e)=> formik.setFieldValue('birthday', e.target.value)}
+                    error={formik.errors.birthday}
+                    value={formik.values.birthday}
                   />
 
                 <div className="double-textbox">

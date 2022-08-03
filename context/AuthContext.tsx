@@ -1,5 +1,6 @@
 import React, { useState, createContext } from "react";
 import { Authentication } from "../api/auth";
+import Cookies from 'js-cookie'
 
 interface UserAttributes {
   user_id?: number;
@@ -20,7 +21,7 @@ export const AuthContextProvider = (props) => {
   const [userData, setUserData] = useState({});
   const userIsLoggedIn = !(Object.keys(userData).length === 0);
   const loadUserDetails = () => {
-    if (localStorage.getItem("isLoggedIn")) {
+    if (Cookies.get('isLoggedIn')) {
       Authentication.getUserDetails()
         .then((data) => {
           const { id, first_name, last_name, email_address, profile_pic_url } =

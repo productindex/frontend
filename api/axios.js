@@ -2,7 +2,6 @@ const axios = require("axios");
 
 const createInstance = () => {
   if (typeof window !== "undefined") {
-    // Perform localStorage action
     const instance = axios.create({
       baseUrl: `${process.env.BACKEND_URL}`,
       withCredentials: true,

@@ -12,7 +12,9 @@ export const AuthErrorMessages = {
   passwordStringLength: "Password must be at least 8 characters long",
   verificationFailed: "Oops. We couldn't verify your account at this time.",
   emailTaken: "Email address already in use.",
-  invalidEmail: "This doesn't seem like a valid email"
+  invalidEmail: "This doesn't seem like a valid email",
+  nameMinCharacters: "Name must have at least 2 characters",
+  emailInvalidFormat: "This doesn't seem like a valid email"
 };
 
 export const EmptyStateMessages = {

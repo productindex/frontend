@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import { Dropdown } from "@productindex/components/formElements/Dropdown";
 import { Datepicker } from "@productindex/components/formElements/Datepicker";
@@ -68,7 +68,7 @@ const OnboardingForm: React.FC = () => {
     
       const res = await Authentication.register(user);
       if (res.success) {
-        localStorage.removeItem("isSigningUp");
+        sessionStorage.removeItem("isSigningUp");
         await Authentication.login(email_address, password);
         router.replace("/");
         authCtx.loadUser();

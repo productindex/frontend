@@ -17,7 +17,7 @@ const SignupForm: React.FC = () => {
     },
     onSubmit: async (values) => {
       validateForm();
-      localStorage.setItem("isSigningUp", "true");
+      sessionStorage.setItem("isSigningUp", "true");
       router.replace(
         {
           pathname: "/onboarding",
@@ -33,17 +33,17 @@ const SignupForm: React.FC = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("This doesn't seem like a valid email")
-        .required(AuthErrorMessages.emailAddressRequired), // TODO: Add to const
+        .email(AuthErrorMessages.emailInvalidFormat)
+        .required(AuthErrorMessages.emailAddressRequired),
       password: Yup.string()
         .required(AuthErrorMessages.passwordRequired)
         .min(8),
       firstname: Yup.string()
         .required(AuthErrorMessages.firstNameRequired)
-        .min(2, "Name must have at least 2 characters"),
+        .min(2, AuthErrorMessages.nameMinCharacters),
       lastname: Yup.string()
         .required(AuthErrorMessages.lastNameRequired)
-        .min(2, "Name must have at least 2 characters"),
+        .min(2, AuthErrorMessages.nameMinCharacters),
     }),
   });
 
