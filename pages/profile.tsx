@@ -2,53 +2,50 @@ import React, {useEffect, useState} from 'react'
 import { Authentication } from '@productindex/api/auth';
 import { TextField } from '@productindex/components/formElements/Textfield';
 import { Dropdown } from '@productindex/components/formElements/Dropdown';
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 
 import NavBar from '@productindex/components/Navigation/Navbar';
 import ProfileSidebar from '@productindex/components/ProfileSidebar';
 
-interface ErrObj {
-  firstname?: string;
-  lastname?: string;
-  email?: string;
-  telephone?: string;
-  birthday?: string;
-  gender?: string;
-  country?: string;
-  state?: string;
-  city?: string;
-}
 //TODO: Add formik to this page
 export default function Profile  () {
+  const formik = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      telephone: "",
+      birthday: "",
+      gender: "",
+      country: "",
+      state: "",
+      city: ""
+    },
+    onSubmit: async (values) => {
+      console.log(values)
+    },
+    validationSchema: Yup.object({
+
+    }),
+    enableReinitialize: true
+  })
 
     const loadUserDetails = async () => {
         const { data } = await Authentication.getUserDetails()
-        setFirstName(data.first_name)
-        setLastName(data.last_name)
-        setGender(data.gender)
-        setCountry(data.country)
-        setTelephone(data.primary_phone_contact)
-        setCity(data.city)
-        setState(data.state)
-    }
-    const [firstname, setFirstName] = useState('');
-    const [lastname, setLastName] = useState('');
-    const [country, setCountry] = useState('');
-    const [state, setState] = useState('');
-    const [gender, setGender] = useState('');
-    const [error, setError] = useState<ErrObj>({});
-    const [telephone, setTelephone] = useState('');
-    const [city, setCity] = useState('');
-    const [formChange, setFormChange] = useState(true)
+        if (data) {
+          formik.values.firstname = data.first_name 
+          formik.setFieldValue('firstname', data.first_name)
+          formik.setFieldValue('lastname', data.last_name)
+          formik.setFieldValue('gender', data.gender)
+          formik.setFieldValue('country', data.country)
+          formik.setFieldValue('state', data.state)
+          formik.setFieldValue('telephone', data.primary_phone_contact)
+          formik.setFieldValue('city', data.city)
+          formik.setFieldValue('birthday', data.birthday)
+        }
 
-    const user = {
-      first_name: firstname,
-      last_name: lastname,
-      gender,
-      country,
-      state,
-      primary_phone: telephone,
-      city
-  }
+    }
+    const [formChange, setFormChange] = useState(true)
 
     const genderList = [
       {
@@ -68,16 +65,11 @@ export default function Profile  () {
         loadUserDetails()
     }, [])
 
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      console.log(user)
-    }
-
     const handleChange = (e) => {
       e.preventDefault()
       setFormChange(false)
   }
-    
+    //TODO: Add birthday field
 
   return (
   <div className='container'>
@@ -88,7 +80,7 @@ export default function Profile  () {
       <div className='profile'>
               <h4>Profile - Your information</h4>
               <hr />
-              <form onSubmit={handleSubmit} onChange={handleChange}>
+              <form onSubmit={formik.handleSubmit} onChange={handleChange}>
 
                 <div className="double-textbox">
                   <TextField 
@@ -96,11 +88,11 @@ export default function Profile  () {
                         valueType='text'
                         valuePlaceholder='John'
                         valueLabel='First name'
-                        onChange={(e: any)=> setFirstName(e.target.value)}
-                        value={firstname}
-                        error={error.firstname}
+                        onChange={formik.handleChange}
+                        value={formik.values.firstname}
+                        error={formik.errors.firstname}
                         showLabel
-                        onBlur={()=>{return}}
+                        onBlur={formik.handleBlur}
                         
                     />
                     <TextField 
@@ -108,12 +100,11 @@ export default function Profile  () {
                         valueType='text'
                         valuePlaceholder='Doe'
                         valueLabel='Last name'
-                        onChange={(e: any)=> setLastName(e.target.value)}
-                        value={lastname}
-                        className='med-textbox'
-                        error={error.lastname}
+                        onChange={formik.handleChange}
+                        value={formik.values.lastname}
+                        error={formik.errors.lastname}
                         showLabel
-                        onBlur={()=>{return}}
+                        onBlur={formik.handleBlur}
                         
                     />
                 </div>
@@ -121,8 +112,9 @@ export default function Profile  () {
                   <Dropdown 
                     valueLabel='Gender'
                     optionList={genderList}
-                    onChange={(e: any)=> setGender(e.target.value)}
-                    error={error.gender}
+                    onChange={(e)=> formik.setFieldValue('gender', e.target.value)}
+                    error={formik.errors.gender}
+                    value={formik.values.gender}
                     showLabel
                     
                   />
@@ -131,44 +123,45 @@ export default function Profile  () {
                   <Dropdown 
                       valueLabel='Country'
                       optionList={[{name: "The Bahamas", value: "BAH"}]}
-                      onChange={(e: any)=> setCountry(e.target.value)}
-                      error={error.country}
+                      onChange={(e)=> formik.setFieldValue('country', e.target.value)}
+                      error={formik.errors.country}
                       showLabel
+                      value={formik.values.country}
                       
                     />
                   <Dropdown 
                       valueLabel='State/Island'
                       optionList={[{name: "New Providence", value: "NEW PROVIDENCE"}]}
-                      onChange={(e: any)=> setState(e.target.value)}
+                      onChange={(e)=> formik.setFieldValue('state', e.target.value)}
                       showLabel
-                      error={error.state}
+                      error={formik.errors.state}
+                      value={formik.values.state}
                       
                   />
                 </div>
-
+              
                 <TextField 
                       name='city'
                       valueType='text'
                       valueLabel='City'
-                      onChange={(e: any)=> setCity(e.target.value)}
-                      value={city}
-                      error={error.city}
+                      onChange={formik.handleChange}
+                      value={formik.values.city}
+                      error={formik.errors.city}
                       showLabel
-                      onBlur={()=>{return}}
+                      onBlur={formik.handleBlur}
                       
                 />
-
                   <TextField 
                       name='telephone'
                       valueType='telephone'
                       valuePlaceholder='242 123 4567'
                       valueLabel='Phone contact'
                       isOptional
-                      onChange={(e: any)=> setTelephone(e.target.value)}
-                      value={telephone}
+                      onChange={formik.handleChange}
+                      value={formik.values.telephone}
                       className='med-textbox'
-                      error={error.telephone}
-                      onBlur={()=>{return}}
+                      error={formik.errors.telephone}
+                      onBlur={formik.handleBlur}
                       showLabel
                       
                   />
