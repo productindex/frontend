@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { TextField } from "@productindex/components/formElements/Textfield"
 import { Authentication } from "../../api/auth";
 import { toasty } from "../../util/toasty";
@@ -9,15 +9,12 @@ import { AuthSuccessMessages } from "@productindex/const/success";
 import { FormLink } from "@productindex/components/formElements/FormLink";
 
 const ForgotPasswordForm: React.FC = () => {
-  const [isLoading, setLoading] = useState(false)
   const formik = useFormik({
     initialValues: {
       email: "",
     },
     onSubmit: async (values) => {
-      setLoading(true)
       const response = await Authentication.forgotPassword(values.email);
-      setLoading(false)
       if (response.success)
         toasty(
           "success",
@@ -48,9 +45,9 @@ const ForgotPasswordForm: React.FC = () => {
 
         <input
           type="submit"
-          value={isLoading? "Sending reset instructions..." : "Send me reset instructions"}
+          value={formik.isSubmitting? "Sending reset instructions..." : "Send me reset instructions"}
           className="btn btn-primary btn-form"
-          disabled={isLoading}
+          disabled={formik.isSubmitting}
         />
       </form>
       <br />

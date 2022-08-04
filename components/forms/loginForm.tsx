@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import { useRouter } from "next/router";
 import { Authentication } from "../../api/auth";
@@ -12,7 +12,6 @@ import { FormLink } from "../formElements/FormLink";
 export const LoginForm = () => {
   const router = useRouter();
   const authCtx = useContext(AuthContext);
-  const [isLoading, setLoading] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -20,10 +19,8 @@ export const LoginForm = () => {
       password: "",
     },
     onSubmit: async (values) => {
-      setLoading(true)
       const res = await Authentication.login(values.email, values.password);
       toasty("error", res.error);
-      setLoading(false)
 
       if (res.success) {
         router.replace("/");
@@ -69,8 +66,8 @@ export const LoginForm = () => {
 
         <input
           type="submit"
-          value={isLoading? "Signing in..." : "Sign in"}
-          disabled={isLoading}
+          value={formik.isSubmitting? "Signing in.." : "Sign in"}
+          disabled={formik.isSubmitting}
           className="btn btn-primary btn-form"
         />
       </form>
