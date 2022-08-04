@@ -4,13 +4,14 @@ import { useState, useContext, useEffect } from "react";
 import FullNavBar from "@productindex/components/Navigation/FullNavBar";
 import CollapseSearchBar from "@productindex/components/CollapseSearchBar";
 import Head from "next/head";
+import { StoreApi } from "@productindex/api/store";
 
 export default function Search() {
   const router = useRouter();
-  const { find, near, type } = router.query; // To verify password change
+  const { find, near, type } = router.query; 
 
   const testStore = {
-    name: "Solomon's Flavor",
+    business_name: "Solomon's Flavor",
     handle: "sol-flavor",
     imgSrc: "/",
     city: "Nassau",
@@ -26,6 +27,12 @@ export default function Search() {
 
   const [stores, setStores] = useState([testStore]);
 
+  useEffect(()=> {
+    StoreApi.searchForStore(find, near, type).then((data) => {
+      console.log(find, near, type, 'params')
+      setStores(data.data)
+    })
+  }, [find, near, type])
   return (
     <>
       <Head>
@@ -56,7 +63,7 @@ export default function Search() {
         {stores.length > 0 &&
           stores.map((store) => (
             <SearchCard
-              businessName={store.name}
+              businessName={store.business_name}
               slug={`/store/${store.handle}`}
               imageSrc={store.displayImg}
               locationState={store.city}
@@ -70,7 +77,7 @@ export default function Search() {
             />
           ))}
 
-        <style jsx>{`
+        <style>{`
           .results {
             font-weight: 400;
           }

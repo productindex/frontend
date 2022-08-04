@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import { useRouter } from "next/router";
 import { Authentication } from "../../api/auth";
@@ -11,16 +11,19 @@ import { AuthErrorMessages } from '../../const/errors';
 const ResetPasswordForm: React.FC = () => {
   const router = useRouter();
   const { token } = router.query; // To verify password change
+  const [isLoading, setLoading] = useState(false)
 
   const formik = useFormik({
     initialValues: {
       password: "",
     },
     onSubmit: async (values) => {
+      setLoading(true)
       const response = await Authentication.resetPassword(
         token,
         values.password
       );
+      setLoading(false)
       if (!response.success) {
         toasty("error", response.error);
       } else {
@@ -51,9 +54,9 @@ const ResetPasswordForm: React.FC = () => {
 
         <input
           type="submit"
-          value="Reset my password"
+          value={isLoading? "Resetting password..." : "Reset my password"}
           className="btn btn-primary btn-form"
-          disabled={formik.isSubmitting}
+          disabled={isLoading}
         />
       </form>
     </>

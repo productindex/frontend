@@ -41,4 +41,20 @@ export const StoreApi = {
         return { error: err?.response?.data?.error };
       });
   },
+  searchForStore: async (search, searchLocation, searchType) => {
+    return authAxios({
+      method: "get",
+      url: `${process.env.BACKEND_URL}/api/search`,
+      params: {
+        search: search,
+        location: searchLocation,
+        type: searchType
+      }
+    }).then(({ data }) => {
+      return {success: true, data: data}
+    })
+    .catch((err) => {
+      return {error: err?.response?.data?.error}
+    })
+  }
 };

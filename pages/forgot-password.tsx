@@ -2,7 +2,7 @@ import Head from "next/head";
 import { ForgotPasswordForm } from "../components/forms/forgotPasswordForm";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import {Cookies} from 'js-cookie'
+import Cookies from 'js-cookie'
 
 export default function ForgotPassword() {
   const router = useRouter();
