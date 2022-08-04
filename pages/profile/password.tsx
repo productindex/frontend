@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 
 export default function Profile() {
-  const [formChange, setFormChange] = useState(true);
+  const [disableButton, setDisableButton] = useState(true);
 
   const formik = useFormik({
     initialValues: {
@@ -25,8 +25,8 @@ export default function Profile() {
   })
   const handleChange = (e) => {
     e.preventDefault();
-    if (formChange) {
-      setFormChange(false);
+    if (disableButton) {
+      setDisableButton(false);
     }
   };
 
@@ -73,8 +73,8 @@ export default function Profile() {
 
             <input
               type="submit"
-              value="Update Password"
-              disabled={formChange}
+              value={formik.isSubmitting? "Updating password..." : "Update Password"}
+              disabled={disableButton}
               className="btn btn-primary btn-form"
             />
           </form>

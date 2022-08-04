@@ -27,9 +27,8 @@ export default function Profile  () {
       city: ""
     },
     onSubmit: async (values) => {
-      console.log(values)
       const user = await User.updateProfile(values)
-      if (user.success) setFormChange(true)
+      if (user.success) setDisableButton(true)
       toasty('success', AuthSuccessMessages.updatedProfile) //TODO: Add this to a const
     },
     validationSchema: Yup.object({
@@ -63,7 +62,7 @@ export default function Profile  () {
         }
 
     }
-    const [formChange, setFormChange] = useState(true)
+    const [disableButton, setDisableButton] = useState(true)
 
     const genderList = [
       {
@@ -85,7 +84,7 @@ export default function Profile  () {
 
     const handleChange = (e) => {
       e.preventDefault()
-      setFormChange(false)
+      setDisableButton(false)
   }
     //TODO: Add birthday field
 
@@ -191,7 +190,7 @@ export default function Profile  () {
                       
                   />
                  
-                 <input type="submit" value="Save Changes" disabled={formChange} className='btn btn-primary btn-form' />
+                 <input type="submit" value={formik.isSubmitting? "Saving changes..." : "Save Changes"} disabled={disableButton || formik.isSubmitting} className='btn btn-primary btn-form' />
               </form>
               <style>{`
                 .profile {
