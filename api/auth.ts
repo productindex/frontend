@@ -1,4 +1,3 @@
-import { Cookies } from "next/dist/server/web/spec-extension/cookies";
 import { authAxios } from "./axios";
 import { ApiErrorMessage } from "./errorMessages/apiErrorMessages";
 

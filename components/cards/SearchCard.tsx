@@ -12,7 +12,7 @@ interface SearchCardProps {
   openingTime?: string;
   closingTime?: string;
   address?: string;
-  tags?: string[];
+  tags?: [];
   reviewAvg?: number;
   imageSrc?: string;
   reviewCount?: number;
@@ -42,7 +42,7 @@ const SearchCard: React.FC<SearchCardProps> = ({
           </div>
           <div className="card-search-content">
             <small>Business in {`${locationState}, ${locationCountry}`}</small>
-            <h4>{businessName}</h4>
+            <h5>{businessName}</h5>
             <div className="card-search-review mobile-size">
               <div className="search-star-reviews">
                 <div>
@@ -69,7 +69,7 @@ const SearchCard: React.FC<SearchCardProps> = ({
             <div className="tag-box">
               {tags &&
                 tags.length > 0 &&
-                tags.map((tag) => <Tag description={tag} />)}
+                tags.map((tag) => <Tag description={tag.tag} />)}
             </div>
           </div>
           <div className="card-search-review full-size">
@@ -92,7 +92,7 @@ const SearchCard: React.FC<SearchCardProps> = ({
             width: 70%;
           }
           .card-search {
-            height: 10.5rem;
+            height: 9.5rem;
             display: flex;
             border: 1.5px solid #e5e9e8;
             width: 70%;
@@ -102,7 +102,7 @@ const SearchCard: React.FC<SearchCardProps> = ({
             margin-bottom: 0.5rem;
           }
           .card-search:hover {
-            background-color: #fbfbfb;
+            background-color: #F8FAFA;
             border: 1.5px solid transparent;
           }
           .search-photo {

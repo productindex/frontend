@@ -15,7 +15,7 @@ const StoreAvailability: React.FC<StoreAvailabilityProps> = ({
     ).toLocaleTimeString();
 
     if (currentTime < openingTime && oneHourAhead >= openingTime) {
-      return <span className="warning bold">Opening soon</span>;
+      return <span className="warning">Opening soon</span>;
     }
     if (currentTime < closingTime && oneHourAhead >= closingTime) {
       return <span className="warning bold">Closing soon </span>;

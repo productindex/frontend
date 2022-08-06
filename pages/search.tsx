@@ -29,10 +29,9 @@ export default function Search() {
 
   useEffect(()=> {
     StoreApi.searchForStore(find, near, type).then((data) => {
-      console.log(find, near, type, 'params')
       setStores(data.data)
     })
-  }, [find, near, type])
+  }, [])
   return (
     <>
       <Head>
@@ -63,17 +62,17 @@ export default function Search() {
         {stores.length > 0 &&
           stores.map((store) => (
             <SearchCard
-              businessName={store.business_name}
-              slug={`/store/${store.handle}`}
-              imageSrc={store.displayImg}
-              locationState={store.city}
-              locationCountry={store.country}
-              openingTime={store.openingTime}
-              closingTime={store.closingTime}
-              address={store.address}
-              tags={store.tags}
-              reviewAvg={store.avgRatings}
-              reviewCount={store.reviewCount}
+              businessName={store?.Business?.business_name}
+              slug={`/store/${store?.unique_name}`}
+              imageSrc={store?.Business?.profile_pic_url}
+              locationState={store?.state}
+              locationCountry={store?.country}
+              openingTime={store.openingTime} //TODO: Pass in store times and determine opening time within the component
+              closingTime={store.closingTime}// TODO: Pass in store times and determine opening time within the component
+              address={store?.address_line_1}
+              tags={store?.Business?.BusinessTags}
+              reviewAvg={store?.avg_star_rating}
+              reviewCount={store?.review_count}
             />
           ))}
 
@@ -82,7 +81,7 @@ export default function Search() {
             font-weight: 400;
           }
           .results-block {
-            margin: 2rem 0 1rem 0;
+            margin-bottom: 1rem;
           }
           .product-container {
             padding: 0 0.5rem;
