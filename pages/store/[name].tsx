@@ -1,40 +1,99 @@
-import { ProductCard } from "../../components/cards/ProductCard";
-import { ReviewCard } from "../../components/cards/ReviewCard";
-import { Tag } from "../../components/tag";
+import ProductListBox from "@productindex/components/Boxes/ProductListBox";
+import { ReviewCard } from "@productindex/components/cards/ReviewCard";
+import { Tag } from "@productindex/components/tag";
 // import SearchBar from "../../components/searchBar";
-import FullNavBar from "../../components/FullNavBar";
-import { useState } from 'react';
+import FullNavBar from "@productindex/components/Navigation/FullNavBar";
+import { useState, useEffect } from "react";
 import Head from "next/head";
-
+import { EmptyStateMessages } from "@productindex/const/errors";
+import { StoreApi } from "@productindex/api/store";
+import { useRouter } from "next/router";
+import { ReviewsApi } from "@productindex/api/review";
+import contextTime from '@productindex/util/contextTime'
+import { TextArea } from "@productindex/components/formElements/TextArea";
+import ReportReviewModel from "@productindex/components/modals/ReportReviewModel";
+import  BusinessContactCard  from '@productindex/components/cards/BusinessContactCard';
+import BusinessStoreHoursCard from '../../components/cards/BusinessStoreHoursCard';
+import BusinessAddressCard from "@productindex/components/cards/BusinessAddressCard";
+import ReviewsBox from "@productindex/components/Boxes/ReviewsBox";
 
 export default function BusinessStore() {
-  const [businessName, setBusinessName] = useState(`No Business Name`)
-  const [tags, setTags] = useState(['Soul Food', 'Chicken', 'Pizza']);
-  const [businessDescription, setBusinessDescription] = useState(`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores velit rerum eum aliquid exercitationem nam mollitia, saepe sunt dicta consequatur aut, alias odit. Consequatur repellendus iure rerum odio placeat perspiciatis nisi ab ad, rem magni soluta dolore qui accusantium dolor nihil libero architecto aperiam cumque obcaecati accusamus iusto odit consectetur?`)
-  const [businessHours, setBusinessHours] = useState({Monday: '09:00AM - 05:00PM', Tuesday: '09:00AM - 05:00PM', Wednesday: '09:00AM - 05:00PM', Thursday: '09:00AM - 05:00PM', Friday: '09:00AM - 05:00PM', Saturday: '09:00AM - 05:00PM', Sunday: '09:00AM - 05:00PM'})
-  const [businessContact, setBusinessContact] = useState( {phoneOne: '(242) 123 - 4567', phoneTwo: '(242) 123 - 4567', email_address: 'me@example.com'})
-  const [businessDirections, setBusinessDirections] = useState('')
-  const [products, setProducts] = useState([{name: "Product name", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse cum unde beatae blanditiis alias officia ullam praesentium eius, explicabo corrupti.", price: '17.00', img: ''}])
-  const [reviews, setReviews] = useState([{}])
-  const [businessCategory, setCategory] = useState('')
-  const [city, setCity] = useState('')
-  const [country, setCountry] = useState('')
-  const [state, setState] = useState('')
-  const tagList = tags.toString().replace(/,/g, ', ')
+  const router = useRouter();
+  useEffect(() => {
+    loadStoreInfo();
+  }, [router.query.name]);
+
+  const loadStoreInfo = async () => {
+    const { data : storeData }  = await StoreApi.getStoreInfo(
+      0,
+      router.query.name
+    );
+      if (storeData) {
+        const { data: businessData } = await StoreApi.getBusinessInfo(
+          storeData["business_id"]
+        );
+        const { data: reviewData } = await ReviewsApi.getStoreReviews(
+          storeData["id"]
+        );
+        const { data: inventoryData } = await StoreApi.getStoreInventory(
+          storeData["id"]
+        );
+      
+      const hours = storeData["StoreHour"] || null;
+      const contactInfo = storeData["StoreContact"];
+
+      setBusinessName(businessData["business_name"]);
+      setBusinessDescription(businessData["description"]);
+      setTags(buildBusinessTags(businessData["BusinessTags"]));
+      setCategory(businessData["category"]);
+      setCity(storeData["city"]);
+      setCountry(storeData["country"]);
+      setState(storeData["state"]);
+      setReviews(reviewData);
+      setStoreData(storeData);
+      setBusinessHours(hours);
+      setBusinessContact(contactInfo);
+      setProducts(inventoryData)
+    }
+  };
+
+  const [storeData, setStoreData] = useState({});
+  const [businessName, setBusinessName] = useState(`No Business Name`);
+  const [tags, setTags] = useState(["Unavailble", "Unavailble", "Unavailble"]);
+  const [businessDescription, setBusinessDescription] = useState('');
+  const [businessHours, setBusinessHours] = useState(null);
+  const [businessContact, setBusinessContact] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [businessCategory, setCategory] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const tagList = tags.toString().replace(/,/g, ", ");
+
+  const buildBusinessTags = (tags) => {
+    const tagList = [];
+    for (let i = 0; i < tags.length; i++) {
+      tagList.push(tags[i].tag);
+    }
+    return tagList;
+  };
   return (
-    
     <>
       <Head>
-            <title>{businessName} : Product Index </title>
-            <link rel="icon" href="/favicon.ico" />
-            <meta name="robots" content="index, follow" />
-            <meta name="description" content={businessDescription}></meta>
-            <meta name="keywords" content={`${tagList}, ${businessCategory}, ${city}, ${country}, ${state}`}></meta>
-            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{businessName} : Product Index </title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="robots" content="index, follow" />
+        <meta name="description" content={businessDescription}></meta>
+        <meta
+          name="keywords"
+          content={`${tagList}, ${businessCategory}, ${city}, ${country}, ${state}`}
+        ></meta>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <main>
         <div className="product-container">
-          <FullNavBar/>
+          <FullNavBar />
           <div className="photogrid">
             <div className="store-photo">1</div>
             <div className="store-photo">2</div>
@@ -43,63 +102,32 @@ export default function BusinessStore() {
           </div>
           <div className="store-content">
             <div className="main-content">
-              <h4 className='business-name'> {businessName ? businessName : 'No Business Name'}</h4>
+              <h4 className="business-name">
+                {" "}
+                {businessName
+                  ? businessName
+                  : EmptyStateMessages.businessStoreName}
+              </h4>
               <div className="tag-box">
-                {tags.map(tag => <Tag description={tag}/>)}
+                {tags.map((tag) => (
+                  <Tag description={tag} />
+                ))}
               </div>
               <p className="description">
-                {businessDescription ? businessDescription : '-'}
+                {businessDescription ? businessDescription : "-"}
               </p>
-              <div className="product-list">
-              {       
-                products.length > 0 ?    
-                products.map(product => <ProductCard productName={product.name} description={product.description} price={product.price} photoSrc={product.img}/>)
-                
-               : <div className='empty-box'> No Products or Services listed for this business</div>
-              }
-              </div>
+              <ProductListBox products={products}/>
               <section className="review-section">
-                <h4>What people are saying</h4>
-          <div className="review-section-box">
-            {   reviews.length > 0 ?
-              <ReviewCard personName='Tammy Taylor' starRatings={1} reviewDate='Yesterday at 8pm' comments='Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore inventore nulla laudantium nisi consequuntur odit doloribus iste, repudiandae obcaecati! Nam voluptate voluptates tenetur quidem quas magnam tempora pariatur incidunt dignissimos quo in sunt itaque modi obcaecati animi labore hic necessitatibus iure consequuntur placeat esse, rem eum ipsum? Voluptate, excepturi fugiat?'/>
-            : <div className='empty-box'> No Reviews left as yet. Be the first one!</div>
-            }            
-          </div>
-        </section>
-          </div>
+              <ReviewsBox reviews={reviews}/>
+              </section>
+            </div>
 
             <div className="side-bar">
-              <div className="card">
-                <h5>Business Hours</h5>
-                <ul>
-                  <li><span className='item-title'>Mon:</span> {businessHours.Monday ? businessHours.Monday: <span className='error'>Closed</span>}</li>
-                  <li><span className='item-title'>Tues:</span> {businessHours.Tuesday ? businessHours.Tuesday : <span className='error'>Closed</span>}</li>
-                  <li><span className='item-title'>Wed:</span> {businessHours.Wednesday ? businessHours.Wednesday : <span className='error'>Closed</span>}</li>
-                  <li><span className='item-title'>Thurs:</span> {businessHours.Thursday ? businessHours.Thursday : <span className='error'>Closed</span>}</li>
-                  <li><span className='item-title'>Fri:</span> {businessHours.Friday ? businessHours.Friday : <span className='error'>Closed</span>}</li>
-                  <li><span className='item-title'>Sat:</span> {businessHours.Saturday ? businessHours.Saturday : <span className='error'>Closed</span>}</li>
-                  <li><span className='item-title'>Sun:</span> {businessHours.Sunday ? businessHours.Sunday : <span className='error'>Closed</span>}</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h5>Contact Us</h5>
-                {businessContact?            
-                <ul>
-                  {businessContact.phoneOne && <li><span className='item-title'>Phone 1: </span> {businessContact.phoneOne}</li>}
-                  {businessContact.phoneTwo && <li><span className='item-title'>Phone 2: </span> {businessContact.phoneTwo}</li>}
-                  {businessContact.email_address && <li><span className='item-title'>Email: </span> {businessContact.email_address}</li> }
-                </ul> 
-                : <p className='description'> No contact info </p>
-                }
-              </div>
-              <div className="card">
-                <h5>Directions</h5>
-                <p>{businessDirections ? businessDirections : 'No directions available'}</p>
-              </div>
+              <BusinessStoreHoursCard businessStoreHours={businessHours}/>
+              <BusinessContactCard contactInfo={businessContact}/>
+              <BusinessAddressCard addressInfo={storeData}/>
             </div>
           </div>
-
         </div>
       </main>
 
@@ -107,12 +135,11 @@ export default function BusinessStore() {
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         .store-photo {
           background-color: pink;
           height: 250px;
           flex-grow: 1;
-
         }
         .item-title {
           display: inline-block;
@@ -120,7 +147,7 @@ export default function BusinessStore() {
         }
         .photogrid {
           display: flex;
-          column-gap: .5rem;
+          column-gap: 0.5rem;
         }
         .description {
           font-size: 1rem;
@@ -129,7 +156,7 @@ export default function BusinessStore() {
         }
 
         .tag-box {
-          margin-top: .5rem;
+          margin-top: 0.5rem;
         }
         .main-content {
           width: 75%;
@@ -144,8 +171,8 @@ export default function BusinessStore() {
         }
         li {
           list-style: none;
-          margin-top: .25rem;
-          color: #5C5C5C;
+          margin-top: 0.25rem;
+          color: #5c5c5c;
           font-size: 0.875rem;
         }
         .business-contact {
@@ -155,8 +182,8 @@ export default function BusinessStore() {
           width: 25%;
         }
         .side-bar .card {
-          margin-top: .5rem;
-          border: 1.5px solid #E5E9E8;
+          margin-top: 0.5rem;
+          border: 1.5px solid #e5e9e8;
           border-radius: 2px;
           padding: 1rem;
         }
@@ -176,29 +203,28 @@ export default function BusinessStore() {
           margin-top: 1.5rem;
         }
         .review-section {
-          border-top: 1.5px solid #E5E9E8;
+          border-top: 1.5px solid #e5e9e8;
           margin: 2.5rem 0;
           padding-top: 2rem;
-
         }
         .card h5 {
-          margin-bottom: .5rem;
+          margin-bottom: 0.5rem;
         }
         .error {
-          color: #C60000;
+          color: #c60000;
           font-weight: 700;
         }
         .empty-box {
-          background-color: #F4F4F4;
+          background-color: #f4f4f4;
           text-align: center;
           height: 200px;
           justify-content: center;
           line-height: 200px;
-        
         }
-
-
+        .yourReview {
+          margin-bottom: 2rem;
+        }
       `}</style>
     </>
-  )
+  );
 }

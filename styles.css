@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap");
 html,
 body {
   padding: 0;
@@ -9,7 +9,7 @@ body {
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .container {
   padding: 0 0.5rem;
@@ -24,13 +24,11 @@ h1 {
   font-size: 4.375rem;
   font-weight: 900;
   color: #1c1c1c;
-  
 }
 h2 {
   font-size: 3.4375rem;
   font-weight: 700;
   color: #1c1c1c;
-  
 }
 h3 {
   font-size: 1.875rem;
@@ -53,24 +51,30 @@ h6 {
   color: #1c1c1c;
 }
 p {
-  color: #5C5C5C;
+  color: #5c5c5c;
   font-size: 1.125rem;
-  line-height: 1.75rem
+  line-height: 1.75rem;
 }
 small {
-  color: #5C5C5C;
+  color: #5c5c5c;
   font-size: 0.875rem;
 }
 footer {
-  background-color: #F4F4F4;
-  padding: 1rem 5%; 
+  background-color: #f4f4f4;
+  padding: 1rem 5%;
 }
 .double-textbox {
   display: flex;
-  width: 100%;
   column-gap: 1rem;
+  justify-content: space-between;
 }
 
+hr {
+  margin-bottom: 1.25rem;
+  background-color: #a0a0a0;
+  height: 1px;
+  border: none;
+}
 .auth-screens {
   height: 97vh;
   max-height: auto;
@@ -79,28 +83,28 @@ footer {
   height: 100%;
   /* background-color: red; */
 }
-.auth-screens .leftpane  p{
+.auth-screens .leftpane p {
   color: white;
   font-size: 1.2rem;
 }
 .error {
-  color: #C60000;
+  color: #c60000;
 }
 .error-alert {
-  color: #C60000;
+  color: #c60000;
   padding: 4px 8px;
   border-radius: 2px;
-  background-color: #FFDADA;
+  background-color: #ffdada;
   display: inline-block;
   font-weight: 500;
   position: relative;
   top: -0.5rem;
 }
 .success-alert {
-  color: #337E10;
+  color: #337e10;
   padding: 4px 8px;
   border-radius: 2px;
-  background-color: #DAFFE2;
+  background-color: #daffe2;
   display: inline-block;
   font-weight: 500;
   position: relative;
@@ -108,64 +112,82 @@ footer {
 }
 
 .warning {
-    color: #EEB612;
+  color: #eeb612;
 }
 .success {
-  color: #38B935;
+  color: #38b935;
 }
 .bold {
   font-weight: 700;
 }
 
 .side-by-side {
-    display: flex;
-    
-  }
-.logo-box img{
-    width: 162px;
+  display: flex;
+}
+.logo-box img {
+  width: 162px;
 }
 
 .btn {
-    display: inline-block;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.4s;
-    border-radius: 2px;
-    cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.4s;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 0;
+  letter-spacing: 1px;
 }
 .btn:hover {
   transform: translateY(-2px);
 }
 .btn:active {
-  transform: scale(.99);
+  transform: scale(0.99);
 }
 .cta-btn {
   padding: 0.75rem 3.5rem;
   font-size: 1.5rem;
   margin-top: 1rem;
-  
 }
 .btn:disabled {
   transform: translateY(0);
 }
 .btn-primary {
-  background-color: #13C8C4;
+  background-color: #13c8c4;
   color: white;
 }
 .btn-primary:hover {
-  background-color: #4BE0DD;
+  background-color: #4be0dd;
 }
 .btn-primary:active {
-  background-color: #2EB7BE;;
+  background-color: #2eb7be;
 }
 .btn-primary:disabled {
-  background-color: #C9F1E9;
+  background-color: #c6e7e0;
+  cursor: default;
 }
 .btn-primary:focus {
-  outline: none;  
-  box-shadow: 0px 0px 0px 4px #89E3E1;
+  outline: none;
+  box-shadow: 0px 0px 0px 4px #89e3e1;
 }
+.btn-secondary {
+  background-color: #1c1c1c;
+  color: white;
+}
+.btn-secondary:hover {
+  background-color: #5C5C5C;
+}
+.btn-secondary:active {
+  background-color: #000000;
+}
+.btn-secondary:disabled {
+  background-color: #E5E9E8;
+}
+.review-btn {
+  padding: .5rem 2rem;
+  
 
+}
 .rightpane {
   width: 45%;
   padding-right: 5%;
@@ -178,46 +200,26 @@ footer {
 .leftpane {
   width: 55%;
   padding: 10rem 0 5% 5%;
-  background-color: #13C8C4;
-  
+  background-color: #13c8c4;
 }
 .leftpane .content {
   max-width: 450px;
 }
-.link {
-  color: #13C8C4;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 500;
-  transition: all .4s;
-  text-decoration: none;
-}
-.link:hover {
-  color: #4BE0DD;
-}
-.link:active {
-  color: #2EB7BE;
-}
+
 .btn-form {
   padding: 12px 24px;
   font-size: 1.125rem;
-  font-weight: 700;
   width: 100%;
   border: 0;
-}
-.linkbox {
-margin: 2rem 0 1rem 0;
 }
 
 @media (max-width: 940px) {
   .auth-screens {
     height: auto;
-
   }
   .rightpane {
     width: 100%;
     min-height: 100vh;
-
   }
   .rightpane {
     width: 100%;

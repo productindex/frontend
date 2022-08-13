@@ -1,0 +1,40 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1000;
+}
+
+.modal {
+    top: 50%;
+    left: 50%;
+    min-height: 50%;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 1000;
+    position: fixed;
+    border-radius: 8px;
+    padding: 1.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.modalContent {
+    width: 90%;
+}
+
+.exampleBox {
+    background-color: #F4F4F4;
+    border: 1.5px solid #E5E9E8;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+.closeBtn {
+    float: right;
+    cursor: pointer;
+}

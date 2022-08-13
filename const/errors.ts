@@ -1,0 +1,26 @@
+export const AuthErrorMessages = {
+  emailAddressRequired: "Email address is required",
+  passwordRequired: "Password is required",
+  unsuccessful: "This was unsuccessful",
+  birthdayRequired: "Birthday is required",
+  countryRequired: "Country is required",
+  stateRequired: "State is required",
+  cityRequired: "City is required",
+  genderRequired: "Gender is required",
+  firstNameRequired: "First name is required",
+  lastNameRequired: "Last name is required",
+  passwordStringLength: "Password must be at least 8 characters long",
+  verificationFailed: "Oops. We couldn't verify your account at this time.",
+  emailTaken: "Email address already in use.",
+  invalidEmail: "This doesn't seem like a valid email",
+  nameMinCharacters: "Name must have at least 2 characters",
+  emailInvalidFormat: "This doesn't seem like a valid email"
+};
+
+export const EmptyStateMessages = {
+  contactInfo: "No contact information to share at this time",
+  directionsInfo: "No address to share at this time",
+  businessStoreName: "Store name is unavailable",
+  noProductsOrServices: "No Products or Services listed for this business",
+  reviews: "No reviews left as yet. Be the first one!",
+};

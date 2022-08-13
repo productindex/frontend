@@ -1,165 +1,157 @@
-import React, {useState, useEffect} from 'react';
-import Link from 'next/link';
-import { TextField } from '../textfield';
-import * as Joi from 'joi';
-import { Dropdown } from '../dropdown';
-import { Datepicker } from '../datepicker';
-const { joiPassword } = require("joi-password");
-import { useRouter } from 'next/router'
-
+import React, { useEffect, useContext, useState } from "react";
+import { TextField } from "@productindex/components/formElements/Textfield";
+import { Dropdown } from "@productindex/components/formElements/Dropdown";
+import { Datepicker } from "@productindex/components/formElements/Datepicker";
+import { useRouter } from "next/router";
+import { AuthErrorMessages } from "../../const/errors";
+import AuthContext from "../../context/AuthContext";
+import { Authentication } from "../../api/auth";
+import { toasty } from "../../util/toasty";
+import { AuthSuccessMessages } from "../../const/success";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const OnboardingForm: React.FC = () => {
-
-  const [birthday, setBirthday] = useState('');
-  const [country, setCountry] = useState('');
-  const [state, setState] = useState('');
-  const [gender, setGender] = useState('');
-  const [error, setError] = useState<ErrObj>({});
-  const [telephone, setTelephone] = useState('');
-  const [city, setCity] = useState('');
-  const router = useRouter()
-  const { firstname, lastname, password, email_address } = router.query
-  
+  const authCtx = useContext(AuthContext);
+  const router = useRouter();
+  const { firstname, lastname, password, email_address } = router.query;
 
   useEffect(() => {
-    window.addEventListener('beforeunload', alertUser)
+    window.addEventListener("beforeunload", alertUser);
     return () => {
-      window.removeEventListener('beforeunload', alertUser)
-    }
-  }, [])
-  const alertUser = e => {
-    e.preventDefault()
-    e.returnValue = ''
-  }
-  interface ErrObj {
-      email?: string;
-      telephone?: string;
-      birthday?: string;
-      gender?: string;
-      country?: string;
-      state?: string;
-      city?: string;
-  }
-  const schema = Joi.object({
-      birthday: Joi.string().required().messages({'string.empty': 'Birthday is required'}),
-      country: Joi.string().required().messages({'string.empty': 'Country is required'}),
-      state: Joi.string().required().messages({'string.empty': 'State is required'}),
-      gender: Joi.string().required().messages({'string.empty': 'Gender is required'}),
-      city: Joi.string().required().messages({'string.empty': 'Gender is required'})
-  });
-
-  const user = {
-    firstname,
-    lastname,
-    email_address,
-    password,
-    birthday,
-    gender,
-    country,
-    state,
-    telephone,
-    city
-}
-  const validateForm = () => {
-    const errors: any = {};
-    const options = {abortEarly: false}
-    const { error } = schema.validate({birthday: birthday, gender: gender, country: country, state: state, city: city}, options );
-    if (error) {
-      for (let e of error.details) {
-          let message = e.message.replace(/"/g, "")
-          errors[e.path[0]] = message.charAt(0).toUpperCase() + message.slice(1);
-      } 
-      return errors;
-    }
-    return errors
-  }
-  const handleSubmit = (e: any) => {
-      e.preventDefault();
-      const errors = validateForm()
-      setError(errors)
-      if (Object.values(errors).every(x => x === null || x === '')) {
-        console.log(user)
-        // router.push('/')
-      }
-      localStorage.removeItem("isSigningUp");
-      router.push('/')
+      window.removeEventListener("beforeunload", alertUser);
+    };
+  }, []);
+  const alertUser = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
   };
+
   const genderList = [
     {
       name: "Male",
-      value: "MALE"
+      value: "MALE",
     },
     {
       name: "Female",
-      value: "FEMALE"
+      value: "FEMALE",
     },
     {
       name: "Prefer not to say",
-      value: "UNIDENTIFIED"
-    }
-  ]
-  
-      return (
-          <div className='form pane-form'>
-  
-              <form onSubmit={handleSubmit}>
-                <div className="double-textbox">
+      value: "UNIDENTIFIED",
+    },
+  ];
 
-                  <Dropdown 
-                    valueLabel='Gender'
-                    optionList={genderList}
-                    onChange={(e: any)=> setGender(e.target.value)}
-                    error={error.gender}
-                  />
-                  <Datepicker 
-                  valueLabel='Birthday'
-                  onChange={(e: any)=> setBirthday(e.target.value)}
-                  error={error.birthday}
-                  />
-                </div>
-                <div className="double-textbox">
-                  <Dropdown 
-                      valueLabel='Country'
-                      optionList={[{name: "The Bahamas", value: "BAH"}]}
-                      onChange={(e: any)=> setCountry(e.target.value)}
-                      error={error.country}
-                    />
-                  <Dropdown 
-                      valueLabel='State/Island'
-                      optionList={[{name: "New Providence", value: "NEW PROVIDENCE"}]}
-                      onChange={(e: any)=> setState(e.target.value)}
-                      error={error.state}
-                  />
-                </div>
-
-                <TextField 
-                      name='city'
-                      valueType='text'
-                      valueLabel='City'
-                      onChange={(e: any)=> setCity(e.target.value)}
-                      value={city}
-                      className='med-textbox'
-                      error={error.city}
-                />
-
-                  <TextField 
-                      name='telephone'
-                      valueType='telephone'
-                      valuePlaceholder='242 123 4567'
-                      valueLabel='Phone contact'
-                      optional={true}
-                      onChange={(e: any)=> setTelephone(e.target.value)}
-                      value={telephone}
-                      className='med-textbox'
-                      error={error.telephone}
-                  />
-                 
-                 <input type="submit" value="Complete sign up" className='btn btn-primary btn-form' />
-              </form>
-
+  const formik = useFormik({
+    initialValues: {
+      birthday: "",
+      country: "",
+      state: "",
+      gender: "",
+      telephone: "",
+      city: "",
+    },
+    onSubmit: async (values) => {
+      const user = {
+        first_name: firstname,
+        last_name: lastname,
+        email_address,
+        password,
+        dob: values.birthday,
+        gender: values.gender,
+        country: values.country,
+        state: values.state,
+        primary_phone: values.telephone,
+        city: values.city,
+      };
+    
+      const res = await Authentication.register(user);
+      if (res.success) {
+        sessionStorage.removeItem("isSigningUp");
+        await Authentication.login(email_address, password);
+        router.replace("/");
+        authCtx.loadUser();
+        toasty("success", AuthSuccessMessages.onboarding);
+      }
+    },
+    validationSchema: Yup.object({
+      birthday: Yup.string().required(AuthErrorMessages.birthdayRequired),
+      country: Yup.string().required(AuthErrorMessages.countryRequired),
+      state: Yup.string().required(AuthErrorMessages.stateRequired),
+      gender: Yup.string().required(AuthErrorMessages.genderRequired),
+      city: Yup.string().required(AuthErrorMessages.cityRequired),
+    }),
+  });
+  return (
+    <>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="double-textbox">
+          <Dropdown
+            valueLabel="Gender"
+            optionList={genderList}
+            onChange={(e)=> formik.setFieldValue('gender', e.target.value)}
+            value={formik.values.gender}
+            error={formik.errors.gender}
+            showLabel
+          />
+          <Datepicker
+            valueLabel="Birthday"
+            onChange={(e)=> formik.setFieldValue('birthday', e.target.value)}
+            error={formik.errors.birthday}
+            value={formik.values.birthday}
+          />
+        </div>
+        <div className="double-textbox">
+          <Dropdown
+            valueLabel="Country"
+            optionList={[{ name: "The Bahamas", value: "BAH" }, { name: "Nassau", value: "BAH" }]}
+            onChange={(e)=> formik.setFieldValue('country', e.target.value)}
+            error={formik.errors.country}
+            value={formik.values.country}
+            showLabel
+          />
+          <Dropdown
+            valueLabel="State/Island"
+            optionList={[{ name: "New Providence", value: "NEW PROVIDENCE" }]}
+            onChange={(e)=> formik.setFieldValue('state', e.target.value)}
+            error={formik.errors.state}
+            value={formik.values.state}
+            showLabel
+          />
         </div>
 
+        <TextField
+          name="city"
+          valueType="text"
+          valueLabel="City"
+          onChange={formik.handleChange}
+          value={formik.values.city}
+          error={formik.errors.city}
+          onBlur={formik.handleBlur}
+          showLabel
+        />
 
-    )
+        <TextField
+          name="telephone"
+          valueType="telephone"
+          valuePlaceholder="242 123 4567"
+          valueLabel="Phone contact"
+          isOptional
+          onChange={formik.handleChange}
+          value={formik.values.telephone}
+          error={formik.errors.telephone}
+          onBlur={formik.handleBlur}
+          showLabel
+        />
+
+        <input
+          type="submit"
+          value={formik.isSubmitting ? "Signing up.." : "Complete sign up"}
+          disabled={formik.isSubmitting}
+          className="btn btn-primary btn-form"
+        />
+      </form>
+    </>
+  );
 };
-export { OnboardingForm};
+export { OnboardingForm };
