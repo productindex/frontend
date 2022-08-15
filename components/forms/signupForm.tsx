@@ -3,7 +3,7 @@ import { TextField } from "@productindex/components/formElements/Textfield"
 import { useRouter } from "next/router";
 import { AuthErrorMessages } from "../../const/errors";
 import { useFormik } from "formik";
-import * as Yup from "Yup";
+import * as Yup from "yup";
 import { User } from "../../api/user";
 import { FormLink } from "@productindex/components/formElements/FormLink";
 
