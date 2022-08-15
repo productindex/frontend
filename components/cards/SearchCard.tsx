@@ -12,7 +12,7 @@ interface SearchCardProps {
   openingTime?: string;
   closingTime?: string;
   address?: string;
-  tags?: [];
+  tags?: any[];
   reviewAvg?: number;
   imageSrc?: string;
   reviewCount?: number;

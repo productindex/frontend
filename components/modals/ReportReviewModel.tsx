@@ -1,9 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styles from '@productindex/components/modals/modals.module.css'
-import { Dropdown } from '@productindex/components/formElements/Dropdown';
+import { Dropdown } from '@productindex/components/formElements/dropdown';
 import { TextArea } from '@productindex/components/formElements/TextArea';
 import { ReviewCard } from '@productindex/components/cards/ReviewCard';
-import { useEffect } from 'react';
 
 type Props = {
     open: boolean;

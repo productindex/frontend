@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import { SearchCard } from "@productindex/components/cards/SearchCard";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FullNavBar from "@productindex/components/Navigation/FullNavBar";
-import CollapseSearchBar from "@productindex/components/CollapseSearchBar";
 import Head from "next/head";
 import { StoreApi } from "@productindex/api/store";
 
@@ -11,16 +10,21 @@ export default function Search() {
   const { find, near, type } = router.query; 
 
   const testStore = {
-    business_name: "Solomon's Flavor",
-    handle: "sol-flavor",
-    imgSrc: "/",
+    Business: {
+      business_name: "Solomon's Flavor",
+      profile_pic_url: "/",
+      BusinessTags: [{tag: 'Chicken'}]
+    },
+    
+    unique_name: "sol-flavor",
     city: "Nassau",
     country: "The Bahamas",
+    state: "New Providence",
     openingTime: "09:05:00",
     closingTime: "19:05:00",
-    address: "21 Johnson Road, Fox Hill",
-    avgRatings: 4.8,
-    reviewCount: 100,
+    address_line_1: "21 Johnson Road, Fox Hill",
+    avg_star_rating: 4.8,
+    review_count: 100,
     tags: ["Pizza", "Chicken", "Waffles"],
     displayImg: "",
   };

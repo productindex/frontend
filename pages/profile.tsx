@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Authentication } from '@productindex/api/auth';
 import { User } from '@productindex/api/user'
 import { TextField } from '@productindex/components/formElements/Textfield';
-import { Dropdown } from '@productindex/components/formElements/Dropdown';
+import { Dropdown } from '@productindex/components/formElements/dropdown';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import {AuthSuccessMessages} from '@productindex/const/success'

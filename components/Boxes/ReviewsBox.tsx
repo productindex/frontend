@@ -6,7 +6,7 @@ import { EmptyStateMessages } from "@productindex/const/errors";
 import contextTime from '@productindex/util/contextTime'
 import { StoreReview } from '@productindex/types/StoreReview';
 import modalStyles from '@productindex/components/modals/modals.module.css'
-import { Dropdown } from '@productindex/components/formElements/Dropdown';
+import { Dropdown } from '@productindex/components/formElements/dropdown';
 
 type Props = {
     reviews: Array<StoreReview>;
