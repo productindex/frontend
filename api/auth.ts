@@ -11,7 +11,7 @@ export const Authentication = {
   getUserDetails: async (): Promise<ApiResponse> => {
     return authAxios({
       method: "get",
-      url: `${process.env.BACKEND_URL}/api/user`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,
     })
       .then(({ data }) => {
         return { success: true, data: data };
@@ -27,7 +27,7 @@ export const Authentication = {
   login: async (emailAddress, password): Promise<ApiResponse> => {
     return authAxios({
       method: "post",
-      url: `${process.env.BACKEND_URL}/api/auth/login`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
       data: {
         email_address: emailAddress,
         password: password,
@@ -47,7 +47,7 @@ export const Authentication = {
   register: async (user): Promise<ApiResponse> => {
     return authAxios({
       method: "post",
-      url: `${process.env.BACKEND_URL}/api/auth/register`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`,
       data: {
         email_address: user.email_address,
         password: user.password,
@@ -75,7 +75,7 @@ export const Authentication = {
   logout: async (): Promise<ApiResponse> => {
     return authAxios({
       method: "delete",
-      url: `${process.env.BACKEND_URL}/api/auth/logout`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`,
     })
       .then(() => {
         location.reload();
@@ -92,7 +92,7 @@ export const Authentication = {
   forgotPassword: (emailAddress): Promise<ApiResponse> => {
     return authAxios({
       method: "post",
-      url: `${process.env.BACKEND_URL}/api/auth/forgot-password`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/forgot-password`,
       data: {
         email_address: emailAddress,
       },
@@ -108,7 +108,7 @@ export const Authentication = {
   resetPassword: (token, password): Promise<ApiResponse> => {
     return authAxios({
       method: "post",
-      url: `${process.env.BACKEND_URL}/api/auth/reset-password/${token}`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/reset-password/${token}`,
       data: {
         password: password,
         password_confirm: password,
@@ -124,7 +124,7 @@ export const Authentication = {
   verify: (token): Promise<ApiResponse> => {
     return authAxios({
       method: "get",
-      url: `${process.env.BACKEND_URL}/api/auth/verify?token=${token}`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/verify?token=${token}`,
     })
       .then(() => {
         return { success: true };

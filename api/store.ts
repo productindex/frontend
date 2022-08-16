@@ -4,7 +4,7 @@ export const StoreApi = {
   getStoreInfo: async (storeId, storeName) => {
     return authAxios({
       method: "get",
-      url: `${process.env.BACKEND_URL}/api/stores`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stores`,
       params: {
         storeId: storeId || undefined,
         storeName: storeName || undefined,
@@ -20,7 +20,7 @@ export const StoreApi = {
   getBusinessInfo: async (businessId) => {
     return authAxios({
       method: "get",
-      url: `${process.env.BACKEND_URL}/api/business/${businessId}`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/business/${businessId}`,
     })
       .then(({ data }) => {
         return { success: true, data: data };
@@ -32,7 +32,7 @@ export const StoreApi = {
   getStoreInventory: async (storeId) => {
     return authAxios({
       method: "get",
-      url: `${process.env.BACKEND_URL}/api/store/${storeId}/inventory`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/store/${storeId}/inventory`,
     })
       .then(({ data }) => {
         return { success: true, data: data };
@@ -44,7 +44,7 @@ export const StoreApi = {
   searchForStore: async (search, searchLocation, searchType) => {
     return authAxios({
       method: "get",
-      url: `${process.env.BACKEND_URL}/api/search`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/search`,
       params: {
         search: search,
         location: searchLocation,

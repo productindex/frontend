@@ -4,7 +4,7 @@ export const ReviewsApi = {
   getStoreReviews: async (storeId) => {
     return authAxios({
       method: "get",
-      url: `${process.env.BACKEND_URL}/api/reviews`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews`,
       params: {
         storeId: storeId || undefined,
       },

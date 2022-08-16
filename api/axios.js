@@ -3,7 +3,7 @@ const axios = require("axios");
 const createInstance = () => {
   if (typeof window !== "undefined") {
     const instance = axios.create({
-      baseUrl: `${process.env.BACKEND_URL}`,
+      baseUrl: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
       withCredentials: true,
       headers: {
         Accept: "application/json",
@@ -16,7 +16,7 @@ const createInstance = () => {
         const originalRequest = error.config;
         const code = error.response.status;
         if (code == 401) {
-          await instance.post(`${process.env.BACKEND_URL}/api/auth/token`);
+          await instance.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/token`);
           return instance(originalRequest);
         }
         return Promise.reject(error);
