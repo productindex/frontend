@@ -19,7 +19,6 @@ function ReviewsBox({reviews}: Props) {
     const [reportSelectedReview, setReportSelectedReview] = useState(null)
 
     const reportReview = (review : StoreReview) => {
-        console.log(review)
         setReportSelectedReview(review)
         setModalOpen(true)
     }

@@ -12,6 +12,7 @@ import ProfileSidebar from '@productindex/components/ProfileSidebar';
 import { toasty } from '@productindex/util/toasty';
 import { Datepicker } from '@productindex/components/formElements/Datepicker';
 import { AuthErrorMessages } from "@productindex/const/errors";
+import { genderList } from "@productindex/const/dropdownInputs/genderList";
 
 //TODO: Add formik to this page
 export default function Profile  () {
@@ -50,7 +51,6 @@ export default function Profile  () {
     const loadUserDetails = async () => {
         const { data } = await Authentication.getUserDetails()
         if (data) {
-          console.log(data)
           formik.setFieldValue('firstname', data.first_name)
           formik.setFieldValue('lastname', data.last_name)
           formik.setFieldValue('gender', data.gender)
@@ -64,20 +64,6 @@ export default function Profile  () {
     }
     const [disableButton, setDisableButton] = useState(true)
 
-    const genderList = [
-      {
-        name: "Male",
-        value: "Male"
-      },
-      {
-        name: "Female",
-        value: "Female"
-      },
-      {
-        name: "Prefer not to say",
-        value: "Unidentified"
-      }
-    ]
     useEffect(()  => {
         loadUserDetails()
     }, [])

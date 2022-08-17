@@ -15,7 +15,7 @@ export default function Search() {
       profile_pic_url: "/",
       BusinessTags: [{tag: 'Chicken'}]
     },
-    
+    id: 1,
     unique_name: "sol-flavor",
     city: "Nassau",
     country: "The Bahamas",
@@ -49,9 +49,9 @@ export default function Search() {
         {/* <CollapseSearchBar /> */}
 
         <div className="results-block">
-          {stores.length > 0 ? (
+          {stores?.length > 0 ? (
             <h5>
-              Search results: <span className="results">{stores.length}</span>
+              Search results: <span className="results">{stores?.length}</span>
             </h5>
           ) : (
             <h5>
@@ -63,7 +63,7 @@ export default function Search() {
           )}
         </div>
 
-        {stores.length > 0 &&
+        {stores?.length > 0 &&
           stores.map((store) => (
             <SearchCard
               businessName={store?.Business?.business_name}
@@ -77,6 +77,7 @@ export default function Search() {
               tags={store?.Business?.BusinessTags}
               reviewAvg={store?.avg_star_rating}
               reviewCount={store?.review_count}
+              key={store?.id}
             />
           ))}
 

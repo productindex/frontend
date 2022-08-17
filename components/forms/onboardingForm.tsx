@@ -10,6 +10,7 @@ import { toasty } from "../../util/toasty";
 import { AuthSuccessMessages } from "../../const/success";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { genderList } from "@productindex/const/dropdownInputs/genderList";
 
 const OnboardingForm: React.FC = () => {
   const authCtx = useContext(AuthContext);
@@ -27,20 +28,6 @@ const OnboardingForm: React.FC = () => {
     e.returnValue = "";
   };
 
-  const genderList = [
-    {
-      name: "Male",
-      value: "MALE",
-    },
-    {
-      name: "Female",
-      value: "FEMALE",
-    },
-    {
-      name: "Prefer not to say",
-      value: "UNIDENTIFIED",
-    },
-  ];
 
   const formik = useFormik({
     initialValues: {
