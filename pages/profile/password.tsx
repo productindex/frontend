@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import { Authentication } from "@productindex/api/auth";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import NavBar from "@productindex/components/Navigation/Navbar";
 import ProfileSidebar from "@productindex/components/ProfileSidebar";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import { User } from "@productindex/api/user";
+import { toasty } from "@productindex/util/toasty";
+import { AuthErrorMessages } from "@productindex/const/errors";
+import { AuthSuccessMessages } from "@productindex/const/success";
 
 export default function Profile() {
   const [disableButton, setDisableButton] = useState(true);
+  const clearFields = () => {
+    formik.setFieldValue('currentPassword', '')
+    formik.setFieldValue('newPassword', '')
+    formik.setFieldValue('newPasswordConfirm', '')
+    setDisableButton(true)
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -16,10 +25,19 @@ export default function Profile() {
       newPasswordConfirm: ''
     },
     onSubmit: async (values) => {
-      console.log(values)
+      const {error}  = await User.changePassword(values.currentPassword, values.newPassword, values.newPasswordConfirm)
+      if (error) return toasty('error', error)
+      toasty('success', AuthSuccessMessages.successPasswordChange)
+      clearFields()
     },
     validationSchema: Yup.object({
-
+      newPassword: Yup.string()
+        .required(AuthErrorMessages.passwordRequired)
+        .min(8, AuthErrorMessages.passwordStringLength).notOneOf([Yup.ref('currentPassword')], AuthErrorMessages.passwordSameAsCurrent),
+      newPasswordConfirm: Yup.string()
+      .required(AuthErrorMessages.passwordRequired)
+      .min(8, AuthErrorMessages.passwordStringLength)
+      .oneOf([Yup.ref('newPassword')], AuthErrorMessages.passwordsMatchError)
     })
     
   })

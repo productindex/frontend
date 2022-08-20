@@ -2,6 +2,7 @@ import { Avatar } from "../bits/Avatar";
 import Link from "next/link";
 import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import { Authentication } from "@productindex/api/auth";
 
 type Props = {
   user?: any;
@@ -9,9 +10,11 @@ type Props = {
 };
 
 export const AvatarMenu = (props: Props) => {
+  
   const authCtx = useContext(AuthContext);
-  const handleSignOut = () => {
-    authCtx.logout();
+  const handleSignOut = async () => {
+    const { success } = await Authentication.logout()
+    if (success) authCtx.logout();
   };
 
   return (

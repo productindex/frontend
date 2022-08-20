@@ -10,13 +10,14 @@ export default function Search() {
   const { find, near, type } = router.query; 
 
   const testStore = {
+    //TODO: Fix default store
     Business: {
       business_name: "Solomon's Flavor",
       profile_pic_url: "/",
       BusinessTags: [{tag: 'Chicken'}]
     },
     id: 1,
-    unique_name: "sol-flavor",
+    unique_name: "no-name-business",
     city: "Nassau",
     country: "The Bahamas",
     state: "New Providence",

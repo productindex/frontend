@@ -41,5 +41,21 @@ export const User = {
       .catch((err) => {
       return {error: err?.response?.data?.error}
     })
+  },
+  changePassword: async (currentPssword: string, newPassword: string, newPasswordConfirm: string) => {
+    return authAxios({
+      method: "put",
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/password`,
+      data: {
+        current_password: currentPssword,
+        new_password: newPassword,
+        new_password_confirm: newPasswordConfirm
+      }
+    }).then((({ data }) => {
+      return { success: true, data: data };
+    }))
+    .catch((err) => {
+      return {error: err?.response?.data?.error}
+    })
   }
 };

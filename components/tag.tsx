@@ -3,11 +3,12 @@ import { useState } from "react";
 
 interface TagProps {
   description: string;
+  key: number | string;
 }
 
-const Tag: React.FC<TagProps> = ({ description, ...props }) => {
+const Tag: React.FC<TagProps> = ({ description, key, ...props }) => {
   return (
-    <div className="tag">
+    <div className="tag" key={key}>
       {description}
 
       <style jsx>{`

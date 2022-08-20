@@ -14,7 +14,9 @@ export const AuthErrorMessages = {
   emailTaken: "Email address already in use.",
   invalidEmail: "This doesn't seem like a valid email",
   nameMinCharacters: "Name must have at least 2 characters",
-  emailInvalidFormat: "This doesn't seem like a valid email"
+  emailInvalidFormat: "This doesn't seem like a valid email",
+  passwordsMatchError: "Passwords must match",
+  passwordSameAsCurrent: 'New password should be different from current password'
 };
 
 export const EmptyStateMessages = {

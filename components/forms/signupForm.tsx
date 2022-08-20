@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@productindex/components/formElements/Textfield"
 import { useRouter } from "next/router";
-import { AuthErrorMessages } from "../../const/errors";
+import { AuthErrorMessages } from "@productindex/const/errors";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { User } from "../../api/user";
@@ -37,7 +37,7 @@ const SignupForm: React.FC = () => {
         .required(AuthErrorMessages.emailAddressRequired),
       password: Yup.string()
         .required(AuthErrorMessages.passwordRequired)
-        .min(8),
+        .min(8, AuthErrorMessages.passwordStringLength),
       firstname: Yup.string()
         .required(AuthErrorMessages.firstNameRequired)
         .min(2, AuthErrorMessages.nameMinCharacters),

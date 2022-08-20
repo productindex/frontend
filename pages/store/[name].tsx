@@ -110,7 +110,7 @@ export default function BusinessStore() {
               </h4>
               <div className="tag-box">
                 {tags.map((tag) => (
-                  <Tag description={tag} />
+                  <Tag description={tag} key={tag}/>
                 ))}
               </div>
               <p className="description">

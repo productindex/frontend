@@ -16,6 +16,7 @@ interface SearchCardProps {
   reviewAvg?: number;
   imageSrc?: string;
   reviewCount?: number;
+  key?: number;
 }
 const SearchCard: React.FC<SearchCardProps> = ({
   businessName,
@@ -28,11 +29,12 @@ const SearchCard: React.FC<SearchCardProps> = ({
   reviewCount,
   imageSrc,
   openingTime,
-  closingTime
+  closingTime,
+  key
 }) => {
   return (
     <>
-      <Link href={slug}>
+      <Link href={slug} key={key}>
         <a className="card-search">
           <div className="search-photo">
             <img
