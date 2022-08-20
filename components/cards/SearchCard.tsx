@@ -71,7 +71,7 @@ const SearchCard: React.FC<SearchCardProps> = ({
             <div className="tag-box">
               {tags &&
                 tags.length > 0 &&
-                tags.map((tag) => <Tag description={tag.tag} />)}
+                tags.map((tag) => <Tag key={tag.tag} description={tag.tag} />)}
             </div>
           </div>
           <div className="card-search-review full-size">
