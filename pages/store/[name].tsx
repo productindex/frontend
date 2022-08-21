@@ -114,7 +114,7 @@ export default function BusinessStore() {
                 ))}
               </div>
               <p className="description">
-                {businessDescription ? businessDescription : "-"}
+                {businessDescription ? businessDescription : "No description for this business"}
               </p>
               <ProductListBox products={products}/>
               <section className="review-section">

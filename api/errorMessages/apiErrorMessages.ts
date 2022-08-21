@@ -6,4 +6,6 @@ export const ApiErrorMessage = {
   FailedRegistering:
     "Registration is unexpectedly down at this time. Please try again later.",
   FailedLoggedOut: "We tried to log you out but encountered a problem.",
+  FailedRequestingPasswordReset: "We encountered a problem and currently unable to handle that request. Please try again later.",
+  FailedVerification: "Failed to verify account at this time. Please try again later."
 };

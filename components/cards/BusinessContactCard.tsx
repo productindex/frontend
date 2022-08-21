@@ -61,7 +61,7 @@ const BusinessContactCard = ({contactInfo}: Props) => {
           )}
         </ul>
     ) : (
-      <p className="description"> No contact info </p>
+      <small> No contact info </small>
     )}
   </div>
   )

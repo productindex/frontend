@@ -8,29 +8,7 @@ import { StoreApi } from "@productindex/api/store";
 export default function Search() {
   const router = useRouter();
   const { find, near, type } = router.query; 
-
-  const testStore = {
-    //TODO: Fix default store
-    Business: {
-      business_name: "Solomon's Flavor",
-      profile_pic_url: "/",
-      BusinessTags: [{tag: 'Chicken'}]
-    },
-    id: 1,
-    unique_name: "no-name-business",
-    city: "Nassau",
-    country: "The Bahamas",
-    state: "New Providence",
-    openingTime: "09:05:00",
-    closingTime: "19:05:00",
-    address_line_1: "21 Johnson Road, Fox Hill",
-    avg_star_rating: 4.8,
-    review_count: 100,
-    tags: ["Pizza", "Chicken", "Waffles"],
-    displayImg: "",
-  };
-
-  const [stores, setStores] = useState([testStore]);
+  const [stores, setStores] = useState([]);
 
   useEffect(()=> {
     StoreApi.searchForStore(find, near, type).then((data) => {
@@ -72,8 +50,8 @@ export default function Search() {
               imageSrc={store?.Business?.profile_pic_url}
               locationState={store?.state}
               locationCountry={store?.country}
-              openingTime={store.openingTime} //TODO: Pass in store times and determine opening time within the component
-              closingTime={store.closingTime}// TODO: Pass in store times and determine opening time within the component
+              openingTime={store?.openingTime} //TODO: Pass in store times and determine opening time within the component
+              closingTime={store?.closingTime}// TODO: Pass in store times and determine opening time within the component
               address={store?.address_line_1}
               tags={store?.Business?.BusinessTags}
               reviewAvg={store?.avg_star_rating}

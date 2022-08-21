@@ -101,8 +101,12 @@ export const Authentication = {
         //TODO: Must send an email here
         return { success: true };
       })
-      .catch(() => {
-        return { success: true };
+      .catch((err) => {
+        return {
+          error: err.response?.data
+            ? err.response.data.error
+            : ApiErrorMessage.FailedRequestingPasswordReset,
+        }
       });
   },
   resetPassword: (token, password): Promise<ApiResponse> => {
@@ -118,7 +122,11 @@ export const Authentication = {
         return { success: true };
       })
       .catch((err) => {
-        return { error: err.response.data.error };
+        return {
+          error: err.response?.data
+            ? err.response.data.error
+            : ApiErrorMessage.FailedRequestingPasswordReset,
+        }
       });
   },
   verify: (token): Promise<ApiResponse> => {
@@ -130,7 +138,11 @@ export const Authentication = {
         return { success: true };
       })
       .catch((err) => {
-        return { error: err.response.data.error };
+        return {
+          error: err.response?.data
+            ? err.response.data.error
+            : ApiErrorMessage.FailedVerification,
+        }
       });
   },
 };

@@ -4,18 +4,17 @@ import {BusinessStoreHours} from '@productindex/types/BusinessStoreHoursType'
 type Props = {businessStoreHours: BusinessStoreHours}
 
 function BusinessStoreHoursCard({businessStoreHours}: Props) {
-
+  const defaultHours = {
+    Monday: null,
+    Tuesday: null,
+    Wednesday: null,
+    Thursday: null,
+    Friday: null,
+    Saturday: null,
+    Sunday: null,
+  };
   const buildStoreHours = (hours) => {
-    if (!hours)
-      return {
-        Monday: null,
-        Tuesday: null,
-        Wednesday: null,
-        Thursday: null,
-        Friday: null,
-        Saturday: null,
-        Sunday: null,
-      };
+    if (!hours) return defaultHours;
     return {
       Monday: hours["monday_open"]
         ? `${hours["monday_open"]} - ${hours["monday_closed"]}`
@@ -41,15 +40,7 @@ function BusinessStoreHoursCard({businessStoreHours}: Props) {
     };
   };
 
-  const [businessHours, setBusinessHours] = useState({
-    Monday: null,
-    Tuesday: null,
-    Wednesday: null,
-    Thursday: null,
-    Friday: null,
-    Saturday: null,
-    Sunday: null,
-  });
+  const [businessHours, setBusinessHours] = useState(defaultHours);
   
 
   useEffect(()=> {
