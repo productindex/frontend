@@ -43,7 +43,6 @@ export const AuthContextProvider = (props) => {
     return;
   };
   const logoutHandler = async () => {
-    await Authentication.logout();
     setUserData({});
   };
   const contextValue = {
