@@ -82,6 +82,7 @@ const OnboardingForm: React.FC = () => {
             showLabel
           />
           <Datepicker
+            name='birthday'
             valueLabel="Birthday"
             onChange={(e)=> formik.setFieldValue('birthday', e.target.value)}
             error={formik.errors.birthday}
