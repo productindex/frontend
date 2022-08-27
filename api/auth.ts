@@ -1,6 +1,8 @@
 import { authAxios } from "./axios";
 import { ApiErrorMessage } from "./errorMessages/apiErrorMessages";
+import Cookies from 'universal-cookie'
 
+const cookies = new Cookies()
 interface ApiResponse {
   success: boolean;
   data?: any;
@@ -34,6 +36,7 @@ export const Authentication = {
       },
     })
       .then((data) => {
+        cookies.set('isLoggedIn', true)
         return { success: true };
       })
       .catch((err) => {
@@ -80,6 +83,7 @@ export const Authentication = {
       url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`,
     })
       .then(() => {
+        cookies.remove('isLoggedIn')
         location.reload();
         return { success: true };
       })
