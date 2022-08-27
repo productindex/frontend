@@ -75,6 +75,9 @@ hr {
   height: 1px;
   border: none;
 }
+
+input[type="submit"]{ -webkit-appearance: none; }
+
 .auth-screens {
   height: 97vh;
   max-height: auto;

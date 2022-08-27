@@ -56,6 +56,7 @@
   border: 1.5px solid #E5E9E8;
   text-transform: uppercase;
   user-select: none;
+  color: #1c1c1c;
 }
 .textContainer {
   width: 100%;
