@@ -76,7 +76,13 @@ hr {
   border: none;
 }
 
-input[type="submit"]{ -webkit-appearance: none; }
+input[type="submit"], 
+input[type="date"],
+select { 
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+}
 
 .auth-screens {
   height: 97vh;
