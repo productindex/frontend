@@ -33,7 +33,7 @@ export const Authentication = {
         password: password,
       },
     })
-      .then(() => {
+      .then((data) => {
         return { success: true };
       })
       .catch((err) => {
@@ -62,9 +62,11 @@ export const Authentication = {
       },
     })
       .then(() => {
+
         return { success: true };
       })
       .catch((err) => {
+
         return {
           error: err.response?.data
             ? err.response.data.error

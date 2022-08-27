@@ -13,9 +13,13 @@ import { toasty } from '@productindex/util/toasty';
 import { Datepicker } from '@productindex/components/formElements/Datepicker';
 import { AuthErrorMessages } from "@productindex/const/errors";
 import { genderList } from "@productindex/const/dropdownInputs/genderList";
+import { Avatar } from '../components/bits/Avatar';
+import { ImageUpload } from '@productindex/components/formElements/ImageUpload';
 
 //TODO: Add formik to this page
 export default function Profile  () {
+  const [displayPic, setDisplayPic] = useState('')
+  const [uploadedDisplayPic, setUploadedDisplayPic] = useState('')
   const formik = useFormik({
     initialValues: {
       firstname: "",
@@ -51,6 +55,7 @@ export default function Profile  () {
     const loadUserDetails = async () => {
         const { data } = await Authentication.getUserDetails()
         if (data) {
+          setDisplayPic(data.profile_pic_url)
           formik.setFieldValue('firstname', data.first_name)
           formik.setFieldValue('lastname', data.last_name)
           formik.setFieldValue('gender', data.gender)
@@ -74,6 +79,10 @@ export default function Profile  () {
   }
     //TODO: Add birthday field
 
+  const uploadPhoto = (e) => {
+    setUploadedDisplayPic(e.target.files[0].name)
+    console.log(e.target.files[0].name)
+  }
   return (
   <div className='container'>
     <NavBar />
@@ -84,6 +93,8 @@ export default function Profile  () {
               <h4>Profile - Your information</h4>
               <hr />
               <form onSubmit={formik.handleSubmit} onChange={handleChange}>
+                <Avatar displayPhotoSrc={displayPic}/>
+                <ImageUpload name='Change profile picture' valueLabel='Change profile picture' showLabel={false} onChange={uploadPhoto}/>
 
                 <div className="double-textbox">
                   <TextField 
@@ -188,6 +199,7 @@ export default function Profile  () {
                 }
                 form {
                   min-width: 550px;
+                  width: 70%;
               }
               
               `}

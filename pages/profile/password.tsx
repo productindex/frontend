@@ -106,6 +106,7 @@ export default function Profile() {
                 }
                 form {
                     min-width: 550px;
+                    width: 70%;
                 }
               
               `}

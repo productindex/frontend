@@ -1,25 +1,23 @@
 import React from 'react'
-import Lottie from 'react-lottie'
+import Lottie from 'lottie-react'
 import animationData from '../public/lottie/loading-animation.json'
 
 type Props = {}
 
 function LoadingPage({}: Props) {
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-          preserveAspectRatio: "xMidYMid slice"
-        }
-      };
   return (
     <div className='wrapper'>
         <div className="lottie">
             <Lottie 
-                options={defaultOptions}
-                height={100}
-                width={100}
+                loop
+                autoPlay
+                animationData={animationData}
+                style ={{
+                    height: 100,
+                    width: 100,
+                    margin: '0 auto'
+                }} 
+
             />
         </div>
 

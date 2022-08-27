@@ -28,10 +28,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         name={name}
         onChange={onChange}
         id={name}
-        className={style.btnUpload}
+        className={`${style.btnUpload} btnUpload` }
         accept="image/png, image/jpeg, image/jpg"
       />
       <FieldError errorMessage={error}/>
+      <style>{`
+        .btnUpload::before {
+          content: '${name || 'Upload Photo'} ';
+        }
+      `}</style>
     </>
   );
 };
