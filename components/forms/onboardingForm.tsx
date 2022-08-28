@@ -11,6 +11,7 @@ import { AuthSuccessMessages } from "../../const/success";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { genderList } from "@productindex/const/dropdownInputs/genderList";
+import { locationList } from "@productindex/const/dropdownInputs/location";
 
 const OnboardingForm: React.FC = () => {
   const authCtx = useContext(AuthContext);
@@ -92,7 +93,9 @@ const OnboardingForm: React.FC = () => {
         <div className="double-textbox">
           <Dropdown
             valueLabel="Country"
-            optionList={[{ name: "The Bahamas", value: "BAH" }, { name: "Nassau", value: "BAH" }]}
+            optionList={Object.keys(locationList).map((value) => {
+              return {name: value, value: value}
+            })}
             onChange={(e)=> formik.setFieldValue('country', e.target.value)}
             error={formik.errors.country}
             value={formik.values.country}
@@ -100,7 +103,9 @@ const OnboardingForm: React.FC = () => {
           />
           <Dropdown
             valueLabel="State/Island"
-            optionList={[{ name: "New Providence", value: "NEW PROVIDENCE" }]}
+            optionList={locationList[formik.values.country] && locationList[formik.values.country].map((value) => {
+              return {name: value, value: value}
+            })}
             onChange={(e)=> formik.setFieldValue('state', e.target.value)}
             error={formik.errors.state}
             value={formik.values.state}

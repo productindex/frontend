@@ -15,6 +15,7 @@ import { AuthErrorMessages } from "@productindex/const/errors";
 import { genderList } from "@productindex/const/dropdownInputs/genderList";
 import { Avatar } from '../components/bits/Avatar';
 import { ImageUpload } from '@productindex/components/formElements/ImageUpload';
+import { locationList } from "@productindex/const/dropdownInputs/location";
 
 //TODO: Add formik to this page
 export default function Profile  () {
@@ -143,7 +144,9 @@ export default function Profile  () {
                 <div className="double-textbox">
                   <Dropdown 
                       valueLabel='Country'
-                      optionList={[{name: "The Bahamas", value: "BAH"}]}
+                      optionList={Object.keys(locationList).map((value) => {
+                        return {name: value, value: value}
+                      })}
                       onChange={(e)=> formik.setFieldValue('country', e.target.value)}
                       error={formik.errors.country}
                       showLabel
@@ -152,7 +155,9 @@ export default function Profile  () {
                     />
                   <Dropdown 
                       valueLabel='State/Island'
-                      optionList={[{name: "New Providence", value: "NEW PROVIDENCE"}]}
+                      optionList={locationList[formik.values.country] && locationList[formik.values.country].map((value) => {
+                        return {name: value, value: value}
+                      })}
                       onChange={(e)=> formik.setFieldValue('state', e.target.value)}
                       showLabel
                       error={formik.errors.state}
