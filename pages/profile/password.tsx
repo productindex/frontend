@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 export default function Profile() {
   const router = useRouter();
   useEffect(() => {
-    if (Cookies.get('isLoggedIn')) {
+    if (!Cookies.get('isLoggedIn')) {
       router.replace("/");
     }
   });
