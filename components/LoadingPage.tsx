@@ -24,7 +24,7 @@ function LoadingPage({}: Props) {
 
     <style>{`
         .lottie {
-            position: absolute;
+            position: fixed;
             top: 40%;
             left: 0;
             right: 0;
@@ -32,7 +32,7 @@ function LoadingPage({}: Props) {
         }
 
         .wrapper {
-            position: absolute;
+            position: fixed;
             background-color: white;
             width: 100%;
             height: 100%;

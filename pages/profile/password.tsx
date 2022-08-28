@@ -55,8 +55,11 @@ export default function Profile() {
       <div className="side-by-side">
         <ProfileSidebar />
         <div className="profile">
-          <h4>Profile - Update password</h4>
-          <hr />
+          <div className="form"></div>
+            <div className="form-header">
+              <h4>Profile - Update password</h4>
+              <hr />
+            </div>
           <form onSubmit={formik.handleSubmit} onChange={handleChange}>
             <TextField
               name="currentPassword"
@@ -96,23 +99,39 @@ export default function Profile() {
               className="btn btn-primary btn-form"
             />
           </form>
+          </div>
           <style>
             {`
                 .profile {
-                  margin-left: 10%;
+                  width: 100%
                 }
+
                 h4 {
-                    margin-bottom: .75rem;
+                  margin-bottom: .75rem;
                 }
-                form {
-                    min-width: 550px;
-                    width: 70%;
+                form,
+                .form-header {
+                  max-width: 450px;
+                  width: 70%;
+                  margin: 0 auto;
+                }
+                @media (max-width: 940px) {
+                  .side-by-side {
+                    flex-direction: column;
+                  }
+
+                form,
+                .form-header {
+                  width: 100%
+                }
+                  .rightpane {
+                    width: 100%;
+                  }
                 }
               
               `}
           </style>
         </div>
       </div>
-    </div>
   );
 }

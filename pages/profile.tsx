@@ -91,8 +91,12 @@ export default function Profile  () {
     <div className="side-by-side">
       <ProfileSidebar />
       <div className='profile'>
-              <h4>Profile - Your information</h4>
-              <hr />
+        <div className="form">
+              <div className="form-header">
+                <h4>Profile - Your information</h4>
+                <hr />
+              </div>
+
               <form onSubmit={formik.handleSubmit} onChange={handleChange}>
                 <Avatar displayPhotoSrc={displayPic}/>
                 <ImageUpload name='Change profile picture' valueLabel='Change profile picture' showLabel={false} onChange={uploadPhoto}/>
@@ -193,19 +197,36 @@ export default function Profile  () {
                   />
                  
                  <input type="submit" value={formik.isSubmitting? "Saving changes..." : "Save Changes"} disabled={disableButton || formik.isSubmitting} className='btn btn-primary btn-form' />
-              </form>
+              </form>   
+        </div>
+
               <style>{`
                 .profile {
-                  margin-left: 10%;
+                  width: 100%
                 }
 
                 h4 {
                   margin-bottom: .75rem;
                 }
-                form {
-                  min-width: 550px;
+                form,
+                .form-header {
+                  max-width: 450px;
                   width: 70%;
-              }
+                  margin: 0 auto;
+                }
+                @media (max-width: 940px) {
+                  .side-by-side {
+                    flex-direction: column;
+                  }
+
+                form,
+                .form-header {
+                  width: 100%
+                }
+                  .rightpane {
+                    width: 100%;
+                  }
+                }
               
               `}
                 
