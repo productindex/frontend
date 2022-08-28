@@ -20,6 +20,8 @@ export default function Signin() {
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
+    <body>
+      
 
       <main className="auth-screens">
         <div className="side-by-side">
@@ -48,8 +50,9 @@ export default function Signin() {
       <footer>
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
+      </body>
 
-      <style jsx>{`
+      <style>{`
         .logo-box {
           margin-bottom: 1.5rem;
         }

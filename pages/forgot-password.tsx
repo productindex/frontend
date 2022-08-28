@@ -18,6 +18,7 @@ export default function ForgotPassword() {
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
+      <body>
       <main className="auth-screens">
         <div className="side-by-side">
           <div className="leftpane">
@@ -45,11 +46,9 @@ export default function ForgotPassword() {
       <footer>
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
-
+      </body>
       <style>{`
-        .auth-screens {
-          min-height: 97vh;
-        }
+
         .auth-screens .side-by-side {
           height: 100%;
         }

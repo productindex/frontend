@@ -18,6 +18,7 @@ export default function ResetPassword() {
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
+      <body>
       <main className="auth-screens">
         <div className="side-by-side">
           <div className="leftpane">
@@ -46,11 +47,9 @@ export default function ResetPassword() {
       <footer>
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
+      </body>
 
-      <style jsx>{`
-        .auth-screens {
-          min-height: 97vh;
-        }
+      <style>{`
         .auth-screens .side-by-side {
           height: 100%;
         }

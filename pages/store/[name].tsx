@@ -91,6 +91,9 @@ export default function BusinessStore() {
         ></meta>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
+      <body>
+        
+      
       <main>
         <div className="product-container">
           <FullNavBar />
@@ -130,10 +133,12 @@ export default function BusinessStore() {
           </div>
         </div>
       </main>
+      
 
       <footer>
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
+      </body>
 
       <style>{`
         .store-photo {

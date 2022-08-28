@@ -16,6 +16,7 @@ import { genderList } from "@productindex/const/dropdownInputs/genderList";
 import { Avatar } from '../components/bits/Avatar';
 import { ImageUpload } from '@productindex/components/formElements/ImageUpload';
 import { locationList } from "@productindex/const/dropdownInputs/location";
+import Head from "next/head";
 
 //TODO: Add formik to this page
 export default function Profile  () {
@@ -85,6 +86,16 @@ export default function Profile  () {
     console.log(e.target.files[0].name)
   }
   return (
+    <>
+      <Head>
+        <title>Product Index: Your profile details</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      </Head>
+      <body>
+        
+
+  <main>
   <div className='container'>
     <NavBar />
     <br />
@@ -92,149 +103,159 @@ export default function Profile  () {
       <ProfileSidebar />
       <div className='profile'>
         <div className="form">
-              <div className="form-header">
-                <h4>Profile - Your information</h4>
-                <hr />
-              </div>
+          <div className="form-header">
+            <h4>Profile - Your information</h4>
+            <hr />
+          </div>
 
-              <form onSubmit={formik.handleSubmit} onChange={handleChange}>
-                <Avatar displayPhotoSrc={displayPic}/>
-                <ImageUpload name='Change profile picture' valueLabel='Change profile picture' showLabel={false} onChange={uploadPhoto}/>
+          <form onSubmit={formik.handleSubmit} onChange={handleChange}>
+            <Avatar displayPhotoSrc={displayPic}/>
+            <ImageUpload name='Change profile picture' valueLabel='Change profile picture' showLabel={false} onChange={uploadPhoto}/>
 
-                <div className="double-textbox">
-                  <TextField 
-                        name='firstname'
-                        valueType='text'
-                        valuePlaceholder='John'
-                        valueLabel='First name'
-                        onChange={formik.handleChange}
-                        value={formik.values.firstname}
-                        error={formik.errors.firstname}
-                        showLabel
-                        onBlur={formik.handleBlur}
-                        
-                    />
-                    <TextField 
-                        name='lastname'
-                        valueType='text'
-                        valuePlaceholder='Doe'
-                        valueLabel='Last name'
-                        onChange={formik.handleChange}
-                        value={formik.values.lastname}
-                        error={formik.errors.lastname}
-                        showLabel
-                        onBlur={formik.handleBlur}
-                        
-                    />
-                </div>
-  
-                  <Dropdown 
-                    valueLabel='Gender'
-                    optionList={genderList}
-                    onChange={(e)=> formik.setFieldValue('gender', e.target.value)}
-                    error={formik.errors.gender}
-                    value={formik.values.gender}
+            <div className="double-textbox">
+              <TextField 
+                    name='firstname'
+                    valueType='text'
+                    valuePlaceholder='John'
+                    valueLabel='First name'
+                    onChange={formik.handleChange}
+                    value={formik.values.firstname}
+                    error={formik.errors.firstname}
                     showLabel
+                    onBlur={formik.handleBlur}
                     
-                  />
-                  <Datepicker
-                    name='birthday'
-                    valueLabel="Birthday"
-                    onChange={(e)=> formik.setFieldValue('birthday', e.target.value)}
-                    error={formik.errors.birthday}
-                    value={formik.values.birthday}
-                  />
-
-                <div className="double-textbox">
-                  <Dropdown 
-                      valueLabel='Country'
-                      optionList={Object.keys(locationList).map((value) => {
-                        return {name: value, value: value}
-                      })}
-                      onChange={(e)=> formik.setFieldValue('country', e.target.value)}
-                      error={formik.errors.country}
-                      showLabel
-                      value={formik.values.country}
-                      
-                    />
-                  <Dropdown 
-                      valueLabel='State/Island'
-                      optionList={locationList[formik.values.country] && locationList[formik.values.country].map((value) => {
-                        return {name: value, value: value}
-                      })}
-                      onChange={(e)=> formik.setFieldValue('state', e.target.value)}
-                      showLabel
-                      error={formik.errors.state}
-                      value={formik.values.state}
-                      
-                  />
-                </div>
-              
-                <TextField 
-                      name='city'
-                      valueType='text'
-                      valueLabel='City'
-                      onChange={formik.handleChange}
-                      value={formik.values.city}
-                      error={formik.errors.city}
-                      showLabel
-                      onBlur={formik.handleBlur}
-                      
                 />
-                  <TextField 
-                      name='telephone'
-                      valueType='telephone'
-                      valuePlaceholder='242 123 4567'
-                      valueLabel='Phone contact'
-                      isOptional
-                      onChange={formik.handleChange}
-                      value={formik.values.telephone}
-                      className='med-textbox'
-                      error={formik.errors.telephone}
-                      onBlur={formik.handleBlur}
-                      showLabel
-                      
-                  />
-                 
-                 <input type="submit" value={formik.isSubmitting? "Saving changes..." : "Save Changes"} disabled={disableButton || formik.isSubmitting} className='btn btn-primary btn-form' />
-              </form>   
+                <TextField 
+                    name='lastname'
+                    valueType='text'
+                    valuePlaceholder='Doe'
+                    valueLabel='Last name'
+                    onChange={formik.handleChange}
+                    value={formik.values.lastname}
+                    error={formik.errors.lastname}
+                    showLabel
+                    onBlur={formik.handleBlur}
+                    
+                />
+            </div>
+
+            <Dropdown 
+              valueLabel='Gender'
+              optionList={genderList}
+              onChange={(e)=> formik.setFieldValue('gender', e.target.value)}
+              error={formik.errors.gender}
+              value={formik.values.gender}
+              showLabel
+              
+            />
+            <Datepicker
+              name='birthday'
+              valueLabel="Birthday"
+              onChange={(e)=> formik.setFieldValue('birthday', e.target.value)}
+              error={formik.errors.birthday}
+              value={formik.values.birthday}
+            />
+
+            <div className="double-textbox">
+              <Dropdown 
+                  valueLabel='Country'
+                  optionList={Object.keys(locationList).map((value) => {
+                    return {name: value, value: value}
+                  })}
+                  onChange={(e)=> formik.setFieldValue('country', e.target.value)}
+                  error={formik.errors.country}
+                  showLabel
+                  value={formik.values.country}
+                  
+                />
+              <Dropdown 
+                  valueLabel='State/Island'
+                  optionList={locationList[formik.values.country] && locationList[formik.values.country].map((value) => {
+                    return {name: value, value: value}
+                  })}
+                  onChange={(e)=> formik.setFieldValue('state', e.target.value)}
+                  showLabel
+                  error={formik.errors.state}
+                  value={formik.values.state}
+                  
+              />
+            </div>
+          
+            <TextField 
+                  name='city'
+                  valueType='text'
+                  valueLabel='City'
+                  onChange={formik.handleChange}
+                  value={formik.values.city}
+                  error={formik.errors.city}
+                  showLabel
+                  onBlur={formik.handleBlur}
+                  
+            />
+            <TextField 
+                name='telephone'
+                valueType='telephone'
+                valuePlaceholder='242 123 4567'
+                valueLabel='Phone contact'
+                isOptional
+                onChange={formik.handleChange}
+                value={formik.values.telephone}
+                className='med-textbox'
+                error={formik.errors.telephone}
+                onBlur={formik.handleBlur}
+                showLabel
+                
+            />
+              
+              <input type="submit" value={formik.isSubmitting? "Saving changes..." : "Save Changes"} disabled={disableButton || formik.isSubmitting} className='btn btn-primary btn-form' />
+          </form>   
         </div>
 
-              <style>{`
-                .profile {
-                  width: 100%
-                }
+        <style>{`
+          .profile {
+            width: 100%
+          }
 
-                h4 {
-                  margin-bottom: .75rem;
-                }
-                form,
-                .form-header {
-                  max-width: 450px;
-                  width: 70%;
-                  margin: 0 auto;
-                }
-                @media (max-width: 940px) {
-                  .side-by-side {
-                    flex-direction: column;
-                  }
+          h4 {
+            margin-bottom: .75rem;
+          }
+          form,
+          .form-header {
+            max-width: 450px;
+            width: 70%;
+            margin: 0 auto;
+            
+          }
+          form {
+            margin-bottom: 3rem;
+          }
+          @media (max-width: 940px) {
+            .side-by-side {
+              flex-direction: column;
+            }
 
-                form,
-                .form-header {
-                  width: 100%
-                }
-                  .rightpane {
-                    width: 100%;
-                  }
-                }
-              
-              `}
-                
-              </style>
+          form,
+          .form-header {
+            width: 100%
+          }
+            .rightpane {
+              width: 100%;
+            }
+          }
+        
+        `}
+          
+        </style>
       </div>
     </div>
     
     
     </div>
+    </main>
+    <footer>
+        <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
+      </footer>
+    </body>
+    </>
   )
 }

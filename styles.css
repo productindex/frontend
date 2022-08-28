@@ -3,7 +3,12 @@ html,
 body {
   padding: 0;
   margin: 0;
-  /* font-family: 'Inter', sans-serif; */
+  height: 100vh;
+  display:flex; 
+  flex-direction:column; 
+}
+footer {
+  margin-top:auto; 
 }
 
 * {
@@ -86,8 +91,7 @@ select {
 }
 
 .auth-screens {
-  height: 97vh;
-  max-height: auto;
+  height: 100%;
 }
 .auth-screens .side-by-side {
   height: 100%;
