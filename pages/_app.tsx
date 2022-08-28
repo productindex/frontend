@@ -9,11 +9,12 @@ import LoadingPage from '../components/LoadingPage';
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  function Loading() {
 
+  function Loading() {
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
     useEffect(() => {
+      
         const handleStart = (url) => (url !== router.asPath) && setLoading(true);
         const handleComplete = (url) => (url === router.asPath) && setLoading(false);
   

@@ -14,7 +14,7 @@ export default function Search() {
     StoreApi.searchForStore(find, near, type).then((data) => {
       setStores(data.data)
     })
-  }, [])
+  }, [router.query])
   return (
     <>
       <Head>
