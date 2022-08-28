@@ -45,6 +45,9 @@ export default function ProfileSidebar() {
                 color: #1c1c1c;
                 letter-spacing: 1px;
             }
+            .profile-sidebar-container h6 {
+              margin-bottom: .5rem;
+            }
             @media (max-width: 940px) {
 
               .profile-sidebar {
@@ -61,9 +64,7 @@ export default function ProfileSidebar() {
                 margin-right: .5rem;
                 border: 1.5px solid #e5e9e8;
               }
-              .profile-sidebar-container h6 {
-                margin-bottom: 1rem;
-              }
+
             }
         `}
       </style>
