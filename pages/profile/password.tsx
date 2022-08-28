@@ -9,8 +9,17 @@ import { toasty } from "@productindex/util/toasty";
 import { AuthErrorMessages } from "@productindex/const/errors";
 import { AuthSuccessMessages } from "@productindex/const/success";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect} from "react";
+import Cookies from 'js-cookie';
 
 export default function Profile() {
+  const router = useRouter();
+  useEffect(() => {
+    if (Cookies.get('isLoggedIn')) {
+      router.replace("/");
+    }
+  });
   const [disableButton, setDisableButton] = useState(true);
   const clearFields = () => {
     formik.setFieldValue('currentPassword', '')

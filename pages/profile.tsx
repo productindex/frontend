@@ -17,6 +17,8 @@ import { Avatar } from '../components/bits/Avatar';
 import { ImageUpload } from '@productindex/components/formElements/ImageUpload';
 import { locationList } from "@productindex/const/dropdownInputs/location";
 import Head from "next/head";
+import Cookies from 'js-cookie';
+import { useRouter } from "next/router";
 
 //TODO: Add formik to this page
 export default function Profile  () {
@@ -70,9 +72,12 @@ export default function Profile  () {
 
     }
     const [disableButton, setDisableButton] = useState(true)
-
+    const router = useRouter();
     useEffect(()  => {
-        loadUserDetails()
+      if (!Cookies.get('isLoggedIn')) {
+        router.replace("/");
+      }
+      loadUserDetails()
     }, [])
 
     const handleChange = (e) => {

@@ -1,8 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { LoginForm } from "../components/forms/loginForm";
-import { toast } from "react-toastify";
 import Cookies from 'js-cookie'
 
 export default function Signin() {

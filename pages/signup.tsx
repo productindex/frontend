@@ -1,7 +1,16 @@
 import Head from "next/head";
 import { SignupForm } from "../components/forms/signupForm";
+import { useRouter } from "next/router";
+import { useEffect} from "react";
+import Cookies from 'js-cookie';
 
 export default function SignUp() {
+  const router = useRouter();
+  useEffect(() => {
+    if (Cookies.get('isLoggedIn')) {
+      router.replace("/");
+    }
+  });
   return (
     <>
       <Head>
