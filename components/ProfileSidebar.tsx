@@ -1,17 +1,20 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 
 export default function ProfileSidebar() {
+  const router = useRouter();
+  const currentRoute = router.pathname;
   return (
     <div className="profile-sidebar">
       <div className="profile-sidebar-container">
       <h6>Your Profile</h6>
       <Link href="/profile">
-        <a className="nav-selector">Details</a>
+        <a className={`nav-selector ${currentRoute == '/profile' && 'active'}`}>Details</a>
       </Link>
       <Link href="/profile/password">
-        <a className="nav-selector">Password</a>
+        <a className={`nav-selector ${currentRoute == '/profile/password' && 'active'}`}>Password</a>
       </Link>
       </div>
 
@@ -27,6 +30,10 @@ export default function ProfileSidebar() {
                 border-radius: 4px;
                 display: block;
                 
+            }
+            .active {
+              background-color: #E5E9E8;
+              font-weight: 700;
             }
             .nav-selector:hover {
                 background-color: #F4F4F4;

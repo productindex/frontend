@@ -12,12 +12,14 @@ function BusinessAddressCard({addressInfo}: Props) {
   return (
     <div className="card">
     <h5>Address</h5>
-    <p>
-      {addressInfo?.address_line_1
-        ? addressInfo.address_line_1
-        : EmptyStateMessages.directionsInfo}
-    </p>
-    {/* <p>{storeData['address_line_2'] ? storeData['address_line_2'] : EmptyStateMessages.directionsInfo}</p> */}
+    { addressInfo?.address_line_1 ? 
+      <>
+        <p>{addressInfo.address_line_1}{addressInfo.address_line_2 && <>, {addressInfo.address_line_2}</>} </p>
+      </>
+      :
+      <p> {EmptyStateMessages.directionsInfo}</p>
+    }
+    
   </div>
   )
 }

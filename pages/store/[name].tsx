@@ -1,7 +1,5 @@
 import ProductListBox from "@productindex/components/Boxes/ProductListBox";
-import { ReviewCard } from "@productindex/components/cards/ReviewCard";
 import { Tag } from "@productindex/components/tag";
-// import SearchBar from "../../components/searchBar";
 import FullNavBar from "@productindex/components/Navigation/FullNavBar";
 import { useState, useEffect } from "react";
 import Head from "next/head";
@@ -11,10 +9,10 @@ import { useRouter } from "next/router";
 import { ReviewsApi } from "@productindex/api/review";
 
 import  BusinessContactCard  from '@productindex/components/cards/BusinessContactCard';
-import BusinessStoreHoursCard from '../../components/cards/BusinessStoreHoursCard';
+import BusinessStoreHoursCard from '@productindex/components/cards/BusinessStoreHoursCard';
 import BusinessAddressCard from "@productindex/components/cards/BusinessAddressCard";
 import ReviewsBox from "@productindex/components/Boxes/ReviewsBox";
-import StorePortfolio from '../../components/StorePortfolio/StorePortfolio';
+import StorePortfolio from '@productindex/components/StorePortfolio/StorePortfolio';
 
 export default function BusinessStore() {
   const router = useRouter();
