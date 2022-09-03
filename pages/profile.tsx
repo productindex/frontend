@@ -117,7 +117,7 @@ export default function Profile  () {
           </div>
 
           <form onSubmit={formik.handleSubmit} onChange={handleChange}>
-            <AvatarImageUpload size='large' displayPhotoSrc={uploadProfilePreview || displayPic } onChange={uploadPhoto}/>
+            <AvatarImageUpload displayPhotoSrc={uploadProfilePreview || displayPic } onChange={uploadPhoto}/>
 
             <div className="double-textbox">
               <TextField 

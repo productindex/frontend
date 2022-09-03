@@ -84,7 +84,7 @@ const OnboardingForm: React.FC = () => {
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
-      <AvatarImageUpload size='large' displayPhotoSrc={uploadProfilePreview } onChange={uploadPhoto}/>
+      <AvatarImageUpload displayPhotoSrc={uploadProfilePreview } onChange={uploadPhoto}/>
         <div className="double-textbox">
           <Dropdown
             valueLabel="Gender"
