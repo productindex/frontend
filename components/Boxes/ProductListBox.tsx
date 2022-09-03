@@ -10,20 +10,19 @@ type Props = {
 function ProductListBox({products}: Props) {
   return (
     <div className="product-list">
-        {products.length > 0 ? (
+        {products?.length > 0 ? (
         products.map((product) => (
             <ProductCard
             productName={product.Product.product_name}
             description={product.Product.description}
-            price={product.show_price ? String(product.price) : 'Contact for price'}
+            price={(product.show_price && product.price) ? String(product.price) : 'Contact'}
             photoSrc={product.Product.image_url}
             id={product.Product.id}
             />
         ))
         ) : (
         <div className="empty-box">
-            {" "}
-            {EmptyStateMessages.noProductsOrServices}
+            <p>{EmptyStateMessages.noProductsOrServices}</p> 
         </div>
         )}
   </div>

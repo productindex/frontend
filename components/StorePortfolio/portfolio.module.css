@@ -1,0 +1,21 @@
+.portfolio {
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.portfolioItem {
+    flex-grow: 1;
+    min-width: 23%;
+    height: 24rem;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 4px;
+    background-color: #F4F4F4;
+}
+
+.portfolioImage {
+    height: auto;
+    min-width: 100%;
+}

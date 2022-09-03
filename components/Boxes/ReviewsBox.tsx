@@ -36,7 +36,7 @@ function ReviewsBox({reviews}: Props) {
     <>
         <div className="yourReview">
             <h5>Add a review</h5>
-            <ReportReviewModel open={modalOpen} />
+            
             <TextArea 
             name={'add-review'}
             valuePlaceholder={'Add your first review now'}
@@ -48,7 +48,9 @@ function ReviewsBox({reviews}: Props) {
         </div>
 
         <div className="review-section-box">
-        <h4>What people are saying</h4>  
+        <h4>What are people saying</h4>  
+        <ReportReviewModel open={modalOpen} />
+        <br />
         {reviews.length > 0 ? (
             reviews.map((review) => (
             <ReviewCard
@@ -64,8 +66,7 @@ function ReviewsBox({reviews}: Props) {
             ))
         ) : (
             <div className="empty-box">
-            {" "}
-            {EmptyStateMessages.reviews}
+                <p>{EmptyStateMessages.reviews}</p>
             </div>
         )}
         </div>

@@ -9,13 +9,12 @@ import { EmptyStateMessages } from "@productindex/const/errors";
 import { StoreApi } from "@productindex/api/store";
 import { useRouter } from "next/router";
 import { ReviewsApi } from "@productindex/api/review";
-import contextTime from '@productindex/util/contextTime'
-import { TextArea } from "@productindex/components/formElements/TextArea";
-import ReportReviewModel from "@productindex/components/modals/ReportReviewModel";
+
 import  BusinessContactCard  from '@productindex/components/cards/BusinessContactCard';
 import BusinessStoreHoursCard from '../../components/cards/BusinessStoreHoursCard';
 import BusinessAddressCard from "@productindex/components/cards/BusinessAddressCard";
 import ReviewsBox from "@productindex/components/Boxes/ReviewsBox";
+import StorePortfolio from '../../components/StorePortfolio/StorePortfolio';
 
 export default function BusinessStore() {
   const router = useRouter();
@@ -57,18 +56,18 @@ export default function BusinessStore() {
     }
   };
 
-  const [storeData, setStoreData] = useState({});
+  const [storeData, setStoreData] = useState(null);
   const [businessName, setBusinessName] = useState(`No Business Name`);
-  const [tags, setTags] = useState(["Unavailble", "Unavailble", "Unavailble"]);
+  const [tags, setTags] = useState(["Unavailable", "Unavailable", "Unavailable"]);
   const [businessDescription, setBusinessDescription] = useState('');
   const [businessHours, setBusinessHours] = useState(null);
   const [businessContact, setBusinessContact] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [businessCategory, setCategory] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
+  const [city, setCity] = useState("Nassau");
+  const [country, setCountry] = useState("The Bahamas");
+  const [state, setState] = useState("New Providence");
   const tagList = tags.toString().replace(/,/g, ", ");
 
   const buildBusinessTags = (tags) => {
@@ -88,25 +87,17 @@ export default function BusinessStore() {
         <meta
           name="keywords"
           content={`${tagList}, ${businessCategory}, ${city}, ${country}, ${state}`}
-        ></meta>
+        />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
-      <body>
         
-      
       <main>
         <div className="product-container">
           <FullNavBar />
-          <div className="photogrid">
-            <div className="store-photo">1</div>
-            <div className="store-photo">2</div>
-            <div className="store-photo">3</div>
-            <div className="store-photo">4</div>
-          </div>
+          <StorePortfolio imageUrls={[]} />
           <div className="store-content">
             <div className="main-content">
               <h4 className="business-name">
-                {" "}
                 {businessName
                   ? businessName
                   : EmptyStateMessages.businessStoreName}
@@ -119,7 +110,13 @@ export default function BusinessStore() {
               <p className="description">
                 {businessDescription ? businessDescription : "No description for this business"}
               </p>
+              <div className="mobileOnly">
+                <BusinessStoreHoursCard businessStoreHours={businessHours}/>
+                <BusinessContactCard contactInfo={businessContact}/>
+                <BusinessAddressCard addressInfo={storeData}/> 
+              </div>
               <ProductListBox products={products}/>
+
               <section className="review-section">
               <ReviewsBox reviews={reviews}/>
               </section>
@@ -138,7 +135,6 @@ export default function BusinessStore() {
       <footer>
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
-      </body>
 
       <style>{`
         .store-photo {
@@ -148,7 +144,10 @@ export default function BusinessStore() {
         }
         .item-title {
           display: inline-block;
+          letter-spacing: 0.5px;
+          color: #1C1C1C;
           font-weight: 700;
+
         }
         .photogrid {
           display: flex;
@@ -162,6 +161,9 @@ export default function BusinessStore() {
 
         .tag-box {
           margin-top: 0.5rem;
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
         }
         .main-content {
           width: 75%;
@@ -187,10 +189,13 @@ export default function BusinessStore() {
           width: 25%;
         }
         .side-bar .card {
-          margin-top: 0.5rem;
+          
           border: 1.5px solid #e5e9e8;
           border-radius: 2px;
           padding: 1rem;
+        }
+        .card {
+          margin-top: 0.5rem;
         }
         .product-container {
           padding: 0 0.5rem;
@@ -224,10 +229,27 @@ export default function BusinessStore() {
           text-align: center;
           height: 200px;
           justify-content: center;
-          line-height: 200px;
+          align-items: center;
+          display: flex;
         }
+
         .yourReview {
           margin-bottom: 2rem;
+        }
+        .mobileOnly {
+          display: none;
+        }
+
+        @media (max-width: 450px) {
+          .side-bar {
+            display: none;
+          }
+          .mobileOnly {
+            display: block;
+          }
+          .main-content {
+            width: 100%;
+          }
         }
       `}</style>
     </>

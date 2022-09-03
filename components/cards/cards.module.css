@@ -63,7 +63,7 @@ border-radius: 1.5rem;
 }
 
 .link {
-    color: #131313;
+    color: #1C1C1C;
     cursor: pointer;
     display: inline-block;
     font-weight: 700;
@@ -77,4 +77,22 @@ border-radius: 1.5rem;
 }
 .link:active {
     color: #2eb7be;
+}
+
+@media (max-width: 450px) {
+    .listItem {
+        display: inline-block;   
+        padding: .25rem .5rem;
+        background-color: #F4F4F4;
+        border-radius: 2px;
+        border: 1.5px solid #E5E9E8;
+        
+    }
+    .list {
+        display: flex;
+        gap: .5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+    }
+
 }

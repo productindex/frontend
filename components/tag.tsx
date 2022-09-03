@@ -24,9 +24,7 @@ const Tag: React.FC<TagProps> = ({ description, key, ...props }) => {
           color: #5c5c5c;
           border: 1.5px solid #E5E9E8;
         }
-        .tag:not(:first-child) {
-          margin-left: 0.5rem;
-        }
+
       `}</style>
     </div>
   );
