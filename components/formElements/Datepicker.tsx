@@ -26,7 +26,7 @@ const Datepicker: React.FC<TextFieldProps> = ({
         id={name}
         name={name}
         onChange={onChange}
-        className={styles.textbox}
+        className={`${styles.textbox} ${styles.datePicker}`}
       />
       <FieldError errorMessage={error}/>
     </div>

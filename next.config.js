@@ -7,4 +7,7 @@ module.exports = {
     BACKEND_URL_S: "http://localhost:8080",
     BUSINESS_URL: "https://www.biz.theproductindex.io",
   },
+  devIndicators: {
+    buildActivity: false
+}
 };

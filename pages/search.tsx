@@ -37,10 +37,7 @@ export default function Search() {
             </h5>
           ) : (
             <h5>
-              No results found for:{" "}
-              <span className="results">
-                {find} in {near}
-              </span>
+              No results found
             </h5>
           )}
         </div>
