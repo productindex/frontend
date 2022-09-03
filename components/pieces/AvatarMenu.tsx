@@ -59,7 +59,7 @@ export const AvatarMenu = (props: Props) => {
           </Link>
         </>
       )}
-      <style jsx>{`
+      <style>{`
         .avatar-menu {
           position: relative;
         }

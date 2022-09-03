@@ -11,7 +11,7 @@ const Tag: React.FC<TagProps> = ({ description, key, ...props }) => {
     <div className="tag" key={key}>
       {description}
 
-      <style jsx>{`
+      <style>{`
         .tag {
           background-color: #F4F4F4;
           width: auto;

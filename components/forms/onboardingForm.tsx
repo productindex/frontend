@@ -12,11 +12,22 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { genderList } from "@productindex/const/dropdownInputs/genderList";
 import { locationList } from "@productindex/const/dropdownInputs/location";
+import { AvatarImageUpload } from '@productindex/components/bits/AvatarImageUpload';
 
 const OnboardingForm: React.FC = () => {
   const authCtx = useContext(AuthContext);
   const router = useRouter();
   const { firstname, lastname, password, email_address } = router.query;
+  const [uploadProfilePreview, setProfilePreview] = useState('')
+  const [uploadedDisplayPic, setUploadedDisplayPic] = useState('')
+  
+  const uploadPhoto = (e) => {
+    if (e.target.files[0]) {
+      setProfilePreview(URL.createObjectURL(e.target.files[0]))
+      setUploadedDisplayPic(e.target.files[0])
+    }
+
+  }
 
   useEffect(() => {
     window.addEventListener("beforeunload", alertUser);
@@ -73,6 +84,7 @@ const OnboardingForm: React.FC = () => {
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
+      <AvatarImageUpload size='large' displayPhotoSrc={uploadProfilePreview } onChange={uploadPhoto}/>
         <div className="double-textbox">
           <Dropdown
             valueLabel="Gender"

@@ -13,16 +13,16 @@ import { toasty } from '@productindex/util/toasty';
 import { Datepicker } from '@productindex/components/formElements/Datepicker';
 import { AuthErrorMessages } from "@productindex/const/errors";
 import { genderList } from "@productindex/const/dropdownInputs/genderList";
-import { Avatar } from '../components/bits/Avatar';
-import { ImageUpload } from '@productindex/components/formElements/ImageUpload';
 import { locationList } from "@productindex/const/dropdownInputs/location";
 import Head from "next/head";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
+import { AvatarImageUpload } from '../components/bits/AvatarImageUpload';
 
 //TODO: Add formik to this page
 export default function Profile  () {
   const [displayPic, setDisplayPic] = useState('')
+  const [uploadProfilePreview, setProfilePreview] = useState('')
   const [uploadedDisplayPic, setUploadedDisplayPic] = useState('')
   const formik = useFormik({
     initialValues: {
@@ -87,8 +87,11 @@ export default function Profile  () {
     //TODO: Add birthday field
 
   const uploadPhoto = (e) => {
-    setUploadedDisplayPic(e.target.files[0].name)
-    console.log(e.target.files[0].name)
+    if (e.target.files[0]) {
+      setProfilePreview(URL.createObjectURL(e.target.files[0]))
+      setUploadedDisplayPic(e.target.files[0])
+    }
+
   }
   return (
     <>
@@ -114,8 +117,7 @@ export default function Profile  () {
           </div>
 
           <form onSubmit={formik.handleSubmit} onChange={handleChange}>
-            <Avatar displayPhotoSrc={displayPic}/>
-            <ImageUpload name='Change profile picture' valueLabel='Change profile picture' showLabel={false} onChange={uploadPhoto}/>
+            <AvatarImageUpload size='large' displayPhotoSrc={uploadProfilePreview || displayPic } onChange={uploadPhoto}/>
 
             <div className="double-textbox">
               <TextField 

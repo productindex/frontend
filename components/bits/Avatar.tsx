@@ -6,16 +6,10 @@ type Props = {
 };
 
 export const Avatar = (props: Props) => {
-  const avatarSize = () => {
-    if (props.size == "small") return "32px";
-    if (props.size == "medium") return "44px";
-    if (props.size == "large") return "56px";
-    return "44px";
-  };
   return (
     <div className="avatar">
       <img
-        className={"avatar-img"}
+        className={`avatar-img ${props.size? props.size : 'medium'}-avi`}
         src={
           !props.displayPhotoSrc
             ? "/images/Default-person.png"
@@ -25,14 +19,25 @@ export const Avatar = (props: Props) => {
       <style>
         {`
           .avatar-img {
-            height: ${avatarSize()};
-            width: ${avatarSize()};
-            border-radius: ${avatarSize()};
+            border-radius: 100px;
             border: 1.5px solid #e5e9e8;
             justify-content: center;
             box-sizing: border-box;
             opacity: 1;
             transition: opacity 0.5s;
+            object-fit: cover;
+          }
+          .large-avi {
+            height: 88px;
+            width: 88px;
+          }
+          .medium-avi {
+            height: 44px;
+            width: 44px;
+          }
+          .small-avi {
+            height: 32px;
+            width: 32px;
           }
           .avatar:hover {
             cursor: pointer;

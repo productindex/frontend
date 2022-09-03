@@ -16,6 +16,7 @@
 }
 
 .portfolioImage {
-    height: auto;
     min-width: 100%;
+    height: auto;
+    object-fit: cover;
 }
