@@ -12,6 +12,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect} from "react";
 import Cookies from 'js-cookie';
+import styles from '@productindex/style/profilePage.module.css'
 
 export default function Profile() {
   const router = useRouter();
@@ -65,20 +66,19 @@ export default function Profile() {
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
-      <body>
+      <div className="fullPage">
         <main>
         <div className="container">
           <NavBar />
           <br />
           <div className="side-by-side">
             <ProfileSidebar />
-            <div className="profile">
-              <div className="form"></div>
-                <div className="form-header">
+            <div className={styles.profile}>
+                <div className={styles.formHeader}>
                   <h4>Profile - Update password</h4>
                   <hr />
                 </div>
-              <form onSubmit={formik.handleSubmit} onChange={handleChange}>
+              <form onSubmit={formik.handleSubmit} onChange={handleChange} className={styles.form}>
                 <TextField
                   name="currentPassword"
                   valueType="password"
@@ -118,42 +118,6 @@ export default function Profile() {
                 />
               </form>
               </div>
-
-              <style>
-                {`
-                    .profile {
-                      width: 100%
-                    }
-
-                    h4 {
-                      margin-bottom: .75rem;
-                    }
-                    form,
-                    .form-header {
-                      max-width: 450px;
-                      width: 70%;
-                      margin: 0 auto;
-                    }
-                    form {
-                      margin-bottom: 3rem;
-                    }
-                    @media (max-width: 940px) {
-                      .side-by-side {
-                        flex-direction: column;
-                      }
-
-                    form,
-                    .form-header {
-                      width: 100%
-                    }
-                    
-                      .rightpane {
-                        width: 100%;
-                      }
-                    }
-                  
-                  `}
-              </style>
             </div>
 
           </div>
@@ -161,7 +125,7 @@ export default function Profile() {
           <footer>
                 <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
           </footer>
-        </body>
+      </div>
     </>
   );
   

@@ -1,0 +1,55 @@
+
+  .authScreens .leftpane p {
+    color: white;
+    font-size: 1.2rem;
+  }
+
+  .authScreens {
+    height: 100%;
+  }
+
+  .logoBox {
+    margin-bottom: 1.5rem;
+  }
+
+  .leftpane {
+    width: 55%;
+    padding: 8rem 0 5% 5%;
+    background-color: #13c8c4;
+  }
+  .formTitle {
+    margin-bottom: 1rem;
+  }
+  .leftpane .content {
+    max-width: 450px;
+  }
+  .rightpane .content {
+    max-width: 450px;
+  }
+
+  .rightpane {
+    width: 45%;
+    padding-right: 5%;
+    padding: 4rem 5% 5% 1.5rem;
+  }
+  .leftpane h2 {
+    color: white;
+    text-transform: uppercase;
+  }
+  .fullPage {
+    height: 100vh;
+    display:flex; 
+    flex-direction:column; 
+  }
+
+  @media (max-width: 940px) {
+    .leftpane {
+      display: none;
+    }
+    .auth-screens {
+        height: auto;
+    }
+    .rightpane {
+      width: 100%;
+    }
+  }

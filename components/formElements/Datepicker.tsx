@@ -8,7 +8,6 @@ interface TextFieldProps {
   onChange?: any;
   value?: string;
   error?: string;
-  optionList?: { value?: string; name?: string; default?: boolean }[];
   //TODO: add onBlur
 }
 
@@ -16,7 +15,8 @@ const Datepicker: React.FC<TextFieldProps> = ({
   name,
   valueLabel,
   onChange,
-  error
+  error,
+  value
 }) => {
   return (
     <div className={styles.textContainer}>
@@ -27,6 +27,7 @@ const Datepicker: React.FC<TextFieldProps> = ({
         name={name}
         onChange={onChange}
         className={`${styles.textbox} ${styles.datePicker}`}
+        value={value}
       />
       <FieldError errorMessage={error}/>
     </div>

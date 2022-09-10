@@ -1,4 +1,5 @@
 import { authAxios } from "./axios";
+import { ApiErrorMessage } from './errorMessages/apiErrorMessages';
 
 interface ApiResponse {
   success: boolean;
@@ -39,7 +40,12 @@ export const User = {
       return { success: true, data: data };
     })
       .catch((err) => {
-      return {error: err?.response?.data?.error}
+      return {
+        error: err.response?.data
+        ? err.response.data.error
+        : ApiErrorMessage.FailedUpdatingProfile,
+      
+      }
     })
   },
   changePassword: async (currentPssword: string, newPassword: string, newPasswordConfirm: string) => {
@@ -55,7 +61,11 @@ export const User = {
       return { success: true, data: data };
     }))
     .catch((err) => {
-      return {error: err?.response?.data?.error}
+      return {
+        error: err.response?.data
+        ? err.response.data.error
+        : ApiErrorMessage.FailedUpdatingPassword,
+      }
     })
   }
 };

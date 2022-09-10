@@ -34,7 +34,7 @@ const Dropdown: React.FC<TextFieldProps>  = ({
         
         <div className={styles.dropdown}>
             {showLabel && <Label name={name} valueLabel={valueLabel} isOptional={isOptional}/>}
-            <select name={name} id={name} className={styles.textbox} onChange={onChange} defaultValue={defaultValue ? defaultValue : '-'} disabled={disabled} value={value}>
+            <select name={name} id={name} className={styles.textbox} onChange={onChange} disabled={disabled} value={value}>
                 {optionList && <> <option hidden value={'-'}> - </option> {optionList.map((item) => <option key={item.name} value={item.value}>{item.name}</option> )}</>}
             </select>
             <FieldError errorMessage={error}/>

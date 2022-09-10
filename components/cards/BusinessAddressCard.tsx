@@ -7,7 +7,6 @@ type Props = {
         address_line_2?: string;
     }
 }
-//TODO: Implement address_line_2
 function BusinessAddressCard({addressInfo}: Props) {
   return (
     <div className="card">
