@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import { genderList } from "@productindex/const/dropdownInputs/genderList";
 import { locationList } from "@productindex/const/dropdownInputs/location";
 import { AvatarImageUpload } from '@productindex/components/bits/AvatarImageUpload';
+import getCurrentAge from '@productindex/util/getCurrentAge'
 
 const OnboardingForm: React.FC = () => {
   const authCtx = useContext(AuthContext);
@@ -39,7 +40,6 @@ const OnboardingForm: React.FC = () => {
     e.preventDefault();
     e.returnValue = "";
   };
-
 
   const formik = useFormik({
     initialValues: {
@@ -74,7 +74,8 @@ const OnboardingForm: React.FC = () => {
       }
     },
     validationSchema: Yup.object({
-      birthday: Yup.string().required(AuthErrorMessages.birthdayRequired),
+      birthday: Yup.string().required(AuthErrorMessages.birthdayRequired)
+        .test('At least 15 years old', AuthErrorMessages.ageMinimumRequirement, () => getCurrentAge(formik.values.birthday) >= 15 ),
       country: Yup.string().required(AuthErrorMessages.countryRequired),
       state: Yup.string().required(AuthErrorMessages.stateRequired),
       gender: Yup.string().required(AuthErrorMessages.genderRequired),

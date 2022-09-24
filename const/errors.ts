@@ -16,7 +16,8 @@ export const AuthErrorMessages = {
   nameMinCharacters: "Name must have at least 2 characters",
   emailInvalidFormat: "This doesn't seem like a valid email",
   passwordsMatchError: "Passwords must match",
-  passwordSameAsCurrent: 'New password should be different from current password'
+  passwordSameAsCurrent: 'New password should be different from current password',
+  ageMinimumRequirement: 'You must be at least 15 years old to sign up'
 };
 
 export const EmptyStateMessages = {

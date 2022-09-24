@@ -19,6 +19,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
 import { AvatarImageUpload } from '@productindex/components/bits/AvatarImageUpload';
 import styles from '@productindex/style/profilePage.module.css'
+import getCurrentAge from '@productindex/util/getCurrentAge'
 
 export default function Profile  () {
   const [displayPic, setDisplayPic] = useState('')
@@ -41,7 +42,8 @@ export default function Profile  () {
       toasty('success', AuthSuccessMessages.updatedProfile)
     },
     validationSchema: Yup.object({
-      birthday: Yup.string().required(AuthErrorMessages.birthdayRequired),
+      birthday: Yup.string().required(AuthErrorMessages.birthdayRequired)
+        .test('At least 15 years old', AuthErrorMessages.ageMinimumRequirement, () => getCurrentAge(formik.values.birthday) >= 15 ),
       country: Yup.string().required(AuthErrorMessages.countryRequired),
       state: Yup.string().required(AuthErrorMessages.stateRequired),
       gender: Yup.string().required(AuthErrorMessages.genderRequired),
