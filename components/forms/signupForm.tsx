@@ -8,6 +8,14 @@ import { User } from "@productindex/api/user";
 import { FormLink } from "@productindex/components/formElements/FormLink";
 
 const SignupForm: React.FC = () => {
+  const validateEmail = async () => {
+    const { data } = await User.find(formik.values.email, null);
+    if (data) {
+      return false
+      ;
+    }
+    return true
+  };
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -16,25 +24,28 @@ const SignupForm: React.FC = () => {
       lastname: "",
     },
     onSubmit: async (values) => {
-      validateForm();
-      sessionStorage.setItem("isSigningUp", "true");
-      router.replace(
-        {
-          pathname: "/onboarding",
-          query: {
-            firstname: values.firstname,
-            lastname: values.lastname,
-            email_address: values.email,
-            password: values.password,
+      if (!formik.errors['email']){
+        sessionStorage.setItem("isSigningUp", "true");
+        router.replace(
+          {
+            pathname: "/onboarding",
+            query: {
+              firstname: values.firstname,
+              lastname: values.lastname,
+              email_address: values.email,
+              password: values.password,
+            },
           },
-        },
-        "/signup"
-      );
+          "/signup"
+        );
+      }
+      
     },
     validationSchema: Yup.object({
       email: Yup.string()
         .email(AuthErrorMessages.emailInvalidFormat)
-        .required(AuthErrorMessages.emailAddressRequired),
+        .required(AuthErrorMessages.emailAddressRequired)
+        .test('Unique Email', AuthErrorMessages.emailTaken, async () => await validateEmail() ),
       password: Yup.string()
         .required(AuthErrorMessages.passwordRequired)
         .min(8, AuthErrorMessages.passwordStringLength),
@@ -47,13 +58,7 @@ const SignupForm: React.FC = () => {
     }),
   });
 
-  const validateForm = async () => {
-    //TODO: Test to see if this still works
-    const { data } = await User.find(formik.values.email, null);
-    if (data) {
-      formik.errors["email"] = AuthErrorMessages.emailTaken;
-    }
-  };
+
   const router = useRouter();
 
   return (
