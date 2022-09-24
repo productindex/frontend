@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { SignupForm } from "../components/forms/signupForm";
+import { SignupForm } from "@productindex/components/forms/signupForm";
 import { useRouter } from "next/router";
 import { useEffect} from "react";
 import Cookies from 'js-cookie';

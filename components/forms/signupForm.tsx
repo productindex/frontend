@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { AuthErrorMessages } from "@productindex/const/errors";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { User } from "../../api/user";
+import { User } from "@productindex/api/user";
 import { FormLink } from "@productindex/components/formElements/FormLink";
 
 const SignupForm: React.FC = () => {

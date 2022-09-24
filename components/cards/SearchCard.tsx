@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import { StoreAvailability } from "../../components/pieces/storeAvailability";
-import { Tag } from "../../components/tag";
+import { StoreAvailability } from "@productindex/components/pieces/storeAvailability";
+import { Tag } from "@productindex/components/tag";
 //TODO: Add this to a CSS module
 interface SearchCardProps {
   businessName?: string;

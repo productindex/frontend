@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@productindex/components/formElements/Textfield"
-import { Authentication } from "../../api/auth";
-import { toasty } from "../../util/toasty";
+import { Authentication } from "@productindex/api/auth";
+import { toasty } from "@productindex/util/toasty";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AuthErrorMessages } from "@productindex/const/errors";

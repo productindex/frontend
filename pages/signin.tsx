@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect} from "react";
-import { LoginForm } from "../components/forms/loginForm";
+import { LoginForm } from "@productindex/components/forms/loginForm";
 import Cookies from 'js-cookie'
 import styles from '@productindex/style/authPages.module.css'
 import LogoBox from '@productindex/components/bits/LogoBox';

@@ -1,4 +1,4 @@
-import AuthContext from "../context/AuthContext";
+import AuthContext from "@productindex/context/AuthContext";
 import { useContext, useEffect } from "react";
 
 export const InitialPageLayout = (props) => {

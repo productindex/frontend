@@ -1,7 +1,7 @@
-import { Avatar } from "../bits/Avatar";
+import { Avatar } from "@productindex/components/bits/Avatar";
 import Link from "next/link";
 import React, { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import AuthContext from "@productindex/context/AuthContext";
 import { Authentication } from "@productindex/api/auth";
 
 type Props = {

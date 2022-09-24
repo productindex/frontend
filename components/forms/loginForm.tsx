@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import { useRouter } from "next/router";
-import { Authentication } from "../../api/auth";
-import AuthContext from "../../context/AuthContext";
-import { toasty } from "../../util/toasty";
-import { AuthErrorMessages } from "../../const/errors";
+import { Authentication } from "@productindex/api/auth";
+import AuthContext from "@productindex/context/AuthContext";
+import { toasty } from "@productindex/util/toasty";
+import { AuthErrorMessages } from "@productindex/const/errors";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { FormLink } from "../formElements/FormLink";
+import { FormLink } from "@productindex/components/formElements/FormLink";
 
 export const LoginForm = () => {
   const router = useRouter();

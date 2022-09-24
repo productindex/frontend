@@ -1,16 +1,16 @@
 import React from "react";
 import { TextField } from "@productindex/components/formElements/Textfield";
 import { useRouter } from "next/router";
-import { Authentication } from "../../api/auth";
-import { toasty } from "../../util/toasty";
-import { AuthSuccessMessages } from "../../const/success";
+import { Authentication } from "@productindex/api/auth";
+import { toasty } from "@productindex/util/toasty";
+import { AuthSuccessMessages } from "@productindex/const/success";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { AuthErrorMessages } from '../../const/errors';
+import { AuthErrorMessages } from '@productindex/const/errors';
 
 const ResetPasswordForm: React.FC = () => {
   const router = useRouter();
-  const { token } = router.query; // To verify password change
+  const { token } = router.query;
 
   const formik = useFormik({
     initialValues: {

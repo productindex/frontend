@@ -1,5 +1,5 @@
 import React from "react";
-import { Ratings } from "../pieces/starRatings";
+import { Ratings } from "@productindex/components/pieces/starRatings";
 import styles from '@productindex/components/cards/cards.module.css'
 
 interface ReviewCardProps {

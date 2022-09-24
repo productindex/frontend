@@ -1,11 +1,11 @@
 import "../styles.css";
 import { useEffect, useState } from "react";
-import { AuthContextProvider } from "../context/AuthContext";
-import { InitialPageLayout } from "../components/InitialPageLayout";
+import { AuthContextProvider } from "@productindex/context/AuthContext";
+import { InitialPageLayout } from "@productindex/components/InitialPageLayout";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from 'next/router';
-import LoadingPage from '../components/LoadingPage';
+import LoadingPage from '@productindex/components/LoadingPage';
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {

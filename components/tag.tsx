@@ -1,12 +1,9 @@
-import Link from "next/link";
-import { useState } from "react";
-
 interface TagProps {
   description: string;
   key: number | string;
 }
 
-const Tag: React.FC<TagProps> = ({ description, key, ...props }) => {
+const Tag: React.FC<TagProps> = ({ description, key }) => {
   return (
     <div className="tag" key={key}>
       {description}

@@ -23,7 +23,7 @@ export default function Search() {
         <meta name="robots" content="noindex, nofollow" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
-      <body>
+      <div className='fullPage'>
         
 
       <main className="product-container">
@@ -81,7 +81,7 @@ export default function Search() {
       <footer>
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
-      </body>
+      </div>
     </>
   );
 }

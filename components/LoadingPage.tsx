@@ -1,6 +1,6 @@
 import React from 'react'
 import Lottie from 'lottie-react'
-import animationData from '../public/lottie/loading-animation.json'
+import animationData from '@productindex/public/lottie/loading-animation.json'
 
 type Props = {}
 

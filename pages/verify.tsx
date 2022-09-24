@@ -1,10 +1,9 @@
-import Head from "next/head";
 import { useEffect, useState } from "react";
-import { Authentication } from "../api/auth";
+import { Authentication } from "@productindex/api/auth";
 import { useRouter } from "next/router";
-import { toasty } from "../util/toasty";
-import { AuthSuccessMessages } from "../const/success";
-import { AuthErrorMessages } from "../const/errors";
+import { toasty } from "@productindex/util/toasty";
+import { AuthSuccessMessages } from "@productindex/const/success";
+import { AuthErrorMessages } from "@productindex/const/errors";
 
 export default function Verify() {
   const router = useRouter();

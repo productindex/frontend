@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
-import { OnboardingForm } from "../components/forms/onboardingForm";
+import { OnboardingForm } from "@productindex/components/forms/onboardingForm";
 import { useRouter } from "next/router";
 import styles from '@productindex/style/authPages.module.css';
 import LogoBox from '@productindex/components/bits/LogoBox';

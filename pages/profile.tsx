@@ -17,7 +17,7 @@ import { locationList } from "@productindex/const/dropdownInputs/location";
 import Head from "next/head";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
-import { AvatarImageUpload } from '../components/bits/AvatarImageUpload';
+import { AvatarImageUpload } from '@productindex/components/bits/AvatarImageUpload';
 import styles from '@productindex/style/profilePage.module.css'
 
 export default function Profile  () {

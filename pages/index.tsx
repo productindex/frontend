@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
-      <body>
+      <div className='fullPage'>
       <header className="header">
         <div className="container">
           <NavBar dark />
@@ -104,7 +104,7 @@ export default function Home() {
       <footer>
         <p>2022 Product Index. All rights reserved. Designed by AquaUx</p>
       </footer>
-      </body>
+      </div>
 
       <style>{`
         .header {
