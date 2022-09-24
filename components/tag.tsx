@@ -1,11 +1,10 @@
 interface TagProps {
   description: string;
-  key: number | string;
 }
 
-const Tag: React.FC<TagProps> = ({ description, key }) => {
+const Tag: React.FC<TagProps> = ({ description }) => {
   return (
-    <div className="tag" key={key}>
+    <div className="tag">
       {description}
 
       <style>{`
