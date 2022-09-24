@@ -1,51 +1,61 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from '@productindex/components/modals/modals.module.css'
 import { Dropdown } from '@productindex/components/formElements/dropdown';
-import { TextArea } from '@productindex/components/formElements/TextArea';
 import { ReviewCard } from '@productindex/components/cards/ReviewCard';
+import { useEffect } from 'react';
+import { ReviewsApi } from '@productindex/api/review';
+
+
+interface ReportedReview {
+    personName: string;
+    starRatings: number;
+    reviewDate : string;
+    comments: string;
+    id: number;
+    store_id: number;
+}
 
 type Props = {
     open: boolean;
+    setOpenState : any;
+    reportedReviewInfo : ReportedReview
 }
 
-function ReportReviewModel({open}: Props) {
-   
+function ReportReviewModel({open, setOpenState, reportedReviewInfo}: Props) {
+   useEffect(()=> {
+    setOpenState(open)
+   }, [open])
+
+   const [reportedReason, setReportedReason] = useState('')
   return (
   <>
     {   
     open ? 
         <div>
-            <div className={styles.modalOverlay} onClick={()=> open=false}>
+            <div className={styles.modalOverlay} onClick={()=> setOpenState(false)}>
             </div>
             <div className={styles.modal}>
-            <span className={styles.closeBtn} onClick={()=> open=false}><img src=' /icons/Cross.svg' /> </span>
+            <span className={styles.closeBtn} onClick={()=> setOpenState(false)}><img src=' /icons/Cross.svg' /> </span>
                 <div className={styles.modalContent}>
                    
                     <h4>Report a Review</h4>
                     <div className={styles.exampleBox}>
                         <ReviewCard 
-                            personName='Stefano'
-                            starRatings={5}
-                            reviewDate='Now'
-                            comments='This is a shitty business'
-                            id={1}
-                            reportReview
+                            personName={reportedReviewInfo.personName}
+                            starRatings={reportedReviewInfo.starRatings}
+                            reviewDate={reportedReviewInfo.reviewDate}
+                            comments={reportedReviewInfo.comments}
+                            id={reportedReviewInfo.id}
                         />
                     </div>
                     <Dropdown 
                     valueLabel='Reason for reporting'
-                    optionList={[]}
-                    value={''}
+                    optionList={[{name: 'Racist', value: 'racism', default: true}]}
+                    value={reportedReason}
                     showLabel
-                    onChange={()=>{return ''}}
+                    onChange={e => setReportedReason(e.target.value)}
                     />
-                    <TextArea 
-                    showLabel
-                    valueLabel="Comments"
-                    isOptional
-                    valuePlaceholder={"What would you add to support you claim?"}
-                    />
-                    <button className='btn-secondary btn review-btn'>Report Review</button>
+                    <button className='btn-secondary btn review-btn' onClick={()=> {ReviewsApi.reportStoreReview(reportedReviewInfo.id, reportedReason)}}>Report Review</button>
                 </div>
             </div>
 

@@ -5,12 +5,10 @@ import { ReviewCard } from "@productindex/components/cards/ReviewCard";
 import { EmptyStateMessages } from "@productindex/const/errors";
 import contextTime from '@productindex/util/contextTime'
 import { StoreReview } from '@productindex/types/StoreReview';
-import modalStyles from '@productindex/components/modals/modals.module.css'
-import { Dropdown } from '@productindex/components/formElements/dropdown';
+import { Ratings } from '@productindex/components/pieces/starRatings';
 
 type Props = {
     reviews: Array<StoreReview>;
-    
 }
 
 function ReviewsBox({reviews}: Props) {
@@ -19,12 +17,18 @@ function ReviewsBox({reviews}: Props) {
     const [reportSelectedReview, setReportSelectedReview] = useState(null)
 
     const reportReview = (review : StoreReview) => {
-        setReportSelectedReview(review)
+
+        const reportedReview = {
+            personName: `${review?.User?.first_name} ${review?.User?.last_name}`,
+            starRatings: review.rating_number,
+            reviewDate: contextTime(review.insert_date),
+            comments: review.comment,
+            id: review.id,
+            store_id: review.store_id
+
+        }
+        setReportSelectedReview(reportedReview)
         setModalOpen(true)
-    }
-    const closeModal = () => {
-        setModalOpen(false)
-        setReportSelectedReview(null)
     }
     const submitReview = () => {
     console.log(reviewInput)
@@ -36,7 +40,7 @@ function ReviewsBox({reviews}: Props) {
     <>
         <div className="yourReview">
             <h5>Add a review</h5>
-            
+            <Ratings />
             <TextArea 
             name={'add-review'}
             valuePlaceholder={'Add your first review now'}
@@ -49,7 +53,7 @@ function ReviewsBox({reviews}: Props) {
 
         <div className="review-section-box">
         <h4>What are people saying</h4>  
-        <ReportReviewModel open={modalOpen} />
+        <ReportReviewModel open={modalOpen} setOpenState={setModalOpen} reportedReviewInfo={reportSelectedReview}/>
         <br />
         {reviews.length > 0 ? (
             reviews.map((review) => (
@@ -70,46 +74,6 @@ function ReviewsBox({reviews}: Props) {
             </div>
         )}
         </div>
-        {   
-    modalOpen ? 
-        <div>
-            <div className={modalStyles.modalOverlay} onClick={()=> closeModal()}>
-            </div>
-            <div className={modalStyles.modal}>
-            <span className={modalStyles.closeBtn} onClick={()=> closeModal()}><img src=' /icons/Cross.svg' /> </span>
-                <div className={modalStyles.modalContent}>
-                   
-                    <h4>Report a Review</h4>
-                    <div className={modalStyles.exampleBox}>
-                        <ReviewCard 
-                            personName={reportSelectedReview?.User?.first_name}
-                            starRatings={reportSelectedReview.rating_number}
-                            reviewDate={contextTime(reportSelectedReview.insert_date)}
-                            comments={reportSelectedReview.comment}
-                            id={reportSelectedReview.id}
-                            reportReview
-                        />
-                    </div>
-                    <Dropdown 
-                    valueLabel='Reason for reporting'
-                    optionList={[]}
-                    value={''}
-                    showLabel
-                    onChange={()=>{return ''}}
-                    />
-                    <TextArea 
-                    showLabel
-                    valueLabel="Comments"
-                    isOptional
-                    valuePlaceholder={"What would you add to support you claim?"}
-                    />
-                    <button className='btn-secondary btn review-btn'>Report Review</button>
-                </div>
-            </div>
-
-        </div>
-        : null
-    }
     </>
   )
 }
