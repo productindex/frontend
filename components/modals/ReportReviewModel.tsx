@@ -4,6 +4,10 @@ import { Dropdown } from '@productindex/components/formElements/dropdown';
 import { ReviewCard } from '@productindex/components/cards/ReviewCard';
 import { useEffect } from 'react';
 import { ReviewsApi } from '@productindex/api/review';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { ReviewsErrorMessages } from '../../const/errors';
+import { toasty } from '@productindex/util/toasty';
 
 
 interface ReportedReview {
@@ -26,7 +30,20 @@ function ReportReviewModel({open, setOpenState, reportedReviewInfo}: Props) {
     setOpenState(open)
    }, [open])
 
-   const [reportedReason, setReportedReason] = useState('')
+   const formik = useFormik({
+    initialValues: {
+      reportedReason: "",
+    },
+    onSubmit: async (values) => {
+        const {success, error} = await ReviewsApi.reportStoreReview(reportedReviewInfo.id, values.reportedReason)
+        if (success) return setOpenState(false)
+        toasty('error', error)
+    },
+    validationSchema: Yup.object({
+        reportedReason: Yup.string()
+        .required(ReviewsErrorMessages.reportedReasonRequired),
+    }),
+  });
   return (
   <>
     {   
@@ -48,14 +65,19 @@ function ReportReviewModel({open, setOpenState, reportedReviewInfo}: Props) {
                             id={reportedReviewInfo.id}
                         />
                     </div>
-                    <Dropdown 
-                    valueLabel='Reason for reporting'
-                    optionList={[{name: 'Racist', value: 'racism', default: true}]}
-                    value={reportedReason}
-                    showLabel
-                    onChange={e => setReportedReason(e.target.value)}
-                    />
-                    <button className='btn-secondary btn review-btn' onClick={()=> {ReviewsApi.reportStoreReview(reportedReviewInfo.id, reportedReason)}}>Report Review</button>
+                    <form onSubmit={formik.handleSubmit} onChange={formik.handleChange}>
+                        <Dropdown 
+                        name='reportedReason'
+                        valueLabel='Reason for reporting'
+                        optionList={[{name: 'Racist', value: 'racism'}]}
+                        value={formik.values.reportedReason}
+                        showLabel
+                        onChange={e => formik.setFieldValue('reportedReason', e.target.value)}
+                        error={formik.errors.reportedReason}
+                        />
+                        <button disabled={formik.isSubmitting} className='btn-secondary btn review-btn' type='submit'>Report Review</button>
+                    </form>
+
                 </div>
             </div>
 

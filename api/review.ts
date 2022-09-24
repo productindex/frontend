@@ -29,7 +29,7 @@ export const ReviewsApi = {
       return {success : true, data: data}
     })
     .catch(err => {
-      return {errror: err.response?.data && err.response.data.error}
+      return {error: err.response?.data && err.response.data.error}
     })
   }
 };

@@ -26,3 +26,8 @@ export const EmptyStateMessages = {
   noProductsOrServices: "No Products or Services listed for this business",
   reviews: "No reviews left as yet. Be the first one!",
 };
+
+
+export const ReviewsErrorMessages = {
+  reportedReasonRequired: 'You must give a reason why you are reporting this review'
+}
